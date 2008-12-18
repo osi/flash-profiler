@@ -19,8 +19,6 @@ package {
 	
     	public function Agent() {
     	    trace(PREFIX, "Loaded");
-
-            /*trace(loaderInfo.loaderURL, loaderInfo.url);*/
     	    
     	    _host = loaderInfo.parameters["host"] || HOST;
     	    _port = loaderInfo.parameters["port"] || PORT;
