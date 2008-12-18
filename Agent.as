@@ -50,7 +50,10 @@ package {
     	
     	private function connected(e:Event):void {
     	   _connected = true;
+
     	   trace(PREFIX, "Connected");
+
+    	   _socket.send("HELLO");
     	}
     	
     	private function close(e:Event):void {
