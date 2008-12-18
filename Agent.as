@@ -8,33 +8,28 @@ package {
     import flash.net.XMLSocket;
 
     public class Agent extends Sprite {
-        // TODO externalize these into parameters in mm.cfg?
 	    private static const HOST:String = "localhost";
 	    private static const PORT:int = 42624;
 	    private static const PREFIX:String = "[AGENT]";
 	    
-	    private static var _instance:Agent;
+	    private var _host:String;
+	    private var _port:int;
 	    private var _socket:XMLSocket;
 	    private var _connected:Boolean;
 	
     	public function Agent() {
-    	    trace(PREFIX, _instance);
+    	    trace(PREFIX, "Loaded");
+
+            /*trace(loaderInfo.loaderURL, loaderInfo.url);*/
     	    
-    	    if( null != _instance ) {
-    	        trace(PREFIX,"Already loaded, ignoring request");
-    	        return;
-    	    }
-    	    
-    	    _instance = this;
-    	    
-    	    trace(PREFIX,"Loaded", loaderInfo.parameters["host"], loaderInfo.parameters["port"]);
+    	    _host = loaderInfo.parameters["host"] || HOST;
+    	    _port = loaderInfo.parameters["port"] || PORT;
 	    
 	        _socket = new XMLSocket();
 
             _socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, fail);
             _socket.addEventListener(IOErrorEvent.IO_ERROR, fail);
             _socket.addEventListener(DataEvent.DATA, dataReceived);
-            
             _socket.addEventListener(Event.CONNECT, connected);
             _socket.addEventListener(Event.CLOSE, close);
 
@@ -46,10 +41,10 @@ package {
     	}
     	
     	private function connect():void {
-    	    trace(PREFIX, "Trying to connect to", HOST, ":", PORT);
+    	    trace(PREFIX, "Trying to connect to", _host, ":", _port);
     	    
     	    try {
-    	        _socket.connect(HOST, PORT);
+    	        _socket.connect(_host, _port);
 	        } catch (e:Error) {
 	            trace(PREFIX, "Unable to connect ", e);
 	        }
