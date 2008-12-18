@@ -9,18 +9,16 @@ irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
 
 require 'optparse'
 
-options = { :irb => irb }
+options = { :irb => irb, :port => 42624 }
 
 OptionParser.new do |opt|
   opt.banner = "Usage: console.rb [options]"
-  # opt.on('-s', '--sandbox', 'Rollback database modifications on exit.') { |v| options[:sandbox] = v }
+  opt.on("-p", "--port=[#{options[:port]}]", 'Port to listen on (TODO make this changable :)') { |v| options[:port] = v }
   opt.on("--irb=[#{irb}]", 'Invoke a different irb.') { |v| options[:irb] = v }
   opt.parse!(ARGV)
 end
 
 libs =  " -r irb/completion"
-# libs << " -r #{RAILS_ROOT}/config/environment"
-# libs << " -r console_app"
-# libs << " -r console_with_helpers"
+libs << " -r flash_profiler/server.rb"
 
-exec "#{options[:irb]} #{libs} --readline"
+exec "#{options[:irb]} #{libs} --readline "
