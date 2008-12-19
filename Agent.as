@@ -53,7 +53,7 @@ package {
 
     	   trace(PREFIX, "Connected");
 
-    	   _socket.send("HELLO");
+    	   _socket.send("I HAS PROFILER");
     	}
     	
     	private function close(e:Event):void {
