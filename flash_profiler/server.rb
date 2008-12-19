@@ -1,6 +1,15 @@
 require "socket"
+require "flash_profiler/agent"
+require "pp"
 
-agent_thread = Thread.new do
+@agent = nil
+
+def accept
   server = TCPServer.new('localhost', 42624)
-  client = server.accept
+  puts "waiting for connection on localhost:42624"
+  @agent = Agent.new(server.accept)
 end
+
+accept
+
+pp @agent.read_message
