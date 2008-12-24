@@ -12,4 +12,3 @@ end
 
 accept
 
-pp @agent.read_message

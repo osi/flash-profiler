@@ -3,6 +3,14 @@ class Agent
     puts "Accepted connection from #{socket.peeraddr[2]}:#{socket.peeraddr[1]}"
 
     @socket = socket
+    
+    hello_msg = read_message
+    
+    if "AGENT READY" != hello_msg
+      raise "Invalid hello message #{hello_msg}"
+    end
+    
+    puts "Agent ready"
   end
   
   def read_message
