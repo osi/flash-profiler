@@ -13,6 +13,24 @@ class Agent
     puts "Agent ready"
   end
   
+  def memory_usage
+    send_message "GET MEMORY"
+    
+    response = read_message
+    
+    if response =~ /MEMORY: (\d+)/
+      $1.to_i
+    else
+      raise "Invalid response to memory request #{response}"
+    end
+  end
+  
+  private
+  
+  def send_message(msg) 
+    @socket.write("#{msg}\x00")
+  end
+  
   def read_message
     @socket.readline("\x00").chop
   end

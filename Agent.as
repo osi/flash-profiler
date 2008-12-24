@@ -6,6 +6,7 @@ package {
     import flash.events.IOErrorEvent;
     import flash.events.SecurityErrorEvent;
     import flash.net.XMLSocket;
+    import flash.system.System;
 
     public class Agent extends Sprite {
 	    private static const HOST:String = "localhost";
@@ -36,6 +37,12 @@ package {
     	
     	private function dataReceived(e:DataEvent):void {
     	    trace(PREFIX, "Received command", e.data);    	   
+    	    
+    	    switch( e.data ) {
+    	        case "GET MEMORY":
+    	            _socket.send("MEMORY: " + System.totalMemory);
+    	            return;
+    	    }
     	}
     	
     	private function connect():void {
