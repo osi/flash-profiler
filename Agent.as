@@ -83,9 +83,8 @@ package {
     	
     	private function close(e:Event):void {
     	   _connected = false;
-    	   trace(PREFIX, "Disconnected, will try to reconnect");
-    	   
-           connect();
+
+    	   trace(PREFIX, "Disconnected");
     	}
 
     	private function fail(e:Event):void {
