@@ -7,6 +7,7 @@ package {
     import flash.events.SecurityErrorEvent;
     import flash.net.XMLSocket;
     import flash.system.System;
+    import flash.utils.getQualifiedClassName;
     import flash.sampler.*;
 
     public class Agent extends Sprite {
@@ -53,7 +54,7 @@ package {
 
                     trace(getSampleCount());
                     for each (var s:Sample in getSamples()) {
-                        trace(s);
+                        trace(sampleToString(s));
                     }
                     return;
                 case "STOP SAMPLING":
@@ -61,6 +62,43 @@ package {
                     _socket.send("OK STOP");
                     return;
     	    }
+    	}
+    	
+    	private function sampleToString(s:Sample):String {
+            if( s is NewObjectSample ) {
+                var nos:NewObjectSample = s as NewObjectSample;
+                
+                return "[NewObjectSample" +
+                    "\n     id: " + nos.id +
+                    "\n   type: " + getQualifiedClassName(nos.type) +
+                    "\n   time: " + nos.time +
+                    "\n  stack: " + stackToString(nos.stack) +
+                    "\n]";
+                    
+            } else if( s is DeleteObjectSample ) {
+                var dos:DeleteObjectSample = s as DeleteObjectSample;
+                
+                return "[DeleteObjectSample" +
+                    "\n     id: " + dos.id +
+                    "\n   size: " + dos.size +
+                    "\n   time: " + dos.time +
+                    "\n  stack: " + stackToString(dos.stack) +
+                    "\n]";
+            }
+
+            return "[Sample" +
+                "\n   time: " + s.time +
+                "\n  stack: " + stackToString(s.stack) +
+                "]";
+    	}
+    	
+    	private function stackToString(stack:Array):String {
+    	    if( null == stack ) {
+    	        return "(none)";
+    	    }
+    	    
+    	    var separator:String = "\n    ";
+    	    return separator + stack.join(separator);
     	}
     	
     	private function connect():void {
