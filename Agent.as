@@ -89,7 +89,7 @@ package {
             return "[Sample" +
                 "\n   time: " + s.time +
                 "\n  stack: " + stackToString(s.stack) +
-                "]";
+                "\n]";
     	}
     	
     	private function stackToString(stack:Array):String {
