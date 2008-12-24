@@ -7,6 +7,7 @@ package {
     import flash.events.SecurityErrorEvent;
     import flash.net.XMLSocket;
     import flash.system.System;
+    import flash.sampler.*;
 
     public class Agent extends Sprite {
 	    private static const HOST:String = "localhost";
@@ -39,9 +40,26 @@ package {
     	    trace(PREFIX, "Received command", e.data);    	   
     	    
     	    switch( e.data ) {
-    	        case "GET MEMORY":
-    	            _socket.send("MEMORY: " + System.totalMemory);
-    	            return;
+                case "GET MEMORY":
+                    _socket.send("MEMORY: " + System.totalMemory);
+                    return;
+                case "START SAMPLING":
+                    startSampling();
+                    _socket.send("OK START");
+                    return;
+                case "PAUSE SAMPLING":
+                    pauseSampling();
+                    _socket.send("OK PAUSE");
+
+                    trace(getSampleCount());
+                    for each (var s:Sample in getSamples()) {
+                        trace(s);
+                    }
+                    return;
+                case "STOP SAMPLING":
+                    stopSampling();
+                    _socket.send("OK STOP");
+                    return;
     	    }
     	}
     	
