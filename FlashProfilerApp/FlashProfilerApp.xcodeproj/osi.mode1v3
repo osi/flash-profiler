@@ -375,7 +375,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6C34FD050F05ABAE00F3A3A8</string>
+										<string>6C34FD130F05E2C900F3A3A8</string>
 										<key>history</key>
 										<array>
 											<string>6C34FCFC0F05ABAE00F3A3A8</string>
@@ -566,7 +566,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>252029870.03755701</real>
+	<real>252043977.945214</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -581,10 +581,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>6C34FB5C0F033F0300F3A3A8</string>
 		<string>/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FlashProfilerApp.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>10 129 1040 649 0 0 1280 778 </string>
@@ -968,7 +968,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

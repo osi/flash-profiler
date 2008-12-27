@@ -1,4 +1,5 @@
 class AvailableAgentsTracker
+  attr_accessor :table
   
   def initialize
     @agents = []
@@ -9,6 +10,8 @@ class AvailableAgentsTracker
     @semaphore.synchronize { @agents.push(agent) }
     
     NSLog "Need to update table from main thread"
+    
+    @table.performSelectorOnMainThread :reloadData, :withObject => nil, :waitUntilDone => false
   end
   
   def remove(agent)
