@@ -1,16 +1,17 @@
 class Agent
   def initialize(socket)
-    puts "Accepted connection from #{socket.peeraddr[2]}:#{socket.peeraddr[1]}"
+    NSLog "Accepted connection from #{socket.peeraddr[2]}:#{socket.peeraddr[1]}"
 
     @socket = socket
     
     hello_msg = read_message
     
     if "AGENT READY" != hello_msg
+      # TODO close the socket
       raise "Invalid hello message #{hello_msg}"
     end
     
-    puts "Agent ready"
+    NSLog "Agent ready"
   end
   
   def memory_usage
@@ -54,7 +55,8 @@ class Agent
   end
   
   def read_message
-    @socket.readline("\x00").chop
+    # Odd that I can't 'chop' off the null
+    @socket.readline("\x00").unpack("Z*")[0]
   end
   
   # Write +string+ to the host.
