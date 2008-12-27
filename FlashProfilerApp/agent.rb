@@ -7,7 +7,8 @@ class Agent
     hello_msg = read_message
     
     if "AGENT READY" != hello_msg
-      # TODO close the socket
+      socket.close
+
       raise "Invalid hello message #{hello_msg}"
     end
     
@@ -36,6 +37,10 @@ class Agent
   
   def stop_sampling
     send_and_expect "STOP SAMPLING", "OK STOP"
+  end
+  
+  def to_s
+    "#{@socket.peeraddr[2]}:#{@socket.peeraddr[1]}"
   end
   
   private
