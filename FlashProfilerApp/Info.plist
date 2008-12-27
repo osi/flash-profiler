@@ -4,6 +4,25 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>profiler-session-data</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Session</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>NSDocumentClass</key>
+			<string>ProfilingSession</string>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>

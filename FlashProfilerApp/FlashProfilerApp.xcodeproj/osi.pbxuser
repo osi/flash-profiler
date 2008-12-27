@@ -2,7 +2,7 @@
 {
 	089C165DFE840E0CC02AAC07 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {771, 290}}";
+			sepNavIntBoundsRect = "{{0, 0}, {771, 313}}";
 			sepNavSelRange = "{93, 0}";
 			sepNavVisRange = "{0, 99}";
 		};
@@ -176,6 +176,36 @@
 			6C34FD110F05E2A200F3A3A8 /* PBXTextBookmark */ = 6C34FD110F05E2A200F3A3A8 /* PBXTextBookmark */;
 			6C34FD120F05E2A500F3A3A8 /* PBXTextBookmark */ = 6C34FD120F05E2A500F3A3A8 /* PBXTextBookmark */;
 			6C34FD130F05E2C900F3A3A8 /* PBXTextBookmark */ = 6C34FD130F05E2C900F3A3A8 /* PBXTextBookmark */;
+			6C34FD150F05E63E00F3A3A8 /* PBXTextBookmark */ = 6C34FD150F05E63E00F3A3A8 /* PBXTextBookmark */;
+			6C34FD160F05E63E00F3A3A8 /* PBXTextBookmark */ = 6C34FD160F05E63E00F3A3A8 /* PBXTextBookmark */;
+			6C34FD170F05E63E00F3A3A8 /* PBXTextBookmark */ = 6C34FD170F05E63E00F3A3A8 /* PBXTextBookmark */;
+			6C34FD3F0F05EBFA00F3A3A8 /* PBXTextBookmark */ = 6C34FD3F0F05EBFA00F3A3A8 /* PBXTextBookmark */;
+			6C34FD400F05EBFA00F3A3A8 /* PlistBookmark */ = 6C34FD400F05EBFA00F3A3A8 /* PlistBookmark */;
+			6C34FD410F05EBFA00F3A3A8 /* PBXTextBookmark */ = 6C34FD410F05EBFA00F3A3A8 /* PBXTextBookmark */;
+			6C34FD420F05EBFA00F3A3A8 /* PBXTextBookmark */ = 6C34FD420F05EBFA00F3A3A8 /* PBXTextBookmark */;
+			6C34FD430F05EBFA00F3A3A8 /* PlistBookmark */ = 6C34FD430F05EBFA00F3A3A8 /* PlistBookmark */;
+			6C34FD440F05EBFA00F3A3A8 /* PBXTextBookmark */ = 6C34FD440F05EBFA00F3A3A8 /* PBXTextBookmark */;
+			6C34FD450F05EBFA00F3A3A8 /* PlistBookmark */ = 6C34FD450F05EBFA00F3A3A8 /* PlistBookmark */;
+			6C34FD460F05EBFA00F3A3A8 /* PBXTextBookmark */ = 6C34FD460F05EBFA00F3A3A8 /* PBXTextBookmark */;
+			6C34FD580F05EEC800F3A3A8 /* PBXTextBookmark */ = 6C34FD580F05EEC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD590F05EEC800F3A3A8 /* PBXTextBookmark */ = 6C34FD590F05EEC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD5A0F05EEC800F3A3A8 /* PlistBookmark */ = 6C34FD5A0F05EEC800F3A3A8 /* PlistBookmark */;
+			6C34FD5B0F05EEC800F3A3A8 /* PBXTextBookmark */ = 6C34FD5B0F05EEC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD5C0F05EEC800F3A3A8 /* PBXTextBookmark */ = 6C34FD5C0F05EEC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD5D0F05EEC800F3A3A8 /* PBXTextBookmark */ = 6C34FD5D0F05EEC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD5E0F05EEC800F3A3A8 /* PlistBookmark */ = 6C34FD5E0F05EEC800F3A3A8 /* PlistBookmark */;
+			6C34FD5F0F05EF2F00F3A3A8 /* PlistBookmark */ = 6C34FD5F0F05EF2F00F3A3A8 /* PlistBookmark */;
+			6C34FD600F05EF4800F3A3A8 /* PlistBookmark */ = 6C34FD600F05EF4800F3A3A8 /* PlistBookmark */;
+			6C34FD620F05EFC800F3A3A8 /* PlistBookmark */ = 6C34FD620F05EFC800F3A3A8 /* PlistBookmark */;
+			6C34FD630F05EFC800F3A3A8 /* PlistBookmark */ = 6C34FD630F05EFC800F3A3A8 /* PlistBookmark */;
+			6C34FD640F05EFC800F3A3A8 /* PBXTextBookmark */ = 6C34FD640F05EFC800F3A3A8 /* PBXTextBookmark */;
+			6C34FD670F05F02900F3A3A8 /* PlistBookmark */ = 6C34FD670F05F02900F3A3A8 /* PlistBookmark */;
+			6C34FD680F05F02900F3A3A8 /* PBXTextBookmark */ = 6C34FD680F05F02900F3A3A8 /* PBXTextBookmark */;
+			6C34FD690F05F02900F3A3A8 /* PBXTextBookmark */ = 6C34FD690F05F02900F3A3A8 /* PBXTextBookmark */;
+			6C34FD6A0F05F02900F3A3A8 /* PlistBookmark */ = 6C34FD6A0F05F02900F3A3A8 /* PlistBookmark */;
+			6C34FD6B0F05F02900F3A3A8 /* PBXTextBookmark */ = 6C34FD6B0F05F02900F3A3A8 /* PBXTextBookmark */;
+			6C34FD6F0F05F24900F3A3A8 /* PBXTextBookmark */ = 6C34FD6F0F05F24900F3A3A8 /* PBXTextBookmark */;
+			6C34FD700F05F4D600F3A3A8 /* PBXTextBookmark */ = 6C34FD700F05F4D600F3A3A8 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 6C34FB680F033F0500F3A3A8 /* Source Control */;
 		userBuildSettings = {
@@ -239,16 +269,16 @@
 	};
 	6C34FCF60F05AB9700F3A3A8 /* agent.rb */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {771, 1022}}";
+			sepNavIntBoundsRect = "{{0, 0}, {771, 1120}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 451}";
+			sepNavVisRange = "{0, 450}";
 		};
 	};
 	6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {771, 448}}";
-			sepNavSelRange = "{650, 0}";
-			sepNavVisRange = "{0, 467}";
+			sepNavSelRange = "{647, 0}";
+			sepNavVisRange = "{0, 464}";
 		};
 	};
 	6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {
@@ -400,6 +430,336 @@
 		rLoc = 624;
 		rType = 0;
 		vrLen = 485;
+		vrLoc = 0;
+	};
+	6C34FD150F05E63E00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */;
+		name = "agent_tracker.rb: 31";
+		rLen = 0;
+		rLoc = 647;
+		rType = 0;
+		vrLen = 464;
+		vrLoc = 0;
+	};
+	6C34FD160F05E63E00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */;
+		name = "agent_tracker.rb: 31";
+		rLen = 0;
+		rLoc = 647;
+		rType = 0;
+		vrLen = 464;
+		vrLoc = 0;
+	};
+	6C34FD170F05E63E00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */;
+		name = "agent.rb: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 450;
+		vrLoc = 0;
+	};
+	6C34FD3F0F05EBFA00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */;
+		name = "agent.rb: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 450;
+		vrLoc = 0;
+	};
+	6C34FD400F05EBFA00F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD410F05EBFA00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD420F05EBFA00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */;
+		name = "agent.rb: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 450;
+		vrLoc = 0;
+	};
+	6C34FD430F05EBFA00F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD440F05EBFA00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD450F05EBFA00F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD460F05EBFA00F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {771, 420}}";
+			sepNavSelRange = "{794, 0}";
+			sepNavVisRange = "{0, 542}";
+		};
+	};
+	6C34FD580F05EEC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 2";
+		rLen = 0;
+		rLoc = 36;
+		rType = 0;
+		vrLen = 689;
+		vrLoc = 0;
+	};
+	6C34FD590F05EEC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD5A0F05EEC800F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleDocumentTypes,
+			0,
+			NSDocumentClass,
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD5B0F05EEC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD5C0F05EEC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 2";
+		rLen = 0;
+		rLoc = 36;
+		rType = 0;
+		vrLen = 689;
+		vrLoc = 0;
+	};
+	6C34FD5D0F05EEC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 93;
+		rType = 0;
+		vrLen = 99;
+		vrLoc = 0;
+	};
+	6C34FD5E0F05EEC800F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleDocumentTypes,
+			0,
+			NSDocumentClass,
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD5F0F05EF2F00F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD600F05EF4800F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD620F05EFC800F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD630F05EFC800F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD640F05EFC800F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 7";
+		rLen = 0;
+		rLoc = 211;
+		rType = 0;
+		vrLen = 681;
+		vrLoc = 0;
+	};
+	6C34FD670F05F02900F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleDocumentTypes,
+			0,
+			CFBundleTypeName,
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD680F05F02900F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 7";
+		rLen = 0;
+		rLoc = 211;
+		rType = 0;
+		vrLen = 686;
+		vrLoc = 0;
+	};
+	6C34FD690F05F02900F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 7";
+		rLen = 0;
+		rLoc = 211;
+		rType = 0;
+		vrLen = 681;
+		vrLoc = 0;
+	};
+	6C34FD6A0F05F02900F3A3A8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleDocumentTypes,
+			0,
+			CFBundleTypeName,
+		);
+		name = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	6C34FD6B0F05F02900F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 6";
+		rLen = 0;
+		rLoc = 203;
+		rType = 0;
+		vrLen = 680;
+		vrLoc = 0;
+	};
+	6C34FD6F0F05F24900F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 28";
+		rLen = 0;
+		rLoc = 763;
+		rType = 0;
+		vrLen = 732;
+		vrLoc = 0;
+	};
+	6C34FD700F05F4D600F3A3A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */;
+		name = "profiling_session.rb: 32";
+		rLen = 0;
+		rLoc = 794;
+		rType = 0;
+		vrLen = 542;
 		vrLoc = 0;
 	};
 	8D1107260486CEB800E47090 /* FlashProfilerApp */ = {

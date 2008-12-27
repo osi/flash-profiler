@@ -9,9 +9,15 @@ class AvailableAgentsTracker
   def add(agent)
     @semaphore.synchronize { @agents.push(agent) }
     
-    NSLog "Need to update table from main thread"
+    refresh_view
+  end
+  
+  def agent_at(index)
+    agent = @semaphore.synchronize { @agents.slice!(index) }
     
-    @table.performSelectorOnMainThread :reloadData, :withObject => nil, :waitUntilDone => false
+    refresh_view
+    
+    agent
   end
   
   def remove(agent)
@@ -26,6 +32,12 @@ class AvailableAgentsTracker
   
   def tableView(view, objectValueForTableColumn:column, row:index)
     @semaphore.synchronize { @agents[index].to_s }
+  end
+  
+  private
+  
+  def refresh_view
+    @table.performSelectorOnMainThread :reloadData, :withObject => nil, :waitUntilDone => false
   end
   
 end

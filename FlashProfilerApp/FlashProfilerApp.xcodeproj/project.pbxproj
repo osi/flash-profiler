@@ -13,7 +13,9 @@
 		6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */; };
 		6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */; };
 		6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF80F05AB9700F3A3A8 /* listener.rb */; };
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */; };
+		6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */; };
+		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -24,7 +26,6 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4DE339F60D74FCDD00ADB6EE /* rb_main.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
@@ -33,6 +34,9 @@
 		6C34FCF60F05AB9700F3A3A8 /* agent.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent.rb; sourceTree = "<group>"; };
 		6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent_tracker.rb; sourceTree = "<group>"; };
 		6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = listener.rb; sourceTree = "<group>"; };
+		6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilingSession.xib; sourceTree = "<group>"; };
+		6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = profiling_session.rb; sourceTree = "<group>"; };
+		6C34FD720F05F5AB00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FlashProfilerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashProfilerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -54,9 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				6C34FCF60F05AB9700F3A3A8 /* agent.rb */,
-				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
-				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
-				6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -91,6 +92,8 @@
 		29B97314FDCFA39411CA2CEA /* FlashProfilerApp */ = {
 			isa = PBXGroup;
 			children = (
+				6C34FD390F05EBAD00F3A3A8 /* Profiling Session */,
+				6C34FD140F05E62000F3A3A8 /* Agent Management */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -112,9 +115,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -126,6 +129,25 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6C34FD140F05E62000F3A3A8 /* Agent Management */ = {
+			isa = PBXGroup;
+			children = (
+				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
+				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
+				6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */,
+			);
+			name = "Agent Management";
+			sourceTree = "<group>";
+		};
+		6C34FD390F05EBAD00F3A3A8 /* Profiling Session */ = {
+			isa = PBXGroup;
+			children = (
+				6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */,
+				6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */,
+			);
+			name = "Profiling Session";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,13 +193,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				4DE339F70D74FCDD00ADB6EE /* rb_main.rb in Resources */,
 				6C34FC7C0F034D4300F3A3A8 /* available_agents_controller.rb in Resources */,
 				6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */,
 				6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */,
 				6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */,
+				6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */,
+				6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */,
+				6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,12 +227,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				6C34FD720F05F5AB00F3A3A8 /* English */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
