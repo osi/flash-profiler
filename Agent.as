@@ -107,7 +107,7 @@ package {
     	    try {
     	        _socket.connect(_host, _port);
 	        } catch (e:Error) {
-	            trace(PREFIX, "Unable to connect ", e);
+	            trace(PREFIX, "Unable to connect", e);
 	        }
     	}
     	
@@ -126,6 +126,8 @@ package {
     	}
 
     	private function fail(e:Event):void {
+    	    _socket.close();
+    	    _connected = false;
             trace(PREFIX, "Communication failure", e);
     	}
     }
