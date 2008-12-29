@@ -17,6 +17,7 @@
 		6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */; };
 		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
 		6C34FD7C0F074D1600F3A3A8 /* profiling_session_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD7B0F074D1600F3A3A8 /* profiling_session_controller.rb */; };
+		6C34FD800F097F0400F3A3A8 /* memory_usage.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -39,6 +40,7 @@
 		6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = profiling_session.rb; sourceTree = "<group>"; };
 		6C34FD720F05F5AB00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6C34FD7B0F074D1600F3A3A8 /* profiling_session_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = profiling_session_controller.rb; sourceTree = "<group>"; };
+		6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = memory_usage.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FlashProfilerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashProfilerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 		6C34FD140F05E62000F3A3A8 /* Agent Management */ = {
 			isa = PBXGroup;
 			children = (
+				6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */,
 				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
 				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
 				6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */,
@@ -206,6 +209,7 @@
 				6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */,
 				6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */,
 				6C34FD7C0F074D1600F3A3A8 /* profiling_session_controller.rb in Resources */,
+				6C34FD800F097F0400F3A3A8 /* memory_usage.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

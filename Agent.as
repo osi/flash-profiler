@@ -42,7 +42,7 @@ package {
     	    
     	    switch( e.data ) {
                 case "GET MEMORY":
-                    _socket.send("MEMORY: " + System.totalMemory);
+                    _socket.send("MEMORY: " + new Date().time + " " + System.totalMemory);
                     return;
                 case "START SAMPLING":
                     startSampling();
@@ -61,6 +61,8 @@ package {
                     stopSampling();
                     _socket.send("OK STOP");
                     return;
+                case "GET SAMPLES":
+                    _socket.send("SENDING SAMPLES: " + )
     	    }
     	}
     	

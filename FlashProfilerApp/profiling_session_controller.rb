@@ -1,6 +1,9 @@
 class ProfilingSessionController
-  attr_accessor :session
-  attr_accessor :collect_button
+  attr_accessor :session, :collect_button, :memory_usage
+
+  def initialize
+    @memory_usage = []
+  end
   
   def awakeFromNib
     @agent = @session.agent
@@ -15,18 +18,37 @@ class ProfilingSessionController
   end
   
   def get_memory_usage
-    NSLog "#{@agent.memory_usage}"
+    usage = @agent.memory_usage
+    
+    @memory_usage.push usage
+    
+    NSLog "#{usage}"
   end
   
   def collect_button_action(sender)
-    NSLog "TODO, start collecting yo"
-    # TODO user hit collect button
+    if @agent.sampling?
+      @agent.pause_sampling
+      
+      samples = @agent.samples
+      
+      @agent.stop_sampling
+    else
+      @agent.start_sampling
+    end
   end
   
   # NSToolbar Delegate
   
   def validateToolbarItem(item)
     if item == @collect_button
+      if nil == @agent
+        @collect_button.label = "Not Connected" 
+      elsif @agent.sampling?
+        @collect_button.label = "Stop"
+      else
+        @collect_button.label = "Collect"
+      end
+      
       nil != @agent
     else
       true

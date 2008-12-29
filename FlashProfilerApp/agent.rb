@@ -12,6 +12,8 @@ class Agent
       raise "Invalid hello message #{hello_msg}"
     end
     
+    @sampling_state = :stopped
+    
     NSLog "Agent ready"
   end
   
@@ -20,23 +22,51 @@ class Agent
     
     response = read_message
     
-    if response =~ /MEMORY: (\d+)/
-      $1.to_i
+    if response =~ /MEMORY: (\d+) (\d+)/
+      MemoryUsage.new $1.to_i, $2.to_i
     else
       raise "Invalid response to memory request #{response}"
     end
   end
   
+  def samples
+    send_message "GET SAMPLES"
+    
+    response = read_message
+
+    if response =~ /SENDING SAMPLES: (\d+)/
+      samples = []
+      
+      $1.to_i.times do
+        samples.push read_sample
+      end
+      
+      samples
+    else
+      raise "Invalid response to sample retrieval #{response}"
+    end
+  end
+  
   def start_sampling
     send_and_expect "START SAMPLING", "OK START"
+    
+    @sampling_state = :started
   end
   
   def pause_sampling
     send_and_expect "PAUSE SAMPLING", "OK PAUSE"
+    
+    @sampling_state = :paused
   end
   
   def stop_sampling
     send_and_expect "STOP SAMPLING", "OK STOP"
+    
+    @sampling_state = :stopped
+  end
+  
+  def sampling?
+    :started == sampling_state
   end
   
   def to_s
@@ -44,6 +74,12 @@ class Agent
   end
   
   private
+  
+  def read_sample
+    data = read_message
+    
+    STDERR.puts data
+  end
   
   def send_and_expect(msg, expected)
     send_message msg
