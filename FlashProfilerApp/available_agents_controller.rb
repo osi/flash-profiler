@@ -7,6 +7,8 @@ class AvailableAgentsController
     if row >= 0
       agent = tracker.agent_at(row)
       
+      NSLog "Will create session for #{agent}"
+      
       session = ProfilingSession.alloc.initWithAgent(agent)
       
       sessions.addDocument(session)

@@ -60,6 +60,7 @@ class Agent
   end
   
   def read_message
+    # TODO this will throw Errno::ECONNRESET when the flash side terminates
     # Odd that I can't 'chop' off the null
     @socket.readline("\x00").unpack("Z*")[0]
   end
