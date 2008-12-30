@@ -7,6 +7,7 @@ package {
     import flash.events.SecurityErrorEvent;
     import flash.net.XMLSocket;
     import flash.system.System;
+    import flash.utils.getTimer;
     import flash.utils.getQualifiedClassName;
     import flash.sampler.*;
 
@@ -44,25 +45,34 @@ package {
                 case "GET MEMORY":
                     _socket.send("MEMORY: " + new Date().time + " " + System.totalMemory);
                     return;
+                    
                 case "START SAMPLING":
                     startSampling();
                     _socket.send("OK START");
                     return;
+                    
                 case "PAUSE SAMPLING":
                     pauseSampling();
                     _socket.send("OK PAUSE");
-
-                    trace(getSampleCount());
-                    for each (var s:Sample in getSamples()) {
-                        trace(sampleToString(s));
-                    }
                     return;
+                    
                 case "STOP SAMPLING":
                     stopSampling();
                     _socket.send("OK STOP");
                     return;
+                    
                 case "GET SAMPLES":
-                    _socket.send("SENDING SAMPLES: " + )
+                    trace(PREFIX, "Sending", getSampleCount(), "samples at", getTimer());
+
+                    _socket.send("SENDING SAMPLES: " + getSampleCount());
+                    
+                    for each (var s:Sample in getSamples()) {
+                        _socket.send(sampleToString(s));
+                    }
+                    
+                    trace(PREFIX, "Done sending samples");
+                    
+                    return;
     	    }
     	}
     	
@@ -71,36 +81,36 @@ package {
                 var nos:NewObjectSample = s as NewObjectSample;
                 
                 return "[NewObjectSample" +
+                    "\n   time: " + nos.time +
                     "\n     id: " + nos.id +
                     "\n   type: " + getQualifiedClassName(nos.type) +
-                    "\n   time: " + nos.time +
-                    "\n  stack: " + stackToString(nos.stack) +
+                    stackToString(nos.stack) +
                     "\n]";
                     
             } else if( s is DeleteObjectSample ) {
                 var dos:DeleteObjectSample = s as DeleteObjectSample;
                 
                 return "[DeleteObjectSample" +
+                    "\n   time: " + dos.time +
                     "\n     id: " + dos.id +
                     "\n   size: " + dos.size +
-                    "\n   time: " + dos.time +
-                    "\n  stack: " + stackToString(dos.stack) +
+                    stackToString(dos.stack) +
                     "\n]";
             }
 
             return "[Sample" +
                 "\n   time: " + s.time +
-                "\n  stack: " + stackToString(s.stack) +
+                stackToString(s.stack) +
                 "\n]";
     	}
     	
     	private function stackToString(stack:Array):String {
     	    if( null == stack ) {
-    	        return "(none)";
+    	        return "";
     	    }
     	    
     	    var separator:String = "\n    ";
-    	    return separator + stack.join(separator);
+    	    return "\n  stack: " + separator + stack.join(separator);
     	}
     	
     	private function connect():void {
