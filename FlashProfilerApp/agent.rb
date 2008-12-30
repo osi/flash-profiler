@@ -66,7 +66,7 @@ class Agent
   end
   
   def sampling?
-    :started == sampling_state
+    :started == @sampling_state
   end
   
   def to_s

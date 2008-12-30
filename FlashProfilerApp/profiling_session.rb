@@ -1,5 +1,11 @@
 class ProfilingSession < NSDocument
-  attr_accessor :agent
+  attr_accessor :agent, :memory_usage
+
+  def init
+    super
+    
+    @memory_usage = []
+  end
 
   def initWithAgent(agent)
     init

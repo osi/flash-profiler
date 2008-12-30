@@ -20,7 +20,7 @@ class ProfilingSessionController
   def get_memory_usage
     usage = @agent.memory_usage
     
-    @memory_usage.push usage
+    @session.memory_usage.push usage
     
     NSLog "#{usage}"
   end
@@ -32,6 +32,8 @@ class ProfilingSessionController
       samples = @agent.samples
       
       @agent.stop_sampling
+      
+      # TODO put samples in the session
     else
       @agent.start_sampling
     end
