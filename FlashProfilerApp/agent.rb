@@ -18,38 +18,24 @@ class Agent
   end
   
   def memory_usage
-    send_message "GET MEMORY"
+    m = send_and_expect "GET MEMORY", /MEMORY: (\d+) (\d+)/
     
-    response = read_message
-    
-    if response =~ /MEMORY: (\d+) (\d+)/
-      MemoryUsage.new $1.to_i, $2.to_i
-    else
-      raise "Invalid response to memory request #{response}"
-    end
+    MemoryUsage.new m[1].to_i, m[2].to_i
   end
   
   def samples
-    send_message "GET SAMPLES"
+    count = send_and_expect("GET SAMPLES", /SENDING SAMPLES: (\d+)/)[1].to_i
+    samples = []
     
-    response = read_message
-
-    if response =~ /SENDING SAMPLES: (\d+)/
-      samples = []
-      
-      $1.to_i.times do
-        samples.push read_sample
-      end
-      
-      samples
-    else
-      raise "Invalid response to sample retrieval #{response}"
+    count.times do
+      samples.push read_sample
     end
+    
+    samples
   end
   
   def start_sampling
-    send_and_expect "START SAMPLING", "OK START"
-    
+    @started_at = send_and_expect("START SAMPLING", /OK START (\d+)/)[1].to_i
     @sampling_state = :started
   end
   
@@ -85,10 +71,16 @@ class Agent
     send_message msg
     
     response = read_message
-  
-    if expected != response
-      raise "Invalid ack: #{response}"
-    end    
+   
+    case expected
+    when Regexp
+      m = expected.match(response)
+      return m if m != nil
+    when response
+      return response
+    end
+    
+    raise "Invalid response: #{response}"
   end
   
   def send_message(msg) 
@@ -99,18 +91,5 @@ class Agent
     # TODO this will throw Errno::ECONNRESET when the flash side terminates
     # Odd that I can't 'chop' off the null
     @socket.readline("\x00").unpack("Z*")[0]
-  end
-  
-  # Write +string+ to the host.
-  #
-  # Does not perform any conversions on +string+.  Will log +string+ to the
-  # dumplog, if the Dump_log option is set.
-  # def write(string)
-  #   length = string.length
-  #   while 0 < length
-  #     IO::select(nil, [@sock])
-  #     @dumplog.log_dump('>', string[-length..-1]) if @options.has_key?("Dump_log")
-  #     length -= @sock.syswrite(string[-length..-1])
-  #   end
-  # end  
+  end  
 end
