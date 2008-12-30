@@ -48,7 +48,7 @@ package {
                     
                 case "START SAMPLING":
                     startSampling();
-                    _socket.send("OK START");
+                    _socket.send("OK START " + new Date().time );
                     return;
                     
                 case "PAUSE SAMPLING":
@@ -62,7 +62,7 @@ package {
                     return;
                     
                 case "GET SAMPLES":
-                    trace(PREFIX, "Sending", getSampleCount(), "samples at", getTimer());
+                    trace(PREFIX, "Sending", getSampleCount(), "samples");
 
                     _socket.send("SENDING SAMPLES: " + getSampleCount());
                     
@@ -72,6 +72,16 @@ package {
                     
                     trace(PREFIX, "Done sending samples");
                     
+                    return;
+                    
+                case "CLEAR SAMPLES":
+                    clearSamples();
+                    
+                    _socket.send("OK CLEARED");
+                    return;
+                    
+                default:
+                    _socket.send("UNKNOWN COMMAND");
                     return;
     	    }
     	}

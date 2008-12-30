@@ -31,6 +31,8 @@ class Agent
       samples.push read_sample
     end
     
+    send_and_expect "CLEAR SAMPLES", "OK CLEARED"
+    
     samples
   end
   
