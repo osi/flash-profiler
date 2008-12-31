@@ -8,7 +8,7 @@ class ProfilingSessionController
   def awakeFromNib
     @agent = @session.agent
     
-    if nil != @agent
+    if not @agent.nil?
       @timer = NSTimer.scheduledTimerWithTimeInterval 1, 
         target: self, 
         selector: :get_memory_usage, 
@@ -43,7 +43,7 @@ class ProfilingSessionController
   
   def validateToolbarItem(item)
     if item == @collect_button
-      if nil == @agent
+      if @agent.nil?
         @collect_button.label = "Not Connected" 
       elsif @agent.sampling?
         @collect_button.label = "Stop"
@@ -51,7 +51,7 @@ class ProfilingSessionController
         @collect_button.label = "Collect"
       end
       
-      nil != @agent
+      not @agent.nil?
     else
       true
     end

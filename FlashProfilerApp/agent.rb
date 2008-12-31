@@ -65,7 +65,7 @@ class Agent
   private
   
   def read_sample(previous)
-    SampleParser.parse read_message, @started_at, nil == previous ? nil : previous.raw_time
+    SampleParser.parse read_message, @started_at, previous.nil? ? nil : previous.raw_time
   end
   
   def send_and_expect(msg, expected)
@@ -76,7 +76,7 @@ class Agent
     case expected
     when Regexp
       m = expected.match(response)
-      return m if m != nil
+      return m if not m.nil?
     when response
       return response
     end

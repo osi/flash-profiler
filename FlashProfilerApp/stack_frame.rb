@@ -14,7 +14,7 @@ class StackFrame
   def self.parse(text)
     frames = @@lines.match(text)
     
-    if nil == frames
+    if frames.nil?
       return nil
     end
     
