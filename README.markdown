@@ -6,10 +6,22 @@ this project aims to develop a set of open-source tools for working with the
 
 **WARNING still very much in-progress**
 
+prerequisites
+-------------
+
+1. [MacRuby](http://macruby.org)
+1. Mac OS X 10.5
+1. [Flex SDK](http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK)
+
+building
+--------
+
+1. compile Agent.as to Agent.swf (TODO, need to make a script for mxmlc, right now I'm just doing it in TextMate)
+1. Build the XCode project in the FlashProfilerApp subdirectory
+
 usage
 -----
 
-1. compile Agent.as to Agent.swf (TODO, need to make a script for mxmlc, right now I'm just doing it in TextMate)
 2. find your [mm.cfg](http://www.adobe.com/devnet/flashplayer/articles/flash_player_admin_guide/flash_player_admin_guide.pdf) (see section 3), and:
     * add a line like: `PreloadSwf=/path/to/Agent.swf?host=localhost&port=42624`
         * set the _host_ and _port_ appropriately
