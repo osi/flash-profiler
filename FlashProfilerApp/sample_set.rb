@@ -1,7 +1,8 @@
 class SampleSet
-  attr_reader :cpu, :objects
+  attr_reader :cpu, :objects, :call_tree
   
   def initialize
+    @call_tree = CallTree.new
     @cpu = []
     @objects = []
     @objects_by_id = Hash.new
@@ -11,6 +12,7 @@ class SampleSet
     case sample
     when CpuSample
       @cpu << sample
+      @call_tree << sample
     when NewObjectSample
       @objects << sample
       @objects_by_id[sample.id] = sample

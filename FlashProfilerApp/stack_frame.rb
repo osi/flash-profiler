@@ -11,6 +11,27 @@ class StackFrame
     @line = line
   end
   
+  def hash
+    @class_name.hash ^ @method_name.hash ^ file.hash ^ line.hash
+  end
+  
+  def ==(other)
+    return false if not other.is_a? StackFrame
+    
+    class_name == other.class_name and 
+    method_name == other.method_name and 
+    file == other.file and 
+    line == other.line
+  end
+
+  def eql?(other)
+    self == other
+  end
+  
+  def equal?(other)
+    self == other
+  end
+  
   def self.parse(text)
     frames = @@lines.match(text)
     
