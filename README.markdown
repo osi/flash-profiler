@@ -13,5 +13,6 @@ usage
     * add a line like: `PreloadSwf=/path/to/Agent.swf?host=localhost&port=42624`
         * set the _host_ and _port_ appropriately
 3. Add *Agent.swf* to your local security domain. See previous PDF.    
-3. launch the console, `./console.rb` (TODO, need to pass in host and port to listen on!)
-4. launch your flash application, in either the browser (be sure to restart after mm.cfg changes), or with the standalone player    
+4. Launch the FlashProfilerApp application.
+5. Launch the Flash program you wish to debug under the Debug version of the player (standalone or in-browser)
+6. Connect via the app, and go to town
