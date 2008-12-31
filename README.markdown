@@ -23,8 +23,8 @@ usage
 -----
 
 2. find your [mm.cfg](http://www.adobe.com/devnet/flashplayer/articles/flash_player_admin_guide/flash_player_admin_guide.pdf) (see section 3), and:
-    * add a line like: `PreloadSwf=/path/to/Agent.swf?host=localhost&port=42624`
-        * set the _host_ and _port_ appropriately
+  * add a line like: `PreloadSwf=/path/to/Agent.swf?host=localhost&port=42624`
+    * set the _host_ and _port_ appropriately
 3. Add *Agent.swf* to your local security domain. See previous PDF.    
 4. Launch the FlashProfilerApp application.
 5. Launch the Flash program you wish to debug under the Debug version of the player (standalone or in-browser)
