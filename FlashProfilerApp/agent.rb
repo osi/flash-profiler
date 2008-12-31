@@ -28,7 +28,7 @@ class Agent
     samples = []
     
     count.times do
-      samples.push read_sample
+      samples.push read_sample(samples[-1])
     end
     
     send_and_expect "CLEAR SAMPLES", "OK CLEARED"
@@ -37,7 +37,8 @@ class Agent
   end
   
   def start_sampling
-    @started_at = send_and_expect("START SAMPLING", /OK START (\d+)/)[1].to_i
+    at = send_and_expect("START SAMPLING", /OK START (\d+)/)[1].to_i
+    @started_at = Time.at(at / 1000, at % 1000 * 1000)
     @sampling_state = :started
   end
   
@@ -63,10 +64,8 @@ class Agent
   
   private
   
-  def read_sample
-    data = read_message
-    
-    STDERR.puts data
+  def read_sample(previous)
+    SampleParser.parse read_message, @started_at, nil == previous ? nil : previous.raw_time
   end
   
   def send_and_expect(msg, expected)

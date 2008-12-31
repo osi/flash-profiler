@@ -1,18 +1,9 @@
-class CpuSample
-  attr_reader :at, :stack
+class CpuSample < BaseSample
+  attr_reader :stack
   
-  @@time = /^\s+time: (\d+)$/
-  
-  def initialize(at, stack)
-    @at = at
-    @stack = stack
+  def initialize(text, session_start, offset)
+    super
+    @stack = StackFrame.parse(text)
   end
-
-  def self.parse(text)
-    CpuSample.new \
-      @@time.match(text)[1].to_i,
-      StackFrame.parse(text)
-  end
-  
   
 end

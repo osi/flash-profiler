@@ -279,9 +279,9 @@
 	};
 	6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {771, 448}}";
+			sepNavIntBoundsRect = "{{0, 0}, {771, 630}}";
 			sepNavSelRange = "{647, 0}";
-			sepNavVisRange = "{0, 464}";
+			sepNavVisRange = "{142, 361}";
 		};
 	};
 	6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {

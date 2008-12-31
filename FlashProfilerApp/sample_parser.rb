@@ -1,7 +1,7 @@
 class SampleParser
   @@shell = /^\[(\w+)(.+)\]$/m
   
-  def self.parse(text)
+  def self.parse(text, session_start, offset)
     m = @@shell.match(text)
 
     # The 'time' field is crap. the relative values are okay though, so the times can be adjusted to be
@@ -12,11 +12,11 @@ class SampleParser
 
     case m[1]
     when "NewObjectSample"
-      NewObjectSample.parse m[2]
+      NewObjectSample.new m[2], session_start, offset
     when "Sample"
-      CpuSample.parse m[2]
+      CpuSample.new m[2], session_start, offset
     when "DeleteObjectSample"
-      DeleteObjectSample.parse m[2]
+      DeleteObjectSample.new m[2], session_start, offset
     else
       raise "Unknown sample type #{m[1]} -- #{text}"
     end
@@ -24,6 +24,7 @@ class SampleParser
 end
 
 =begin
+require "base_sample"
 require "new_object_sample"
 require "delete_object_sample"
 require "cpu_sample"
@@ -451,9 +452,12 @@ samples = <<-EOF
 ]
 EOF
 
+last = nil
+start = Time.new
+
 samples.split("]\n[").each do |s| 
   s = "[" + s if s[0,1] != "["
   s = s + "]" if s[-1,1] != "]"
-  puts SampleParser.parse(s).inspect
+  puts (last = SampleParser.parse(s, start, nil == last ? nil : last.raw_time)).inspect
 end
 =end
