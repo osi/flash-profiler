@@ -24,6 +24,7 @@ class SampleParser
 end
 
 =begin
+require "sample_set"
 require "base_sample"
 require "new_object_sample"
 require "delete_object_sample"
@@ -454,10 +455,14 @@ EOF
 
 last = nil
 start = Time.new
+set = SampleSet.new
 
 samples.split("]\n[").each do |s| 
   s = "[" + s if s[0,1] != "["
   s = s + "]" if s[-1,1] != "]"
-  puts (last = SampleParser.parse(s, start, nil == last ? nil : last.raw_time)).inspect
+  sample = (last = SampleParser.parse(s, start, nil == last ? nil : last.raw_time))
+  set << sample
 end
+
+puts set.inspect
 =end

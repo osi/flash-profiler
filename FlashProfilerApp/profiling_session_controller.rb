@@ -32,8 +32,8 @@ class ProfilingSessionController
       samples = @agent.samples
       
       @agent.stop_sampling
-      
-      # TODO put samples in the session
+
+      @session.add_sample_set samples
     else
       @agent.start_sampling
     end

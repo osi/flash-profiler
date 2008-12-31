@@ -1,5 +1,6 @@
 class NewObjectSample < BaseSample
   attr_reader :id, :type, :source
+  attr_accessor :deleted
   
   @@id = /^\s+id: (\d+)$/
   @@type = /^\s+type: ([\w.:]+)$/

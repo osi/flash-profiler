@@ -1,5 +1,6 @@
 class DeleteObjectSample < BaseSample
   attr_reader :id, :size
+  attr_accessor :created
   
   @@id = /^\s+id: (\d+)$/
   @@size = /^\s+size: (\d+)$/

@@ -14,6 +14,13 @@ class ProfilingSession < NSDocument
     
     self
   end
+  
+  def add_sample_set(samples)
+    
+  end
+  
+  
+  # NSDocument overrides
 
   def windowNibName
     # Implement this to return a nib to load OR implement
