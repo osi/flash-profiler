@@ -10,4 +10,19 @@ class MemoryUsage
     "MemoryUsage[usage=#{usage}, at=#{at}]"
   end
   
+  # NSCoding
+  
+  def initWithCoder(coder)
+    @at = Time.at coder.decodeInt64ForKey("at_sec"), coder.decodeInt64ForKey("at_usec")
+    @usage = coder.decodeInt64ForKey("usage")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    coder.encodeInt64 at.sec, forKey: "at_sec"
+    coder.encodeInt64 at.usec, forKey: "at_usec"
+    coder.encodeInt64 usage, forKey: "usage"
+  end  
+  
 end

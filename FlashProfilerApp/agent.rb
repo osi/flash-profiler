@@ -26,9 +26,10 @@ class Agent
   def samples
     count = send_and_expect("GET SAMPLES", /SENDING SAMPLES: (\d+)/)[1].to_i
     sample_set = SampleSet.new
+    previous = nil
     
     count.times do
-      sample_set << read_sample(samples[-1])
+      previous = (sample_set << read_sample(previous))
     end
     
     send_and_expect "CLEAR SAMPLES", "OK CLEARED"

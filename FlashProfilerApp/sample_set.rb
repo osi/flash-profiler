@@ -25,6 +25,8 @@ class SampleSet
         sample.created = new_object
       end
     end
+    
+    sample
   end
   
   # NSCoding
