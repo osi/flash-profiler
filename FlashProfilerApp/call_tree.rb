@@ -24,6 +24,18 @@ class CallTree
     root.to_s 0, root.visits.to_f
   end
   
+  # NSCoding
+  
+  def initWithCoder(coder)
+    @root = coder.decodeObjectForKey("root")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    coder.encodeObject root, forKey: "root"
+  end  
+  
   # TODO need to handle cycles in the tree
   class Node
     attr_reader :frame, :children
@@ -55,5 +67,21 @@ class CallTree
       frame.to_s << 
       children.map { |child| "\n" << child.to_s(level+1, total_visits) }.join
     end
+    
+    # NSCoding
+
+    def initWithCoder(coder)
+      @frame = coder.decodeObjectForKey("frame")
+      @children = coder.decodeObjectForKey("children")
+      @visits = coder.decodeIntegerForKey("visits")
+
+      self
+    end
+
+    def encodeWithCoder(coder)
+      coder.encodeObject frame, forKey: "frame"
+      coder.encodeObject children, forKey: "children"
+      coder.encodeInteger visits, forKey: "visits"
+    end    
   end
 end

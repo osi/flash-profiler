@@ -36,6 +36,26 @@ class StackFrame
     "#{class_name}/#{method_name}(#{file}#{line.nil? ? '' : ':'}#{line})"
   end
   
+  # NSCoding
+  
+  def initWithCoder(coder)
+    @class_name = coder.decodeObjectForKey("class_name")
+    @method_name = coder.decodeObjectForKey("method_name")
+    @file = coder.decodeObjectForKey("file")
+    @line = coder.decodeIntegerForKey("line")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    coder.encodeObject class_name, forKey: "class_name"
+    coder.encodeObject method_name, forKey: "method_name"
+    coder.encodeObject file, forKey: "file"
+    coder.encodeInteger line, forKey: "line" if not line.nil?
+  end  
+  
+  # Parser
+  
   def self.parse(text)
     frames = @@lines.match(text)
     

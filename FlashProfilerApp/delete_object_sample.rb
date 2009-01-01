@@ -12,4 +12,24 @@ class DeleteObjectSample < BaseSample
     @size = @@size.match(text)[1].to_i
   end
 
+  # NSCoding
+  
+  def initWithCoder(coder)
+    super
+    
+    @id = coder.decodeIntegerForKey("id")
+    @size = coder.decodeIntegerForKey("size")
+    @created = coder.decodeObjectForKey("created")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    super
+    
+    coder.encodeInteger id, forKey: "id"
+    coder.encodeInteger size, forKey: "size"
+    coder.encodeObject created, forKey: "created"
+  end
+
 end

@@ -12,4 +12,20 @@ class BaseSample
       @at = Time.at session_start.sec, session_start.usec + @raw_time - offset
     end
   end
+  
+  # NSCoding
+  
+  def initWithCoder(coder)
+    @raw_time = coder.decodeObjectForKey("raw").to_i
+    @at = Time.at coder.decodeInt64ForKey("at_sec"), coder.decodeInt64ForKey("at_usec")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    coder.encodeInt64 at.sec, forKey: "at_sec"
+    coder.encodeInt64 at.usec, forKey: "at_usec"
+    coder.encodeObject raw_time.to_s, forKey: "raw"
+  end
+  
 end

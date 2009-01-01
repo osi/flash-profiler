@@ -5,5 +5,22 @@ class CpuSample < BaseSample
     super
     @stack = StackFrame.parse(text)
   end
+
+  # NSCoding
+  
+  def initWithCoder(coder)
+    super
+    
+    @stack = coder.decodeObjectForKey("stack")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    super
+    
+    coder.encodeObject stack, forKey: "stack"
+  end
+  
   
 end

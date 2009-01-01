@@ -26,4 +26,22 @@ class SampleSet
       end
     end
   end
+  
+  # NSCoding
+  
+  def initWithCoder(coder)
+    @cpu = coder.decodeObjectForKey("cpu")
+    @objects = coder.decodeObjectForKey("objects")
+    @objects_by_id = coder.decodeObjectForKey("objects_by_id")
+    @call_tree = coder.decodeObjectForKey("call_tree")
+    
+    self
+  end
+  
+  def encodeWithCoder(coder)
+    coder.encodeObject cpu, forKey: "cpu"
+    coder.encodeObject objects, forKey: "objects"
+    coder.encodeObject call_tree, forKey: "call_tree"
+    coder.encodeObject @objects_by_id, forKey: "objects_by_id"
+  end
 end

@@ -23,7 +23,10 @@ class SampleParser
   end
 end
 
-=begin
+# =begin
+framework 'Cocoa'
+require "profiling_session"
+require "call_tree"
 require "sample_set"
 require "base_sample"
 require "new_object_sample"
@@ -464,5 +467,14 @@ samples.split("]\n[").each do |s|
   set << sample
 end
 
-puts set.inspect
-=end
+session = ProfilingSession.alloc.init
+session.add_sample_set set
+
+data = session.dataOfType(nil, error: nil)
+
+session2 = ProfilingSession.alloc.init
+session2.readFromData(data, ofType: nil, error: nil)
+
+puts session2.sample_sets[0].call_tree.to_s
+# puts set.call_tree.to_s
+# =end

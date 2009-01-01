@@ -33,7 +33,7 @@ class Agent
     
     send_and_expect "CLEAR SAMPLES", "OK CLEARED"
     
-    samples
+    sample_set
   end
   
   def start_sampling
