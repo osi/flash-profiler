@@ -23,7 +23,7 @@ class SampleParser
   end
 end
 
-# =begin
+=begin
 framework 'Cocoa'
 require "profiling_session"
 require "call_tree"
@@ -477,4 +477,4 @@ session2.readFromData(data, ofType: nil, error: nil)
 
 puts session2.sample_sets[0].call_tree.to_s
 # puts set.call_tree.to_s
-# =end
+=end
