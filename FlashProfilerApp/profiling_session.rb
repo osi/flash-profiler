@@ -20,6 +20,8 @@ class ProfilingSession < NSDocument
   
   def add_sample_set(set)
     @sample_sets << set
+    
+    updateChangeCount NSChangeDone
   end
   
   

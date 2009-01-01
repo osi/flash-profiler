@@ -21,6 +21,7 @@ class ProfilingSessionController
     usage = @agent.memory_usage
     
     @session.memory_usage.push usage
+    @session.updateChangeCount NSChangeDone
     
     NSLog "#{usage}"
   end

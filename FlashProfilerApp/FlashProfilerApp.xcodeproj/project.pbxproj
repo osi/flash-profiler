@@ -25,6 +25,7 @@
 		6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD850F0B160700F3A3A8 /* sample_parser.rb */; };
 		6C34FD8C0F0B160700F3A3A8 /* stack_frame.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD860F0B160700F3A3A8 /* stack_frame.rb */; };
 		6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */; };
+		6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -55,6 +56,7 @@
 		6C34FD850F0B160700F3A3A8 /* sample_parser.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_parser.rb; sourceTree = "<group>"; };
 		6C34FD860F0B160700F3A3A8 /* stack_frame.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = stack_frame.rb; sourceTree = "<group>"; };
 		6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_set.rb; sourceTree = "<group>"; };
+		6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = call_tree.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FlashProfilerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashProfilerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */,
 				6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */,
 				6C34FD810F0B160700F3A3A8 /* base_sample.rb */,
 				6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */,
@@ -238,6 +241,7 @@
 				6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */,
 				6C34FD8C0F0B160700F3A3A8 /* stack_frame.rb in Resources */,
 				6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */,
+				6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
