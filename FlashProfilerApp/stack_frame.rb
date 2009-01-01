@@ -32,6 +32,10 @@ class StackFrame
     self == other
   end
   
+  def to_s
+    "#{class_name}/#{method_name}(#{file}#{line.nil? ? '' : ':'}#{line})"
+  end
+  
   def self.parse(text)
     frames = @@lines.match(text)
     
@@ -44,6 +48,5 @@ class StackFrame
       StackFrame.new m[1], m[2], m[3], m[4] ? m[4].to_i : nil
     end
   end
-  
   
 end

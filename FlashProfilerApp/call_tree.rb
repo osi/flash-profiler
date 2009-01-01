@@ -3,10 +3,12 @@ class CallTree
   
   def initialize
     @root = Node.new StackFrame.new("<root>", "")
+    @root.visits = 0
   end
   
   def <<(sample)
     current_node = root
+    current_node.visits += 1
     
     sample.stack.reverse_each do |frame|
       if current_node.has_child? frame
@@ -16,6 +18,10 @@ class CallTree
         current_node = current_node.add_child(Node.new(frame))
       end
     end
+  end
+  
+  def to_s
+    root.to_s 0, root.visits.to_f
   end
   
   # TODO need to handle cycles in the tree
@@ -40,6 +46,14 @@ class CallTree
     def add_child(node)
       children << node
       node
+    end
+    
+    def to_s(level, total_visits)
+      "  " * level << 
+      (visits / total_visits * 100).round.to_s << 
+      " " <<
+      frame.to_s << 
+      children.map { |child| "\n" << child.to_s(level+1, total_visits) }.join
     end
   end
 end
