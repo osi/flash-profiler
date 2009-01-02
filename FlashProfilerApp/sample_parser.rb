@@ -7,9 +7,6 @@ class SampleParser
     # The 'time' field is crap. the relative values are okay though, so the times can be adjusted to be
     # relative to the first item
     
-    # TODO take in the crap time to use as the first, in order to determine an offset
-    # TODO set an actual time based on when we started sampling
-
     case m[1]
     when "NewObjectSample"
       NewObjectSample.new m[2], session_start, offset
