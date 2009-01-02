@@ -17,4 +17,13 @@ class AvailableAgentsController
       session.showWindows
     end
   end
+  
+  def awakeFromNib
+    # FIXME remove the below once done testing
+    url = NSURL.fileURLWithPath "~/Desktop/test two.profiler-session-data".stringByExpandingTildeInPath
+    sessions.openDocumentWithContentsOfURL url, display: true, error: nil
+
+    # FIXME don't be evil and grab focus for testing
+    NSApplication.sharedApplication.activateIgnoringOtherApps true
+  end
 end

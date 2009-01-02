@@ -550,9 +550,9 @@
 	};
 	6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {771, 350}}";
-			sepNavSelRange = "{741, 0}";
-			sepNavVisRange = "{0, 728}";
+			sepNavIntBoundsRect = "{{0, 0}, {771, 1330}}";
+			sepNavSelRange = "{2180, 0}";
+			sepNavVisRange = "{963, 615}";
 		};
 	};
 	6C34FD580F05EEC800F3A3A8 /* PBXTextBookmark */ = {
