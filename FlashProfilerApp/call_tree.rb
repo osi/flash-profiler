@@ -20,8 +20,20 @@ class CallTree
     end
   end
   
+  def compute
+    total = @root.visits.to_f
+
+    f = Proc.new do |child| 
+      child.time = child.visits / total
+      child.children.each &f
+    end
+    
+    @root.time = 1
+    @root.children.each &f
+  end
+  
   def to_s
-    root.to_s 0, root.visits.to_f
+    root.nested_to_s 0, root.visits.to_f
   end
   
   # NSCoding
@@ -29,6 +41,8 @@ class CallTree
   def initWithCoder(coder)
     @root = coder.decodeObjectForKey("root")
     
+    compute
+
     self
   end
   
@@ -39,7 +53,7 @@ class CallTree
   # TODO need to handle cycles in the tree
   class Node
     attr_reader :frame, :children
-    attr_accessor :visits
+    attr_accessor :visits, :time
     
     def initialize(frame)
       @frame = frame
@@ -60,12 +74,12 @@ class CallTree
       node
     end
     
-    def to_s(level, total_visits)
+    def nested_to_s(level, total_visits)
       "  " * level << 
-      (visits / total_visits * 100).round.to_s << 
+      (time * 100).round.to_s << 
       " " <<
       frame.to_s << 
-      children.map { |child| "\n" << child.to_s(level+1, total_visits) }.join
+      children.map { |child| "\n" << child.nested_to_s(level+1, total_visits) }.join
     end
     
     # NSCoding

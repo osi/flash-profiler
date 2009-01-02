@@ -43,6 +43,7 @@ class StackFrame
     @method_name = coder.decodeObjectForKey("method_name")
     @file = coder.decodeObjectForKey("file")
     @line = coder.decodeIntegerForKey("line")
+    @line = nil if @line == 0
     
     self
   end
