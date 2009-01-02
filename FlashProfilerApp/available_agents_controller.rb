@@ -16,7 +16,5 @@ class AvailableAgentsController
       session.makeWindowControllers
       session.showWindows
     end
-    
-# it then sends the new document makeWindowControllers and showWindows messages.    
   end
 end
