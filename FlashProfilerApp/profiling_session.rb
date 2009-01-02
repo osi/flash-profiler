@@ -42,7 +42,7 @@ class ProfilingSession < NSDocument
     stored = NSKeyedUnarchiver.unarchiveObjectWithData data
     @memory_usage = stored[0]
     @sample_sets = stored[1]
-    # NSLog "reading: #{outError}"
+    # TODO outError is a Pointer instance.
     # error = NSError.errorWithDomain NSOSStatusErrorDomain, code: -4, userInfo: nil
     true
   end
