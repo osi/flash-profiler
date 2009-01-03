@@ -6,16 +6,21 @@ class SampleParser
 
     # The 'time' field is crap. the relative values are okay though, so the times can be adjusted to be
     # relative to the first item
-    
-    case m[1]
-    when "NewObjectSample"
-      NewObjectSample.new m[2], session_start, offset
-    when "Sample"
-      CpuSample.new m[2], session_start, offset
-    when "DeleteObjectSample"
-      DeleteObjectSample.new m[2], session_start, offset
-    else
-      raise "Unknown sample type #{m[1]} -- #{text}"
+    begin
+      case m[1]
+      when "NewObjectSample"
+        NewObjectSample.new m[2], session_start, offset
+      when "Sample"
+        CpuSample.new m[2], session_start, offset
+      when "DeleteObjectSample"
+        DeleteObjectSample.new m[2], session_start, offset
+      else
+        raise "Unknown sample type #{m[1]}"
+      end
+    rescue Exception => e
+      STDERR.puts "Unable to parse sample:\n#{text}"
+      
+      raise
     end
   end
 end
@@ -451,6 +456,28 @@ samples = <<-EOF
      id: 37
    size: 40
 ]
+[Sample
+   time: 716232166224
+  stack: 
+    [reap]()
+]
+[NewObjectSample
+   time: 716232166224
+     id: 9084
+   type: builtin.as$0::MethodClosure
+  stack: 
+    mx.managers::LayoutManager/invalidateDisplayList()
+    mx.core::UIComponent/invalidateDisplayList()
+    mx.controls.listClasses::ListBase/drawItem()
+    mx.controls.listClasses::ListBase/mouseOverHandler()
+    mx.controls.listClasses::ListBase/mouseMoveHandler()
+    [mouseEvent]()
+]
+[DeleteObjectSample
+   time: 716232166224
+     id: 37
+   size: 40
+]
 EOF
 
 last = nil
@@ -461,6 +488,7 @@ samples.split("]\n[").each do |s|
   s = "[" + s if s[0,1] != "["
   s = s + "]" if s[-1,1] != "]"
   sample = (last = SampleParser.parse(s, start, nil == last ? nil : last.raw_time))
+  puts sample.inspect
   set << sample
 end
 
