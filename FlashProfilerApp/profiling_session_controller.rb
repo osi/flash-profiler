@@ -60,10 +60,6 @@ class ProfilingSessionController < NSWindowController
     @cpu_view.reloadData
   end
   
-  def windowControllerDidLoadNib(controller)
-    NSLog "did load nib... in controller"
-  end
-  
   # NSToolbar Delegate
   
   def validateToolbarItem(item)
