@@ -5,9 +5,11 @@ package {
     import flash.events.DataEvent;
     import flash.events.IOErrorEvent;
     import flash.events.SecurityErrorEvent;
+    import flash.events.TimerEvent;
     import flash.net.XMLSocket;
     import flash.system.System;
     import flash.utils.getTimer;
+    import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.sampler.*;
 
@@ -20,6 +22,7 @@ package {
 	    private var _port:int;
 	    private var _socket:XMLSocket;
 	    private var _connected:Boolean;
+	    private var _sampleSender:Timer;
 	
     	public function Agent() {
     	    trace(PREFIX, "Loaded");
@@ -62,15 +65,43 @@ package {
                     return;
                     
                 case "GET SAMPLES":
-                    trace(PREFIX, "Sending", getSampleCount(), "samples");
+                    var count:int = getSampleCount();
+                    
+                    trace(PREFIX, "Sending", count, "samples");
 
-                    _socket.send("SENDING SAMPLES: " + getSampleCount());
+                    _socket.send("SENDING SAMPLES: " + count);
+                    
+                    var samples:Array = []
                     
                     for each (var s:Sample in getSamples()) {
-                        _socket.send(sampleToString(s));
+                        samples.push(s);
                     }
                     
-                    trace(PREFIX, "Done sending samples");
+                    var batchSize:int = 1000;
+                    var offset:int = 0;
+                    
+                    _sampleSender = new Timer(100, Math.ceil(count / batchSize) );
+                    _sampleSender.addEventListener(TimerEvent.TIMER, function(e:Event):void {
+                        var toSend:int = Math.min(count, offset + batchSize);
+                        
+                        trace(PREFIX, "Sending", offset, "-", toSend);
+                        
+                        for( var i:int = offset; i < toSend; i++ ) {
+                            _socket.send(sampleToString(samples[i]));
+                            
+                            if( i % 100 == 0) {
+                                trace(PREFIX, "Sent", i, "/", toSend);
+                            }
+                        }
+                        
+                        offset += batchSize;
+                    });
+                    _sampleSender.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:Event):void {
+                        trace(PREFIX, "Done sending samples");
+
+                        _sampleSender = null;
+                    });
+                    _sampleSender.start();
                     
                     return;
                     
@@ -106,8 +137,8 @@ package {
                     "\n   size: " + dos.size +
                     stackToString(dos.stack) +
                     "\n]";
-            }
-
+            } 
+            
             return "[Sample" +
                 "\n   time: " + s.time +
                 stackToString(s.stack) +
