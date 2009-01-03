@@ -9,7 +9,11 @@ class BaseSample
     if offset.nil?
       @at = session_start
     else
-      @at = Time.at session_start.sec, session_start.usec + @raw_time - offset
+      begin
+        @at = Time.at session_start.sec, session_start.usec + @raw_time - offset
+      rescue RangeError => e
+        NSLog "ERROR: invalid time. session started at #{session_start}, offset is #{offset} and current raw value is #{@raw_time}"
+      end
     end
   end
   
