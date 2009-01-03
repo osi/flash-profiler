@@ -3,7 +3,7 @@ class NewObjectSample < BaseSample
   attr_accessor :deleted
   
   @@id = /^\s+id: (\d+)$/
-  @@type = /^\s+type: ([\w.:]+)$/
+  @@type = /^\s+type: (.+)$/
   
   def initialize(text, session_start, offset)
     super
