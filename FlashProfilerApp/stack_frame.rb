@@ -2,7 +2,7 @@ class StackFrame
   attr_reader :class_name, :method_name, :file, :line
   
   @@lines = /\n  stack: (?:\n    (.+))+/m
-  @@frame = /^(.+)\/(.+)\((.+)?\:?(\d+)?\)$/
+  @@frame = /^(.+?)(\/(.+))?\((.+)?\:?(\d+)?\)$/
   
   def initialize(class_name, method_name, file = nil, line = nil)
     @class_name = class_name
@@ -66,7 +66,7 @@ class StackFrame
     
     frames[1].split("\n").map { |s| s.strip }.map do |frame|
       m = @@frame.match(frame)
-      StackFrame.new m[1], m[2], m[3], m[4] ? m[4].to_i : nil
+      StackFrame.new m[1], m[3], m[4], m[5] ? m[5].to_i : nil
     end
   end
   
