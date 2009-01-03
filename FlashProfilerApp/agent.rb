@@ -17,6 +17,10 @@ class Agent
     NSLog "Agent ready"
   end
   
+  def closed?
+    @socket.closed?
+  end
+  
   def memory_usage
     m = send_and_expect "GET MEMORY", /MEMORY: (\d+) (\d+)/
     
@@ -86,12 +90,24 @@ class Agent
   end
   
   def send_message(msg) 
-    @socket.write("#{msg}\x00")
+    begin
+      @socket.write("#{msg}\x00")
+    rescue Exception => e
+      @socket.close
+      
+      raise
+    end
   end
   
   def read_message
     # TODO this will throw Errno::ECONNRESET when the flash side terminates
     # Odd that I can't 'chop' off the null
-    @socket.readline("\x00").unpack("Z*")[0]
+    begin
+      @socket.readline("\x00").unpack("Z*")[0]
+    rescue Exception => e
+      @socket.close
+      
+      raise
+    end
   end  
 end

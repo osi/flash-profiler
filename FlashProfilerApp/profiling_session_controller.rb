@@ -24,7 +24,15 @@ class ProfilingSessionController < NSWindowController
   end
   
   def get_memory_usage
-    usage = @agent.memory_usage
+    begin
+      usage = @agent.memory_usage
+    rescue Exception => e
+      NSLog "Memory retrieval failed. #{e}"
+      
+      @timer.invalidate
+      
+      return
+    end
     
     document.memory_usage.push usage
     document.updateChangeCount NSChangeDone
@@ -60,18 +68,17 @@ class ProfilingSessionController < NSWindowController
   
   def validateToolbarItem(item)
     if item == @collect_button
-      if @agent.nil?
+      if @agent.nil? or @agent.closed?
         @collect_button.label = "Not Connected" 
+        
+        return false
       elsif @agent.sampling?
         @collect_button.label = "Stop"
       else
         @collect_button.label = "Collect"
       end
-      
-      not @agent.nil?
-    else
-      true
     end
+      true
   end
   
   # NSOutlineView delegates
