@@ -1,4 +1,6 @@
 class MemoryUsage
+  include Comparable
+  
   attr_reader :at, :usage
   
   def initialize(at, usage)
@@ -8,6 +10,10 @@ class MemoryUsage
   
   def to_s
     "MemoryUsage[usage=#{usage}, at=#{at}]"
+  end
+  
+  def <=>(other)
+    self.usage <=> other.usage
   end
   
   # NSCoding

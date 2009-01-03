@@ -21,6 +21,8 @@ class ProfilingSessionController < NSWindowController
     if not document.sample_sets.empty?
       self.viewing_sample_set = document.sample_sets[0]
     end
+    
+    memory_graph.reloadData
   end
   
   def get_memory_usage
@@ -109,5 +111,13 @@ class ProfilingSessionController < NSWindowController
   def current_or_root(item)
     item.nil? ? @viewing_sample_set.call_tree.root : item
   end  
+  
+  public
+  
+  # GraphView delegate
+  
+  def valuesForGraphView(view)
+    document.memory_usage
+  end
   
 end

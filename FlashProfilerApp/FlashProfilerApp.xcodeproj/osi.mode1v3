@@ -376,7 +376,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6C34FDAD0F0F2A3C00F3A3A8</string>
+										<string>6CBFC0DB0F0FCB16005FE40C</string>
 										<key>history</key>
 										<array>
 											<string>6C34FCFD0F05ABAE00F3A3A8</string>
@@ -385,7 +385,7 @@
 											<string>6C34FD590F05EEC800F3A3A8</string>
 											<string>6C34FD670F05F02900F3A3A8</string>
 											<string>6C34FD3F0F05EBFA00F3A3A8</string>
-											<string>6C34FD5C0F05EEC800F3A3A8</string>
+											<string>6CBB0A6E0F0F358C00013145</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -453,9 +453,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>6C34FDAE0F0F2A3C00F3A3A8</string>
+				<string>6CBFC0DC0F0FCB16005FE40C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>6C34FDAF0F0F2A3C00F3A3A8</string>
+				<string>6CBFC0DD0F0FCB16005FE40C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -572,7 +572,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>252652092.02837101</real>
+	<real>252693268.089892</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -587,9 +587,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>6C34FB5C0F033F0300F3A3A8</string>
 		<string>/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FlashProfilerApp.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -712,8 +710,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {316, 198}}</string>
-											<string>{{316, 0}, {378, 198}}</string>
+											<string>{{0, 0}, {316, 202}}</string>
+											<string>{{316, 0}, {378, 202}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -728,8 +726,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {694, 198}}</string>
-											<string>{{0, 198}, {694, 183}}</string>
+											<string>{{0, 0}, {694, 202}}</string>
+											<string>{{0, 202}, {694, 179}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -762,7 +760,7 @@
 										<real>148</real>
 									</array>
 									<key>Frame</key>
-									<string>{{316, 0}, {378, 198}}</string>
+									<string>{{316, 0}, {378, 202}}</string>
 									<key>RubberWindowFrame</key>
 									<string>252 193 694 422 0 0 1280 778 </string>
 								</dict>
@@ -790,13 +788,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>6C34FDA40F0E8E4000F3A3A8</string>
+				<string>6CBFC0DE0F0FCB16005FE40C</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>6C34FDA50F0E8E4000F3A3A8</string>
-				<string>6C34FDA60F0E8E4000F3A3A8</string>
-				<string>6C34FDA70F0E8E4000F3A3A8</string>
-				<string>6C34FDA80F0E8E4000F3A3A8</string>
-				<string>6C34FDA90F0E8E4000F3A3A8</string>
+				<string>6CBFC0DF0F0FCB16005FE40C</string>
+				<string>6CBFC0E00F0FCB16005FE40C</string>
+				<string>6CBFC0E10F0FCB16005FE40C</string>
+				<string>6CBFC0E20F0FCB16005FE40C</string>
+				<string>6CBFC0E30F0FCB16005FE40C</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
