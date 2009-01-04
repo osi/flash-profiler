@@ -35,6 +35,12 @@ class ProfilingSessionController < NSWindowController
       
       return
     end
+
+    if document.nil?
+      # FIXME putting this in a 'dealloc' seems to kill things
+      @timer.invalidate
+      return
+    end
     
     document.memory_usage.push usage
     document.updateChangeCount NSChangeDone
