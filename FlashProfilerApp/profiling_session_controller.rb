@@ -1,5 +1,5 @@
 class ProfilingSessionController < NSWindowController
-  attr_accessor :collect_button, :memory_graph, :cpu_view
+  attr_accessor :collect_button, :memory_graph, :memory_graph_scroll, :cpu_view
 
   def awakeFromNib
     @viewing_sample_set = nil
@@ -38,6 +38,11 @@ class ProfilingSessionController < NSWindowController
     
     document.memory_usage.push usage
     document.updateChangeCount NSChangeDone
+    
+    memory_graph.reloadData
+    
+    frame = memory_graph.frame
+    memory_graph_scroll.documentView.scrollPoint NSPoint.new(frame.size.width + frame.origin.x, frame.origin.y)
     
     NSLog "#{usage}"
   end
