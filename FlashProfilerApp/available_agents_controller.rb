@@ -26,5 +26,36 @@ class AvailableAgentsController
 
     # FIXME don't be evil and grab focus for testing
     # NSApplication.sharedApplication.activateIgnoringOtherApps true
+    
+    listener = Listener.new(tracker)
+
+    io_thread = IoThread.alloc.initWithListener(listener)
+    io_thread.start
+    
+    # @thread = Thread.new do
+    #   run = true
+    # 
+    #   NSLog "Starting io thread"
+    # 
+    #   listener.start
+    # 
+    #   NSLog "Started listener"
+    # 
+    #   run_loop = NSRunLoop.currentRunLoop
+    # 
+    #   STDERR.puts "#{run_loop}"
+    # 
+    #   begin
+    #     while run and run_loop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture)
+    #       # NSLog "run..."
+    #       # do nothing!
+    #     end
+    #   rescue Exception => e
+    #     NSLog "Failure in run loop #{e}"
+    #   end
+    #   
+    # 
+    #   NSLog "io thread exiting.."      
+    # end
   end
 end

@@ -8,7 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="375"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -738,7 +737,7 @@
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{480, 193}</string>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -848,7 +847,6 @@
 									</object>
 									<string key="NSFrame">{{1, 1}, {438, 111}}</string>
 									<reference key="NSSuperview" ref="76333619"/>
-									<reference key="NSNextKeyView" ref="921651750"/>
 									<reference key="NSDocView" ref="921651750"/>
 									<reference key="NSBGColor" ref="381121128"/>
 									<int key="NScvFlags">4</int>
@@ -875,7 +873,6 @@
 							</object>
 							<string key="NSFrame">{{20, 60}, {440, 113}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView" ref="90355025"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="525657109"/>
 							<reference key="NSHScroller" ref="347287408"/>
@@ -904,7 +901,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{480, 193}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{480, 215}</string>
@@ -915,9 +911,6 @@
 			</object>
 			<object class="NSCustomObject" id="405617766">
 				<string key="NSClassName">AvailableAgentsTracker</string>
-			</object>
-			<object class="NSCustomObject" id="846574057">
-				<string key="NSClassName">Listener</string>
 			</object>
 			<object class="NSCustomObject" id="857358832">
 				<string key="NSClassName">NSDocumentController</string>
@@ -1245,14 +1238,6 @@
 						<reference key="destination" ref="405617766"/>
 					</object>
 					<int key="connectionID">396</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tracker</string>
-						<reference key="source" ref="846574057"/>
-						<reference key="destination" ref="405617766"/>
-					</object>
-					<int key="connectionID">398</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1945,11 +1930,6 @@
 						<reference key="parent" ref="1049"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">397</int>
-						<reference key="object" ref="846574057"/>
-						<reference key="parent" ref="1049"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">401</int>
 						<reference key="object" ref="857358832"/>
 						<reference key="parent" ref="1049"/>
@@ -2114,7 +2094,6 @@
 					<string>390.IBPluginDependency</string>
 					<string>391.IBPluginDependency</string>
 					<string>395.IBPluginDependency</string>
-					<string>397.IBPluginDependency</string>
 					<string>401.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.ImportedFromIB2</string>
@@ -2310,7 +2289,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
@@ -2413,26 +2391,10 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">Listener</string>
-					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>host</string>
-							<string>port</string>
-							<string>tracker</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
+					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">listener.rb</string>
+						<string key="minorKey">AsyncSocket.h</string>
 					</object>
 				</object>
 			</object>

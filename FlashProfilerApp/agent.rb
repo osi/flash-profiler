@@ -1,24 +1,17 @@
 class Agent
-  def initialize(socket)
-    NSLog "Accepted connection from #{socket.peeraddr[2]}:#{socket.peeraddr[1]}"
-
+  
+  def initialize(socket, tracker)
     @socket = socket
-    
-    hello_msg = read_message
-    
-    if "AGENT READY" != hello_msg
-      socket.close
+    @socket.delegate = self
 
-      raise "Invalid hello message #{hello_msg}"
-    end
+    @tracker = tracker
     
-    @sampling_state = :stopped
-    
-    NSLog "Agent ready"
+    @callbacks = Hash.new
+    @callback_counter = 1
   end
   
-  def closed?
-    @socket.closed?
+  def connected?
+    @socket.isConnected
   end
   
   def memory_usage
@@ -67,6 +60,36 @@ class Agent
     "#{@socket.peeraddr[2]}:#{@socket.peeraddr[1]}"
   end
   
+  # AsyncSocket delegates
+  
+  def onSocket(socket, didConnectToHost:host, port:port)
+    NSLog "Accepted connection from #{host}:#{port}"
+
+    hello_msg = read_message
+    
+    if "AGENT READY" != hello_msg
+      @socket.disconnect
+    else
+      @sampling_state = :stopped
+
+      @tracker.add self
+
+      NSLog "Agent ready"
+    end
+  end
+  
+  def onSocket(socket, didReadData:data, withTag:tag)
+    @callbacks.delete(tag).call NSString.initWithData(data, encoding: NSUTF8StringEncoding)
+  end
+  
+  def onSocket(socket, willDisconnectWithError:err)
+    NSLog "#{self} closing due to #{err}"
+  end
+  
+  def onSocketDidDisconnect(socket)
+    # TODO ensure that we're removed from the tracker
+  end
+  
   private
   
   def read_sample(previous)
@@ -90,24 +113,16 @@ class Agent
   end
   
   def send_message(msg) 
-    begin
-      @socket.write("#{msg}\x00")
-    rescue Exception => e
-      @socket.close
-      
-      raise
-    end
+    sdata = msg.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+    
+    @socket.writeData sdata, withTimeout: -1, tag: 0
+    @socket.writeData AsyncSocket.ZeroData, withTimeout: -1, tag: 0
   end
   
-  def read_message
-    # TODO this will throw Errno::ECONNRESET when the flash side terminates
-    # Odd that I can't 'chop' off the null
-    begin
-      @socket.readline("\x00").unpack("Z*")[0]
-    rescue Exception => e
-      @socket.close
-      
-      raise
-    end
+  def read_message(&block)
+    id = @callback_counter++
+    
+    @callbacks[id] = block
+    @socket.readDataToData AsyncSocket.ZeroData, withTimeout: -1, tag: id
   end  
 end

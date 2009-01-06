@@ -1,36 +1,39 @@
-require "socket"
+framework 'AsyncSocket'
 
 class Listener
-  attr_accessor :host, :port, :tracker
+  attr_accessor :host, :port
+  
+  def initialize(tracker)
+    @host = "127.0.0.1"
+    @port = 42624
+    
+    @tracker = tracker
+    
+    @socket = AsyncSocket.alloc.initWithDelegate(self)
+  end
   
   def start
-    NSLog "Starting server at #{@host}:#{@port}"
-    
-    server = TCPServer.new(@host, @port)
-    
-    @thread = Thread.new do
-      NSLog "waiting for connection"
+    # error_pointer = Pointer.new_with_type("@")
 
-      while true do
-        begin
-          @tracker.add Agent.new(server.accept)
-        rescue Exception => e
-          NSLog "#{e.to_s}"
-
-          e.backtrace.each { |l| NSLog "#{l}" }
-          
-          retry
-        end
-      end
+    if not @socket.acceptOnAddress(@host, port: @port, error: nil) # pass error_pointer
+      NSLog "Unable to open socket"
+      # error_pointer[0]
+    else
+      s = "Started server at " + host + ":" + port.to_s
+      # FIXME using #{} bails here..
+      NSLog s.to_s
     end
   end
   
-  def awakeFromNib
-    # TODO these should come from prefs
+  # AsyncSocket delgates
 
-    @host = "localhost"
-    @port = 42624
+  def onSocket(socket, didAcceptNewSocket:newSocket)
+    NSLog "will make agent.."
 
-    start
+    Agent.new newSocket, tracker
+  end
+
+  def onSocket(socket, willDisconnectWithError:err)
+    NSLog "Listener closing due to #{err}"
   end
 end

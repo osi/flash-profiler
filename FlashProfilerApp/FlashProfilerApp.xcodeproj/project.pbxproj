@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4DE339F70D74FCDD00ADB6EE /* rb_main.rb in Resources */ = {isa = PBXBuildFile; fileRef = 4DE339F60D74FCDD00ADB6EE /* rb_main.rb */; };
 		4DE3BE140D8651D900ECA448 /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE3BE130D8651D900ECA448 /* MacRuby.framework */; };
+		6C1E94D30F131E0A0096D51B /* io_thread.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C1E94D20F131E0A0096D51B /* io_thread.rb */; };
 		6C34FC7C0F034D4300F3A3A8 /* available_agents_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */; };
 		6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */; };
 		6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */; };
@@ -27,10 +28,38 @@
 		6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */; };
 		6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */; };
 		6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */; };
+		6CBFC1CA0F11CC5A005FE40C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CBFC1C90F11CC5A005FE40C /* CoreServices.framework */; };
+		6CBFC2910F11CD19005FE40C /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */; };
+		6CBFC29B0F11CDC9005FE40C /* AsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CBFC1BA0F11CBE7005FE40C /* AsyncSocket.framework */; };
+		6CBFC2A20F11CDFC005FE40C /* AsyncSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CBFC1BA0F11CBE7005FE40C /* AsyncSocket.framework */; };
+		6CBFC2A60F11D1EA005FE40C /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6CBFC1CB0F11CC6F005FE40C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CBFC1B90F11CBE7005FE40C;
+			remoteInfo = AsyncSocket;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6CBFC2A00F11CDE5005FE40C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6CBFC2A20F11CDFC005FE40C /* AsyncSocket.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -41,6 +70,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4DE339F60D74FCDD00ADB6EE /* rb_main.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
 		4DE3BE130D8651D900ECA448 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = /Library/Frameworks/MacRuby.framework; sourceTree = "<absolute>"; };
+		6C1E94D20F131E0A0096D51B /* io_thread.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = io_thread.rb; sourceTree = "<group>"; };
 		6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = available_agents_controller.rb; sourceTree = "<group>"; };
 		6C34FCF60F05AB9700F3A3A8 /* agent.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent.rb; sourceTree = "<group>"; };
 		6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent_tracker.rb; sourceTree = "<group>"; };
@@ -59,15 +89,30 @@
 		6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_set.rb; sourceTree = "<group>"; };
 		6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = call_tree.rb; sourceTree = "<group>"; };
 		6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = graph_view.rb; sourceTree = "<group>"; };
+		6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		6CBFC0F50F11BC23005FE40C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		6CBFC1BA0F11CBE7005FE40C /* AsyncSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CBFC1BB0F11CBE7005FE40C /* AsyncSocket-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AsyncSocket-Info.plist"; sourceTree = "<group>"; };
+		6CBFC1C90F11CC5A005FE40C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FlashProfilerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashProfilerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6CBFC1B80F11CBE7005FE40C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CBFC1CA0F11CC5A005FE40C /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CBFC29B0F11CDC9005FE40C /* AsyncSocket.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				4DE3BE140D8651D900ECA448 /* MacRuby.framework in Frameworks */,
 			);
@@ -79,6 +124,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6C1E94D20F131E0A0096D51B /* io_thread.rb */,
+				6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */,
+				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
 				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
 				6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */,
 				6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */,
@@ -96,6 +144,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CBFC0F50F11BC23005FE40C /* CoreServices.framework */,
 				4DE3BE130D8651D900ECA448 /* MacRuby.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
@@ -116,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* FlashProfilerApp.app */,
+				6CBFC1BA0F11CBE7005FE40C /* AsyncSocket.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +180,8 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				6CBFC1BB0F11CBE7005FE40C /* AsyncSocket-Info.plist */,
+				6CBFC1C90F11CC5A005FE40C /* CoreServices.framework */,
 			);
 			name = FlashProfilerApp;
 			sourceTree = "<group>";
@@ -185,7 +237,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		6CBFC1B50F11CBE7005FE40C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CBFC2A60F11D1EA005FE40C /* AsyncSocket.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		6CBFC1B90F11CBE7005FE40C /* AsyncSocket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CBFC1BE0F11CBE8005FE40C /* Build configuration list for PBXNativeTarget "AsyncSocket" */;
+			buildPhases = (
+				6CBFC1B50F11CBE7005FE40C /* Headers */,
+				6CBFC1B60F11CBE7005FE40C /* Resources */,
+				6CBFC1B70F11CBE7005FE40C /* Sources */,
+				6CBFC1B80F11CBE7005FE40C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AsyncSocket;
+			productName = AsyncSocket;
+			productReference = 6CBFC1BA0F11CBE7005FE40C /* AsyncSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		8D1107260486CEB800E47090 /* FlashProfilerApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "FlashProfilerApp" */;
@@ -193,10 +274,12 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				6CBFC2A00F11CDE5005FE40C /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6CBFC1CC0F11CC6F005FE40C /* PBXTargetDependency */,
 			);
 			name = FlashProfilerApp;
 			productInstallPath = "$(HOME)/Applications";
@@ -217,11 +300,19 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* FlashProfilerApp */,
+				6CBFC1B90F11CBE7005FE40C /* AsyncSocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6CBFC1B60F11CBE7005FE40C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,12 +337,21 @@
 				6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */,
 				6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */,
 				6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */,
+				6C1E94D30F131E0A0096D51B /* io_thread.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6CBFC1B70F11CBE7005FE40C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CBFC2910F11CD19005FE40C /* AsyncSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,6 +361,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CBFC1CC0F11CC6F005FE40C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CBFC1B90F11CBE7005FE40C /* AsyncSocket */;
+			targetProxy = 6CBFC1CB0F11CC6F005FE40C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
@@ -282,6 +390,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6CBFC1BC0F11CBE8005FE40C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "AsyncSocket-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = AsyncSocket;
+			};
+			name = Debug;
+		};
+		6CBFC1BD0F11CBE8005FE40C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "AsyncSocket-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = AsyncSocket;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -337,6 +499,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6CBFC1BE0F11CBE8005FE40C /* Build configuration list for PBXNativeTarget "AsyncSocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CBFC1BC0F11CBE8005FE40C /* Debug */,
+				6CBFC1BD0F11CBE8005FE40C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "FlashProfilerApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
