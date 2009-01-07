@@ -2,13 +2,13 @@
 //  main.m
 //  FlashProfilerApp
 //
-//  Created by peter royal on 12/24/08.
-//  Copyright Peter Royal 2008-2009. All rights reserved.
+//  Created by peter royal on 1/6/09.
+//  Copyright Peter Royal 2009 . All rights reserved.
 //
 
-#import <MacRuby/MacRuby.h>
+#import <Cocoa/Cocoa.h>
 
 int main(int argc, char *argv[])
 {
-    return macruby_main("rb_main.rb", argc, argv);
+    return NSApplicationMain(argc, (const char **) argv);
 }
