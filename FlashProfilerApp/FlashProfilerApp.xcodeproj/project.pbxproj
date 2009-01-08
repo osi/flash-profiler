@@ -9,24 +9,23 @@
 /* Begin PBXBuildFile section */
 		6C1E94D30F131E0A0096D51B /* io_thread.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C1E94D20F131E0A0096D51B /* io_thread.rb */; };
 		6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C27F2050F1467E500B29D55 /* FPAgentController.m */; };
-		6C34FC7C0F034D4300F3A3A8 /* available_agents_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */; };
 		6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */; };
 		6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */; };
 		6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF80F05AB9700F3A3A8 /* listener.rb */; };
 		6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */; };
-		6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */; };
 		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
-		6C34FD7C0F074D1600F3A3A8 /* profiling_session_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD7B0F074D1600F3A3A8 /* profiling_session_controller.rb */; };
-		6C34FD800F097F0400F3A3A8 /* memory_usage.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */; };
 		6C34FD870F0B160700F3A3A8 /* base_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD810F0B160700F3A3A8 /* base_sample.rb */; };
 		6C34FD880F0B160700F3A3A8 /* cpu_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */; };
 		6C34FD890F0B160700F3A3A8 /* delete_object_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */; };
 		6C34FD8A0F0B160700F3A3A8 /* new_object_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */; };
 		6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD850F0B160700F3A3A8 /* sample_parser.rb */; };
 		6C34FD8C0F0B160700F3A3A8 /* stack_frame.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD860F0B160700F3A3A8 /* stack_frame.rb */; };
-		6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */; };
 		6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */; };
 		6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */; };
+		6C5D7FA40F15BFB40041FF31 /* FPProfilingSessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */; };
+		6C5D7FAE0F15C0D60041FF31 /* FPSampleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */; };
+		6C5D7FB40F15C4300041FF31 /* FPMemoryUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */; };
+		6C5D7FBA0F15C7800041FF31 /* FPProfilingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */; };
 		6CD1CA6F0F14661400912223 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6CD1CA6D0F14661400912223 /* Credits.rtf */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -55,24 +54,27 @@
 		6C1E94D20F131E0A0096D51B /* io_thread.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = io_thread.rb; sourceTree = "<group>"; };
 		6C27F2040F1467E500B29D55 /* FPAgentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPAgentController.h; sourceTree = "<group>"; };
 		6C27F2050F1467E500B29D55 /* FPAgentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgentController.m; sourceTree = "<group>"; };
-		6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = available_agents_controller.rb; sourceTree = "<group>"; };
 		6C34FCF60F05AB9700F3A3A8 /* agent.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent.rb; sourceTree = "<group>"; };
 		6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent_tracker.rb; sourceTree = "<group>"; };
 		6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = listener.rb; sourceTree = "<group>"; };
 		6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilingSession.xib; sourceTree = "<group>"; };
-		6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = profiling_session.rb; sourceTree = "<group>"; };
 		6C34FD720F05F5AB00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		6C34FD7B0F074D1600F3A3A8 /* profiling_session_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = profiling_session_controller.rb; sourceTree = "<group>"; };
-		6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = memory_usage.rb; sourceTree = "<group>"; };
 		6C34FD810F0B160700F3A3A8 /* base_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = base_sample.rb; sourceTree = "<group>"; };
 		6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = cpu_sample.rb; sourceTree = "<group>"; };
 		6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = delete_object_sample.rb; sourceTree = "<group>"; };
 		6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = new_object_sample.rb; sourceTree = "<group>"; };
 		6C34FD850F0B160700F3A3A8 /* sample_parser.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_parser.rb; sourceTree = "<group>"; };
 		6C34FD860F0B160700F3A3A8 /* stack_frame.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = stack_frame.rb; sourceTree = "<group>"; };
-		6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_set.rb; sourceTree = "<group>"; };
 		6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = call_tree.rb; sourceTree = "<group>"; };
 		6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = graph_view.rb; sourceTree = "<group>"; };
+		6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPProfilingSessionController.h; sourceTree = "<group>"; };
+		6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPProfilingSessionController.m; sourceTree = "<group>"; };
+		6C5D7FAC0F15C0D60041FF31 /* FPSampleSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPSampleSet.h; sourceTree = "<group>"; };
+		6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPSampleSet.m; sourceTree = "<group>"; };
+		6C5D7FB20F15C4300041FF31 /* FPMemoryUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMemoryUsage.h; sourceTree = "<group>"; };
+		6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMemoryUsage.m; sourceTree = "<group>"; };
+		6C5D7FB80F15C7800041FF31 /* FPProfilingSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPProfilingSession.h; sourceTree = "<group>"; };
+		6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPProfilingSession.m; sourceTree = "<group>"; };
 		6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		6CBFC0F50F11BC23005FE40C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
@@ -102,7 +104,6 @@
 				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
 				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
 				6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */,
-				6C34FD9B0F0B2DD600F3A3A8 /* sample_set.rb */,
 				6C34FD810F0B160700F3A3A8 /* base_sample.rb */,
 				6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */,
 				6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */,
@@ -110,6 +111,8 @@
 				6C34FD850F0B160700F3A3A8 /* sample_parser.rb */,
 				6C34FD860F0B160700F3A3A8 /* stack_frame.rb */,
 				6C34FCF60F05AB9700F3A3A8 /* agent.rb */,
+				6C5D7FAC0F15C0D60041FF31 /* FPSampleSet.h */,
+				6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -188,12 +191,12 @@
 		6C34FD140F05E62000F3A3A8 /* Agent Management */ = {
 			isa = PBXGroup;
 			children = (
-				6C34FD7F0F097F0400F3A3A8 /* memory_usage.rb */,
 				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
 				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
-				6C34FC7A0F034D4300F3A3A8 /* available_agents_controller.rb */,
 				6C27F2040F1467E500B29D55 /* FPAgentController.h */,
 				6C27F2050F1467E500B29D55 /* FPAgentController.m */,
+				6C5D7FB20F15C4300041FF31 /* FPMemoryUsage.h */,
+				6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */,
 			);
 			name = "Agent Management";
 			sourceTree = "<group>";
@@ -201,8 +204,10 @@
 		6C34FD390F05EBAD00F3A3A8 /* Profiling Session */ = {
 			isa = PBXGroup;
 			children = (
-				6C34FD7B0F074D1600F3A3A8 /* profiling_session_controller.rb */,
-				6C34FD490F05EC3E00F3A3A8 /* profiling_session.rb */,
+				6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */,
+				6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */,
+				6C5D7FB80F15C7800041FF31 /* FPProfilingSession.h */,
+				6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */,
 			);
 			name = "Profiling Session";
 			sourceTree = "<group>";
@@ -252,22 +257,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				6C34FC7C0F034D4300F3A3A8 /* available_agents_controller.rb in Resources */,
 				6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */,
 				6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */,
 				6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */,
 				6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */,
-				6C34FD4A0F05EC3E00F3A3A8 /* profiling_session.rb in Resources */,
 				6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */,
-				6C34FD7C0F074D1600F3A3A8 /* profiling_session_controller.rb in Resources */,
-				6C34FD800F097F0400F3A3A8 /* memory_usage.rb in Resources */,
 				6C34FD870F0B160700F3A3A8 /* base_sample.rb in Resources */,
 				6C34FD880F0B160700F3A3A8 /* cpu_sample.rb in Resources */,
 				6C34FD890F0B160700F3A3A8 /* delete_object_sample.rb in Resources */,
 				6C34FD8A0F0B160700F3A3A8 /* new_object_sample.rb in Resources */,
 				6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */,
 				6C34FD8C0F0B160700F3A3A8 /* stack_frame.rb in Resources */,
-				6C34FD9C0F0B2DD600F3A3A8 /* sample_set.rb in Resources */,
 				6C34FD9E0F0C881400F3A3A8 /* call_tree.rb in Resources */,
 				6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */,
 				6C1E94D30F131E0A0096D51B /* io_thread.rb in Resources */,
@@ -284,6 +284,10 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */,
+				6C5D7FA40F15BFB40041FF31 /* FPProfilingSessionController.m in Sources */,
+				6C5D7FAE0F15C0D60041FF31 /* FPSampleSet.m in Sources */,
+				6C5D7FB40F15C4300041FF31 /* FPMemoryUsage.m in Sources */,
+				6C5D7FBA0F15C7800041FF31 /* FPProfilingSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
