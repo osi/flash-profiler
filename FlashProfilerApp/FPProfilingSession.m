@@ -11,6 +11,10 @@
 
 @implementation FPProfilingSession
 
+@synthesize agent;
+@synthesize memoryUsage;
+@synthesize sampleSets;
+
 - (id)init {
     return [self initWithAgent: nil];
 }
@@ -26,7 +30,7 @@
     return self;
 }
 
-- (void)addSampleSet:(FPSampleSet *set) {
+- (void)addSampleSet:(FPSampleSet *)set {
     [sampleSets addObject:set];
     [self updateChangeCount:NSChangeDone];
 }

@@ -15,7 +15,7 @@
 @synthesize sessions;
 
 - (IBAction)connectToAgent:(id)sender {
-    NSInteger *row = [table selectedRow];
+    NSInteger row = [table selectedRow];
     
     if( row >= 0 ) {
         FPAgent *agent; // TODO look up agent

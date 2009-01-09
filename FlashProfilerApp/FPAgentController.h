@@ -14,8 +14,8 @@
     NSTableView *table;
 }
 
-@property IBOutlet NSDocumentController sessions;
-@property IBOutlet NSTableView table;
+@property IBOutlet NSDocumentController *sessions;
+@property IBOutlet NSTableView *table;
 
 - (IBAction)connectToAgent:(id)sender;
 

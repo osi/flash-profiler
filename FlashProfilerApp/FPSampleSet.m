@@ -48,7 +48,7 @@
  */
 }
 
-- (id)initWithCoder(NSCoder *)coder {
+- (id)initWithCoder:(NSCoder *)coder {
     [super init];
 
 // TODO    

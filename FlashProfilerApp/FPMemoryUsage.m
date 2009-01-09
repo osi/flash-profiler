@@ -12,7 +12,7 @@
 @implementation FPMemoryUsage
 
 @synthesize at;
-@synthesize date;
+@synthesize usage;
 
 - (id)init {
     [self dealloc];
@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (id)initWithUsage:(int) theUsage, (NSDate *) theDate {
+- (id)initWithUsage:(int)theUsage at:(NSDate *)theDate {
     [super init];
     
     usage = theUsage;
@@ -34,10 +34,10 @@
 }
 
 - (NSString *)description {
-    return [[NSString alloc] initWithFormat:@"[MemoryUsage usage=%d, at %@"], usage, at];
+    return [[NSString alloc] initWithFormat:@"[MemoryUsage usage=%d, at %@]", usage, at];
 }
 
-- (id)initWithCoder(NSCoder *)coder {
+- (id)initWithCoder:(NSCoder *)coder {
     [super init];
     
     // TODO    

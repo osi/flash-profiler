@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C13A4FE0F17199C00715A7C /* FPAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A4FD0F17199C00715A7C /* FPAgent.m */; };
+		6C13A54A0F17212000715A7C /* FPCallTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A5490F17212000715A7C /* FPCallTree.m */; };
 		6C1E94D30F131E0A0096D51B /* io_thread.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C1E94D20F131E0A0096D51B /* io_thread.rb */; };
 		6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C27F2050F1467E500B29D55 /* FPAgentController.m */; };
-		6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF60F05AB9700F3A3A8 /* agent.rb */; };
 		6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */; };
 		6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF80F05AB9700F3A3A8 /* listener.rb */; };
 		6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */; };
@@ -51,10 +52,13 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		6C13A4FC0F17199C00715A7C /* FPAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPAgent.h; sourceTree = "<group>"; };
+		6C13A4FD0F17199C00715A7C /* FPAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgent.m; sourceTree = "<group>"; };
+		6C13A5480F17212000715A7C /* FPCallTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCallTree.h; sourceTree = "<group>"; };
+		6C13A5490F17212000715A7C /* FPCallTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCallTree.m; sourceTree = "<group>"; };
 		6C1E94D20F131E0A0096D51B /* io_thread.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = io_thread.rb; sourceTree = "<group>"; };
 		6C27F2040F1467E500B29D55 /* FPAgentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPAgentController.h; sourceTree = "<group>"; };
 		6C27F2050F1467E500B29D55 /* FPAgentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgentController.m; sourceTree = "<group>"; };
-		6C34FCF60F05AB9700F3A3A8 /* agent.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent.rb; sourceTree = "<group>"; };
 		6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent_tracker.rb; sourceTree = "<group>"; };
 		6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = listener.rb; sourceTree = "<group>"; };
 		6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilingSession.xib; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */,
 				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
 				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
+				6C13A5480F17212000715A7C /* FPCallTree.h */,
+				6C13A5490F17212000715A7C /* FPCallTree.m */,
 				6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */,
 				6C34FD810F0B160700F3A3A8 /* base_sample.rb */,
 				6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */,
@@ -110,9 +116,10 @@
 				6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */,
 				6C34FD850F0B160700F3A3A8 /* sample_parser.rb */,
 				6C34FD860F0B160700F3A3A8 /* stack_frame.rb */,
-				6C34FCF60F05AB9700F3A3A8 /* agent.rb */,
 				6C5D7FAC0F15C0D60041FF31 /* FPSampleSet.h */,
 				6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */,
+				6C13A4FC0F17199C00715A7C /* FPAgent.h */,
+				6C13A4FD0F17199C00715A7C /* FPAgent.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -257,7 +264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				6C34FCF90F05AB9700F3A3A8 /* agent.rb in Resources */,
 				6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */,
 				6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */,
 				6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */,
@@ -288,6 +294,8 @@
 				6C5D7FAE0F15C0D60041FF31 /* FPSampleSet.m in Sources */,
 				6C5D7FB40F15C4300041FF31 /* FPMemoryUsage.m in Sources */,
 				6C5D7FBA0F15C7800041FF31 /* FPProfilingSession.m in Sources */,
+				6C13A4FE0F17199C00715A7C /* FPAgent.m in Sources */,
+				6C13A54A0F17212000715A7C /* FPCallTree.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

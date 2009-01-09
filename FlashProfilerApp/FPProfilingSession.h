@@ -20,6 +20,7 @@
 @property NSMutableArray memoryUsage;
 @property NSMutableArray sampleSets;
 
-- (void)addSampleSet:(FPSampleSet *set);
+- (id)initWithAgent:(FPAgent *)theAgent
+- (void)addSampleSet:(FPSampleSet *)set;
 
 @end

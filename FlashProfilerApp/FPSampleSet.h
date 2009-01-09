@@ -16,9 +16,9 @@
     NSMutableDictionary *objectsById;
 }
 
-@property(readonly) FPCallTree callTree;
-@property(readonly) NSArray objects;
-@property(readonly) NSArray cpu;
+@property(readonly) FPCallTree *callTree;
+@property(readonly) NSMutableArray *objects;
+@property(readonly) NSMutableArray *cpu;
 
 - (void)add:(FPSample *)sample;
 

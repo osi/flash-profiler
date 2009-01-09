@@ -1,18 +1,45 @@
-class Agent
-  
-  def initialize(socket, tracker)
-    @socket = socket
-    @socket.delegate = self
+//
+//  FPAgent.m
+//  FlashProfilerApp
+//
+//  Created by peter royal on 1/8/09.
+//  Copyright 2009 Electrotank, Inc.. All rights reserved.
+//
 
-    @tracker = tracker
+#import "FPAgent.h"
+
+
+@implementation FPAgent
+
+- (id)init {
+    [self dealloc];
     
-    @callbacks = Hash.new
-    @callback_counter = 1
-  end
-  
-  def connected?
-    @socket.isConnected
-  end
+    @throw [NSException exceptionWithName:@"FPBadInitCall" 
+                                   reason:@"Initialize with initWithSocket" 
+                                 userInfo:nil];
+    
+    return nil;
+}
+
+- (id)initWithSocket:(AsyncSocket *)socket {
+    [super init];
+    
+    self.socket = socket; 
+    
+    [socket setDelegate:self];
+    
+    return self;
+}
+
+- (BOOL)isConnected {
+    return [self.socket isConnected];
+}
+
+// TODO all the action methods need to be lazy and return stuff
+// via callbacks
+
+/*
+class Agent
   
   def memory_usage
     m = send_and_expect "GET MEMORY", /MEMORY: (\d+) (\d+)/
@@ -125,4 +152,8 @@ class Agent
     @callbacks[id] = block
     @socket.readDataToData AsyncSocket.ZeroData, withTimeout: -1, tag: id
   end  
-end
+end 
+
+*/
+
+@end

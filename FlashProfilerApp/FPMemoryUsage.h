@@ -14,7 +14,9 @@
     int usage;
 }
 
-@property(readonly) NSDate at;
+@property(readonly) NSDate *at;
 @property(readonly) int usage;
+
+- (id)initWithUsage:(int)theUsage at:(NSDate *)theDate;
 
 @end
