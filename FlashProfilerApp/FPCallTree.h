@@ -7,10 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FPCallTreeNode.h"
+#import "FPCpuSample.h"
 
-
-@interface FPCallTree : NSObject {
-
+@interface FPCallTree : NSObject <NSCoding> {
+    FPCallTreeNode *_root;
 }
+
+@property(readonly) FPCallTreeNode *root;
+
+- (void)addSample:(FPCpuSample *)sample;
+- (void)computeTimes;
 
 @end

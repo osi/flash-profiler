@@ -329,15 +329,15 @@
 	6C13A5480F17212000715A7C /* FPCallTree.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1004, 571}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 215}";
+			sepNavSelRange = "{340, 63}";
+			sepNavVisRange = "{0, 409}";
 		};
 	};
 	6C13A5490F17212000715A7C /* FPCallTree.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1004, 571}}";
-			sepNavSelRange = "{203, 0}";
-			sepNavVisRange = "{0, 203}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 1155}}";
+			sepNavSelRange = "{1044, 0}";
+			sepNavVisRange = "{0, 813}";
 			sepNavWindowFrame = "{{15, 69}, {1276, 704}}";
 		};
 	};
@@ -346,7 +346,7 @@
 		fRef = 6C13A5480F17212000715A7C /* FPCallTree.h */;
 		name = "FPCallTree.h: 12";
 		rLen = 0;
-		rLoc = 200;
+		rLoc = 250;
 		rType = 0;
 		vrLen = 215;
 		vrLoc = 0;
@@ -356,7 +356,7 @@
 		fRef = 6C13A5480F17212000715A7C /* FPCallTree.h */;
 		name = "FPCallTree.h: 12";
 		rLen = 0;
-		rLoc = 200;
+		rLoc = 250;
 		rType = 0;
 		vrLen = 215;
 		vrLoc = 0;
@@ -437,6 +437,13 @@
 			sepNavWindowFrame = "{{38, 86}, {982, 666}}";
 		};
 	};
+	6C34FD810F0B160700F3A3A8 /* base_sample.rb */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1060, 525}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 527}";
+		};
+	};
 	6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1004, 571}}";
@@ -446,9 +453,9 @@
 	};
 	6C34FD850F0B160700F3A3A8 /* sample_parser.rb */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {668, 6944}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 7515}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 700}";
+			sepNavVisRange = "{0, 681}";
 		};
 	};
 	6C34FD860F0B160700F3A3A8 /* stack_frame.rb */ = {
@@ -466,10 +473,16 @@
 		};
 	};
 	6C34FD9D0F0C881400F3A3A8 /* call_tree.rb */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text.script.ruby;
+		name = call_tree.rb;
+		path = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/call_tree.rb";
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1004, 1560}}";
-			sepNavSelRange = "{1337, 0}";
-			sepNavVisRange = "{620, 656}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 1605}}";
+			sepNavSelRange = "{38, 915}";
+			sepNavVisRange = "{0, 762}";
 			sepNavWindowFrame = "{{15, 69}, {1276, 704}}";
 		};
 	};
@@ -482,9 +495,9 @@
 	};
 	6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {762, 330}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 330}}";
 			sepNavSelRange = "{384, 0}";
-			sepNavVisRange = "{3, 470}";
+			sepNavVisRange = "{0, 473}";
 			sepNavWindowFrame = "{{15, 69}, {1263, 704}}";
 		};
 	};
@@ -1381,9 +1394,9 @@
 		path = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FPCallTreeNode.h";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1004, 555}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 571}}";
 			sepNavSelRange = "{275, 0}";
-			sepNavVisRange = "{0, 431}";
+			sepNavVisRange = "{0, 736}";
 		};
 	};
 	6CAEEDAC0F186D890013E786 /* PBXTextBookmark */ = {
@@ -1526,9 +1539,9 @@
 		path = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FPCallTreeNode.m";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1004, 1305}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 1275}}";
 			sepNavSelRange = "{944, 0}";
-			sepNavVisRange = "{734, 426}";
+			sepNavVisRange = "{0, 800}";
 		};
 	};
 	6CAEEDCA0F186DF40013E786 /* PBXTextBookmark */ = {
