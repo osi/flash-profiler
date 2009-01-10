@@ -74,12 +74,12 @@ class CallTree
       node
     end
     
-    def nested_to_s(level, total_visits)
+    def nested_to_s(level)
       "  " * level << 
       (time * 100).round.to_s << 
       " " <<
       frame.to_s << 
-      children.map { |child| "\n" << child.nested_to_s(level+1, total_visits) }.join
+      children.map { |child| "\n" << child.nested_to_s(level+1) }.join
     end
     
     # NSCoding

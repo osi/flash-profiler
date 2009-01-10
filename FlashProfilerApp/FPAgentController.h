@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FPAgent.h"
+#import "FPProfilingSession.h"
 
 
 @interface FPAgentController : NSObject {

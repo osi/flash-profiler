@@ -14,6 +14,8 @@
 @synthesize table;
 @synthesize sessions;
 
+// TODO we need an NSArrayController of available agents..
+
 - (IBAction)connectToAgent:(id)sender {
     NSInteger row = [table selectedRow];
     

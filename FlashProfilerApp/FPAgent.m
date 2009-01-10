@@ -24,19 +24,23 @@
 - (id)initWithSocket:(AsyncSocket *)socket {
     [super init];
     
-    self.socket = socket; 
+    _socket = socket; 
     
-    [socket setDelegate:self];
+    [_socket setDelegate:self];
     
     return self;
 }
 
 - (BOOL)isConnected {
-    return [self.socket isConnected];
+    return [_socket isConnected];
+}
+
+- (void)setDelegate:(id)delegate {
+    _delegate = delegate;
 }
 
 // TODO all the action methods need to be lazy and return stuff
-// via callbacks
+// via the delgate
 
 /*
 class Agent

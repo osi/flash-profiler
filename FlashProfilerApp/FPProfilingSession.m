@@ -7,31 +7,35 @@
 //
 
 #import "FPProfilingSession.h"
+#import "FPAgent.h"
+#import "FPSampleSet.h"
 
 
 @implementation FPProfilingSession
 
-@synthesize agent;
-@synthesize memoryUsage;
-@synthesize sampleSets;
+@synthesize agent = _agent;
+@synthesize memoryUsage = _memoryUsage;
+@synthesize sampleSets = _sampleSets;
 
 - (id)init {
     return [self initWithAgent: nil];
 }
 
-- (id)initWithAgent:(FPAgent *)theAgent {
+- (id)initWithAgent:(FPAgent *)agent {
     [super init];
 
-    agent = theAgent;
-    memoryUsage = [NSMutableArray arrayWithCapacity:128];
-    sampleSets = [NSMutableArray arrayWithCapacity:8];
-    viewingSampleSet = nil;
+    _agent = agent;
+    _memoryUsage = [NSMutableArray arrayWithCapacity:128];
+    _sampleSets = [NSMutableArray arrayWithCapacity:8];
+    _viewingSampleSet = nil;
+    
+    [agent setDelegate:self];
     
     return self;
 }
 
 - (void)addSampleSet:(FPSampleSet *)set {
-    [sampleSets addObject:set];
+    [_sampleSets addObject:set];
     [self updateChangeCount:NSChangeDone];
 }
 

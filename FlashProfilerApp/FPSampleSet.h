@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FPCallTree.h"
 
 
 @interface FPSampleSet : NSObject <NSCoding> {

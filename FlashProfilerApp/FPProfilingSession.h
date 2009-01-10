@@ -7,20 +7,23 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FPAgent.h"
+#import "FPSampleSet.h"
 
 
-@interface FPProfilingSession : NSDocument {
-    FPAgent *agent;
-    NSMutableArray *memoryUsage;
-    NSMutableArray *sampleSets;
-    FPSampleSet *viewingSampleSet;
+@interface FPProfilingSession : NSDocument <FPAgentDelegate> {
+    FPAgent *_agent;
+    NSMutableArray *_memoryUsage;
+    NSMutableArray *_sampleSets;
+    FPSampleSet *_viewingSampleSet;
 }
 
-@property FPAgent agent;
-@property NSMutableArray memoryUsage;
-@property NSMutableArray sampleSets;
+@property FPAgent *agent;
+@property(retain) NSMutableArray *memoryUsage;
+@property(retain) NSMutableArray *sampleSets;
 
-- (id)initWithAgent:(FPAgent *)theAgent
+- (id)initWithAgent:(FPAgent *)agent;
+
 - (void)addSampleSet:(FPSampleSet *)set;
 
 @end
