@@ -13,7 +13,6 @@
 		6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C27F2050F1467E500B29D55 /* FPAgentController.m */; };
 		6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */; };
 		6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FCF80F05AB9700F3A3A8 /* listener.rb */; };
-		6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */; };
 		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
 		6C34FD870F0B160700F3A3A8 /* base_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD810F0B160700F3A3A8 /* base_sample.rb */; };
 		6C34FD880F0B160700F3A3A8 /* cpu_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */; };
@@ -28,6 +27,7 @@
 		6C5D7FBA0F15C7800041FF31 /* FPProfilingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */; };
 		6CAEED050F18582D0013E786 /* FPStackFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEED040F18582D0013E786 /* FPStackFrame.m */; };
 		6CAEED410F1867E60013E786 /* FPCallTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEED400F1867E60013E786 /* FPCallTreeNode.m */; };
+		6CAEEE160F191F480013E786 /* ProfilingSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CAEEE150F191F480013E786 /* ProfilingSession.xib */; };
 		6CD1CA6F0F14661400912223 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6CD1CA6D0F14661400912223 /* Credits.rtf */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -62,7 +62,7 @@
 		6C27F2050F1467E500B29D55 /* FPAgentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgentController.m; sourceTree = "<group>"; };
 		6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = agent_tracker.rb; sourceTree = "<group>"; };
 		6C34FCF80F05AB9700F3A3A8 /* listener.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = listener.rb; sourceTree = "<group>"; };
-		6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilingSession.xib; sourceTree = "<group>"; };
+		6C34FD470F05EC2C00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ProfilingSession.xib; sourceTree = "<group>"; };
 		6C34FD720F05F5AB00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6C34FD810F0B160700F3A3A8 /* base_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = base_sample.rb; sourceTree = "<group>"; };
 		6C34FD820F0B160700F3A3A8 /* cpu_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = cpu_sample.rb; sourceTree = "<group>"; };
@@ -107,6 +107,16 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */,
+				6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */,
+				6C5D7FB80F15C7800041FF31 /* FPProfilingSession.h */,
+				6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */,
+				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
+				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
+				6C27F2040F1467E500B29D55 /* FPAgentController.h */,
+				6C27F2050F1467E500B29D55 /* FPAgentController.m */,
+				6C5D7FB20F15C4300041FF31 /* FPMemoryUsage.h */,
+				6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */,
 				6C1E94D20F131E0A0096D51B /* io_thread.rb */,
 				6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */,
 				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
@@ -161,8 +171,6 @@
 		29B97314FDCFA39411CA2CEA /* FlashProfilerApp */ = {
 			isa = PBXGroup;
 			children = (
-				6C34FD390F05EBAD00F3A3A8 /* Profiling Session */,
-				6C34FD140F05E62000F3A3A8 /* Agent Management */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -184,7 +192,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6C34FD470F05EC2C00F3A3A8 /* ProfilingSession.xib */,
+				6CAEEE150F191F480013E786 /* ProfilingSession.xib */,
 				6CD1CA6D0F14661400912223 /* Credits.rtf */,
 				6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -200,30 +208,6 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6C34FD140F05E62000F3A3A8 /* Agent Management */ = {
-			isa = PBXGroup;
-			children = (
-				6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */,
-				6C34FCF80F05AB9700F3A3A8 /* listener.rb */,
-				6C27F2040F1467E500B29D55 /* FPAgentController.h */,
-				6C27F2050F1467E500B29D55 /* FPAgentController.m */,
-				6C5D7FB20F15C4300041FF31 /* FPMemoryUsage.h */,
-				6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */,
-			);
-			name = "Agent Management";
-			sourceTree = "<group>";
-		};
-		6C34FD390F05EBAD00F3A3A8 /* Profiling Session */ = {
-			isa = PBXGroup;
-			children = (
-				6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */,
-				6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */,
-				6C5D7FB80F15C7800041FF31 /* FPProfilingSession.h */,
-				6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */,
-			);
-			name = "Profiling Session";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +257,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				6C34FCFA0F05AB9700F3A3A8 /* agent_tracker.rb in Resources */,
 				6C34FCFB0F05AB9700F3A3A8 /* listener.rb in Resources */,
-				6C34FD480F05EC2C00F3A3A8 /* ProfilingSession.xib in Resources */,
+				6CAEEE160F191F480013E786 /* ProfilingSession.xib in Resources */,
 				6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */,
 				6C34FD870F0B160700F3A3A8 /* base_sample.rb in Resources */,
 				6C34FD880F0B160700F3A3A8 /* cpu_sample.rb in Resources */,
@@ -324,6 +308,14 @@
 				6C34FD720F05F5AB00F3A3A8 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6CAEEE150F191F480013E786 /* ProfilingSession.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C34FD470F05EC2C00F3A3A8 /* English */,
+			);
+			name = ProfilingSession.xib;
 			sourceTree = "<group>";
 		};
 		6CD1CA6D0F14661400912223 /* Credits.rtf */ = {

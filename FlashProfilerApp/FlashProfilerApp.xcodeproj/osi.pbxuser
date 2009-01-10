@@ -423,9 +423,9 @@
 	};
 	6C34FCF70F05AB9700F3A3A8 /* agent_tracker.rb */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {845, 645}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 675}}";
 			sepNavSelRange = "{115, 0}";
-			sepNavVisRange = "{0, 671}";
+			sepNavVisRange = "{0, 350}";
 			sepNavWindowFrame = "{{15, 69}, {904, 704}}";
 		};
 	};
@@ -1588,7 +1588,7 @@
 		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1004, 450}}";
-			sepNavSelRange = "{503, 0}";
+			sepNavSelRange = "{373, 0}";
 			sepNavVisRange = "{177, 442}";
 		};
 	};
