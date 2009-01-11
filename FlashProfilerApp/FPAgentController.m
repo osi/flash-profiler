@@ -11,13 +11,12 @@
 
 @implementation FPAgentController
 
-@synthesize table;
-@synthesize sessions;
-
-// TODO we need an NSArrayController of available agents..
+@synthesize table = _table;
+@synthesize sessions = _sessions;
+@synthesize agents = _agents;
 
 - (IBAction)connectToAgent:(id)sender {
-    NSInteger row = [table selectedRow];
+    NSInteger row = [_table selectedRow];
     
     if( row >= 0 ) {
         FPAgent *agent; // TODO look up agent
@@ -26,7 +25,7 @@
         
         FPProfilingSession *session = [[FPProfilingSession alloc] initWithAgent: agent];
         
-        [sessions addDocument: session];
+        [_sessions addDocument: session];
         [session makeWindowControllers];
         [session showWindows];
     } 

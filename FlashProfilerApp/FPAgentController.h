@@ -12,12 +12,14 @@
 
 
 @interface FPAgentController : NSObject {
-    NSDocumentController *sessions;
-    NSTableView *table;
+    NSDocumentController *_sessions;
+    NSTableView *_table;
+    NSMutableArray *_agents;
 }
 
 @property IBOutlet NSDocumentController *sessions;
 @property IBOutlet NSTableView *table;
+@property(readonly) NSMutableArray *agents;
 
 - (IBAction)connectToAgent:(id)sender;
 
