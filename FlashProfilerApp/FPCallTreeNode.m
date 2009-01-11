@@ -26,7 +26,7 @@
     return nil;
 }
 
-- (id)initWithFrame:(FPStackFrame *)frame {
+- (id)initWithStackFrame:(FPStackFrame *)frame {
     [super init];
     
     _frame = frame;

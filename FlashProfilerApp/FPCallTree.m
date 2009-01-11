@@ -16,7 +16,7 @@
 - (id)init {
     [super init];
     
-    _root = [[FPCallTreeNode alloc] initWithFrame:[[FPStackFrame alloc] initWithClassName:@"<root>" methodName:@""]];
+    _root = [[FPCallTreeNode alloc] initWithStackFrame:[[FPStackFrame alloc] initWithClassName:@"<root>" methodName:@""]];
     _root.visits = 0;
     
     return self;

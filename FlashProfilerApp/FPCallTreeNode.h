@@ -22,7 +22,7 @@
 @property NSUInteger visits;
 @property float time;
 
-- (id)initWithFrame:(FPStackFrame *)frame;
+- (id)initWithStackFrame:(FPStackFrame *)frame;
 
 - (BOOL)hasChild:(FPStackFrame *)frame;
 

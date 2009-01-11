@@ -6,6 +6,22 @@ class SampleParser
 
     # The 'time' field is crap. the relative values are okay though, so the times can be adjusted to be
     # relative to the first item
+    
+#//      def initialize(text, session_start, offset)
+#//    @raw_time = @@time.match(text)[1].to_i
+#//    
+#//    if offset.nil?
+##//      @at = session_start
+#//    else
+#//      begin
+#//        @at = Time.at session_start.sec, session_start.usec + @raw_time - offset
+#//      rescue RangeError => e
+#//        NSLog "ERROR: invalid time. session started at #{session_start}, offset is #{offset} and current raw value is #{@raw_time}"
+#//      end
+#//    end
+#//  end
+
+    
     begin
       case m[1]
       when "NewObjectSample"
