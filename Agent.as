@@ -4,9 +4,10 @@ package {
     import flash.events.Event;
     import flash.events.DataEvent;
     import flash.events.IOErrorEvent;
+    import flash.events.ProgressEvent;
     import flash.events.SecurityErrorEvent;
     import flash.events.TimerEvent;
-    import flash.net.XMLSocket;
+    import flash.net.Socket;
     import flash.system.System;
     import flash.utils.getTimer;
     import flash.utils.Timer;
@@ -20,8 +21,9 @@ package {
 	    
 	    private var _host:String;
 	    private var _port:int;
-	    private var _socket:XMLSocket;
+	    private var _socket:Socket;
 	    private var _connected:Boolean;
+	    private var _referenceDate:Number;
 	    private var _sampleSender:Timer;
 	
     	public function Agent() {
@@ -30,18 +32,20 @@ package {
     	    _host = loaderInfo.parameters["host"] || HOST;
     	    _port = loaderInfo.parameters["port"] || PORT;
 	    
+	        _referenceDate = new Date().time;
+	    
 	        _socket = new XMLSocket();
 
             _socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, fail);
             _socket.addEventListener(IOErrorEvent.IO_ERROR, fail);
-            _socket.addEventListener(DataEvent.DATA, dataReceived);
+            _socket.addEventListener(ProgressEvent.SOCKET_DATA, dataReceived);
             _socket.addEventListener(Event.CONNECT, connected);
             _socket.addEventListener(Event.CLOSE, close);
 
             connect();
     	}
     	
-    	private function dataReceived(e:DataEvent):void {
+    	private function dataReceived(e:ProgressEvent):void {
     	    trace(PREFIX, "Received command", e.data);    	   
     	    
     	    switch( e.data ) {
@@ -169,7 +173,14 @@ package {
 
     	   trace(PREFIX, "Connected");
 
-    	   _socket.send("AGENT READY");
+           _socket.writeByte(42);
+           _socket.writeByte(01);
+
+           var seconds:uint = _referenceDate / 1000;
+           
+           _socket.writeUnsignedInt(seconds);
+           _socket.writeShort(_referenceDate - (seconds * 1000));
+           _socket.flush();
     	}
     	
     	private function close(e:Event):void {

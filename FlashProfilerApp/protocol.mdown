@@ -9,7 +9,7 @@ Agent to Controller
 ===================
 
    - **01** - "Hello World". Sent upon establishing a new socket connection. 
-      - 8 bytes indicating the system "base time" in seconds, and two bytes for the millisecond component.
+      - 4 bytes indicating the system "base time" in seconds, and two bytes for the millisecond component.
    
    - **03** - Current memory usage of the client.
       - 4 bytes indicating the number of milliseconds since the "base time" (unsigned)
