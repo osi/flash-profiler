@@ -9,17 +9,22 @@
 #import <Cocoa/Cocoa.h>
 #import "FPAgent.h"
 #import "FPProfilingSession.h"
+#import "FPNewAgentListener.h"
+#import "FPIoThread.h"
 
 
-@interface FPAgentController : NSObject {
+@interface FPAgentController : NSObject <FPNewAgentListenerDelegate> {
     NSDocumentController *_sessions;
     NSTableView *_table;
     NSMutableArray *_agents;
+    FPIoThread *_thread;
+    NSArrayController *_agentsController;
 }
 
 @property IBOutlet NSDocumentController *sessions;
 @property IBOutlet NSTableView *table;
 @property(readonly) NSMutableArray *agents;
+@property IBOutlet NSArrayController *agentsController;
 
 - (IBAction)connectToAgent:(id)sender;
 

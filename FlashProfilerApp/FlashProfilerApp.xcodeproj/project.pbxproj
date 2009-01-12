@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C13A4FE0F17199C00715A7C /* FPAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A4FD0F17199C00715A7C /* FPAgent.m */; };
 		6C13A54A0F17212000715A7C /* FPCallTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A5490F17212000715A7C /* FPCallTree.m */; };
+		6C26870F0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */; };
 		6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C27F2050F1467E500B29D55 /* FPAgentController.m */; };
 		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
 		6C34FD890F0B160700F3A3A8 /* delete_object_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */; };
@@ -56,6 +57,8 @@
 		6C13A4FD0F17199C00715A7C /* FPAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgent.m; sourceTree = "<group>"; };
 		6C13A5480F17212000715A7C /* FPCallTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCallTree.h; sourceTree = "<group>"; };
 		6C13A5490F17212000715A7C /* FPCallTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCallTree.m; sourceTree = "<group>"; };
+		6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonZeroLengthArrayValueTransformer.h; sourceTree = "<group>"; };
+		6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonZeroLengthArrayValueTransformer.m; sourceTree = "<group>"; };
 		6C27F2040F1467E500B29D55 /* FPAgentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPAgentController.h; sourceTree = "<group>"; };
 		6C27F2050F1467E500B29D55 /* FPAgentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgentController.m; sourceTree = "<group>"; };
 		6C34FD470F05EC2C00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ProfilingSession.xib; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
 				6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */,
 				6C34FD850F0B160700F3A3A8 /* sample_parser.rb */,
+				6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */,
+				6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */,
 			);
 			fileEncoding = 4;
 			lineEnding = 0;
@@ -292,6 +297,7 @@
 				6CAEEEF10F19AFE30013E786 /* FPIoThread.m in Sources */,
 				6CAEEEF50F19B1C30013E786 /* FPNewAgentListener.m in Sources */,
 				6CA825740F19BEB5006F55F6 /* AsyncSocket.m in Sources */,
+				6C26870F0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

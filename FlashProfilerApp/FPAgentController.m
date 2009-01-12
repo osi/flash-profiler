@@ -7,6 +7,7 @@
 //
 
 #import "FPAgentController.h"
+#import "NonZeroLengthArrayValueTransformer.h"
 
 
 @implementation FPAgentController
@@ -14,6 +15,7 @@
 @synthesize table = _table;
 @synthesize sessions = _sessions;
 @synthesize agents = _agents;
+@synthesize agentsController = _agentsController;
 
 - (IBAction)connectToAgent:(id)sender {
     NSInteger row = [_table selectedRow];
@@ -31,46 +33,32 @@
     } 
 }
 
-//
-//def awakeFromNib
-//# FIXME remove the below once done testing
-//# url = NSURL.fileURLWithPath "~/Desktop/test two.profiler-session-data".stringByExpandingTildeInPath
-//# url = NSURL.fileURLWithPath "~/Desktop/modo2.profiler-session-data".stringByExpandingTildeInPath
-//# sessions.openDocumentWithContentsOfURL url, display: true, error: nil
-//
-//# FIXME don't be evil and grab focus for testing
-//# NSApplication.sharedApplication.activateIgnoringOtherApps true
-//
-//listener = Listener.new(tracker)
-//
-//io_thread = IoThread.alloc.initWithListener(listener)
-//io_thread.start
-//
-//# @thread = Thread.new do
-//#   run = true
-//# 
-//#   NSLog "Starting io thread"
-//# 
-//#   listener.start
-//# 
-//#   NSLog "Started listener"
-//# 
-//#   run_loop = NSRunLoop.currentRunLoop
-//# 
-//#   STDERR.puts "#{run_loop}"
-//# 
-//#   begin
-//#     while run and run_loop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture)
-//#       # NSLog "run..."
-//#       # do nothing!
-//#     end
-//#   rescue Exception => e
-//#     NSLog "Failure in run loop #{e}"
-//#   end
-//#   
-//# 
-//#   NSLog "io thread exiting.."      
-//# end
-//end
++ (void)initialize {
+    [NSValueTransformer setValueTransformer:[[NonZeroLengthArrayValueTransformer alloc] init] 
+                                    forName:@"NonZeroLengthArray"];
+}
+
+- (void)awakeFromNib {
+    //# FIXME remove the below once done testing
+    //# url = NSURL.fileURLWithPath "~/Desktop/test two.profiler-session-data".stringByExpandingTildeInPath
+    //# url = NSURL.fileURLWithPath "~/Desktop/modo2.profiler-session-data".stringByExpandingTildeInPath
+    //# sessions.openDocumentWithContentsOfURL url, display: true, error: nil
+
+    FPNewAgentListener *listener = [[FPNewAgentListener alloc] initWithDelegate:self];
+    
+    _thread = [[FPIoThread alloc] initWithListener:listener];
+    [_thread start];
+    
+//    [_agentsController addObject:[[FPAgent alloc] initWithSocket:nil]];
+//    
+//    NSLog(@"Agents %@", _agents);
+}
+
+- (void)agentConnected:(FPAgent *)agent {
+    NSLog(@"Will add %@ to array controller", agent);
+    [_agentsController performSelectorOnMainThread:@selector(addObject:) withObject:agent waitUntilDone:YES];
+    NSLog(@"Agents %@", _agents);
+}
+
 
 @end
