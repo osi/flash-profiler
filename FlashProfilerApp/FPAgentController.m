@@ -48,16 +48,10 @@
     
     _thread = [[FPIoThread alloc] initWithListener:listener];
     [_thread start];
-    
-//    [_agentsController addObject:[[FPAgent alloc] initWithSocket:nil]];
-//    
-//    NSLog(@"Agents %@", _agents);
 }
 
 - (void)agentConnected:(FPAgent *)agent {
-    NSLog(@"Will add %@ to array controller", agent);
     [_agentsController performSelectorOnMainThread:@selector(addObject:) withObject:agent waitUntilDone:YES];
-    NSLog(@"Agents %@", _agents);
 }
 
 

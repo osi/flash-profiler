@@ -371,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6C2687380F1AF6E5003ABC33</string>
+										<string>6C26873C0F1AFDD5003ABC33</string>
 										<key>history</key>
 										<array>
 											<string>6CAEED240F1864B40013E786</string>
@@ -445,14 +445,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1065, 422}}</string>
+								<string>{{0, 0}, {1065, 603}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 129 1280 649 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>422pt</string>
+							<string>603pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -465,14 +465,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 427}, {1065, 181}}</string>
+								<string>{{0, 608}, {1065, 0}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 129 1280 649 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>181pt</string>
+							<string>0pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -610,7 +610,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>253425381.699314</real>
+	<real>253427157.88291901</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -629,10 +629,10 @@
 		<string>1C0AD2AF069F1E9B00FABCE6</string>
 		<string>6C26871F0F1AF516003ABC33</string>
 		<string>6C2687200F1AF516003ABC33</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>6C34FB5C0F033F0300F3A3A8</string>
 		<string>/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FlashProfilerApp.xcodeproj</string>
-		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 129 1280 649 0 0 1280 778 </string>
@@ -756,8 +756,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {316, 203}}</string>
-											<string>{{316, 0}, {378, 203}}</string>
+											<string>{{0, 0}, {433, 275}}</string>
+											<string>{{433, 0}, {519, 275}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -772,8 +772,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {694, 203}}</string>
-											<string>{{0, 203}, {694, 178}}</string>
+											<string>{{0, 0}, {952, 275}}</string>
+											<string>{{0, 275}, {952, 241}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -793,7 +793,7 @@
 								<key>DebugSTDIOWindowFrame</key>
 								<string>{{200, 200}, {500, 300}}</string>
 								<key>Frame</key>
-								<string>{{0, 0}, {694, 381}}</string>
+								<string>{{0, 0}, {952, 516}}</string>
 								<key>PBXDebugSessionStackFrameViewKey</key>
 								<dict>
 									<key>DebugVariablesTableConfiguration</key>
@@ -803,24 +803,24 @@
 										<string>Value</string>
 										<real>85</real>
 										<string>Summary</string>
-										<real>148</real>
+										<real>289</real>
 									</array>
 									<key>Frame</key>
-									<string>{{316, 0}, {378, 203}}</string>
+									<string>{{433, 0}, {519, 275}}</string>
 									<key>RubberWindowFrame</key>
-									<string>120 174 694 422 0 0 1280 778 </string>
+									<string>72 129 952 557 0 0 1280 778 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>120 174 694 422 0 0 1280 778 </string>
+								<string>72 129 952 557 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
 							<key>Proportion</key>
-							<string>381pt</string>
+							<string>516pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>381pt</string>
+					<string>516pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -845,7 +845,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>120 174 694 422 0 0 1280 778 </string>
+			<string>72 129 952 557 0 0 1280 778 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
@@ -1018,7 +1018,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

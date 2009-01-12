@@ -179,6 +179,7 @@
 			6C2687360F1AF6E5003ABC33 /* PBXTextBookmark */ = 6C2687360F1AF6E5003ABC33 /* PBXTextBookmark */;
 			6C2687370F1AF6E5003ABC33 /* PBXTextBookmark */ = 6C2687370F1AF6E5003ABC33 /* PBXTextBookmark */;
 			6C2687380F1AF6E5003ABC33 /* PBXTextBookmark */ = 6C2687380F1AF6E5003ABC33 /* PBXTextBookmark */;
+			6C26873C0F1AFDD5003ABC33 /* PBXTextBookmark */ = 6C26873C0F1AFDD5003ABC33 /* PBXTextBookmark */;
 			6CA825590F19BDE1006F55F6 = 6CA825590F19BDE1006F55F6 /* PBXTextBookmark */;
 			6CA825A30F1AD3FB006F55F6 = 6CA825A30F1AD3FB006F55F6 /* PBXTextBookmark */;
 			6CA825A40F1AD3FB006F55F6 = 6CA825A40F1AD3FB006F55F6 /* PBXTextBookmark */;
@@ -293,7 +294,7 @@
 		fRef = 6CA8258B0F1ACB76006F55F6 /* FPAgentController.m */;
 		name = "FPAgentController.m: 46";
 		rLen = 0;
-		rLoc = 1594;
+		rLoc = 1576;
 		rType = 0;
 		vrLen = 1314;
 		vrLoc = 396;
@@ -353,7 +354,7 @@
 		fRef = 6CA8258B0F1ACB76006F55F6 /* FPAgentController.m */;
 		name = "FPAgentController.m: 46";
 		rLen = 0;
-		rLoc = 1594;
+		rLoc = 1576;
 		rType = 0;
 		vrLen = 1320;
 		vrLoc = 396;
@@ -437,9 +438,9 @@
 		path = "/Users/osi/code/ruby/flash-profiler/FlashProfilerApp/FPAgentController.m";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1004, 960}}";
-			sepNavSelRange = "{1002, 0}";
-			sepNavVisRange = "{443, 957}";
+			sepNavIntBoundsRect = "{{0, 0}, {1004, 885}}";
+			sepNavSelRange = "{1576, 0}";
+			sepNavVisRange = "{0, 1036}";
 		};
 	};
 	6C2687340F1AF6E5003ABC33 /* PBXTextBookmark */ = {
@@ -489,6 +490,16 @@
 		vrLen = 957;
 		vrLoc = 443;
 	};
+	6C26873C0F1AFDD5003ABC33 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6C2687300F1AF6CD003ABC33 /* FPAgentController.m */;
+		name = "FPAgentController.m: 51";
+		rLen = 0;
+		rLoc = 1576;
+		rType = 0;
+		vrLen = 1036;
+		vrLoc = 0;
+	};
 	6C27F2040F1467E500B29D55 /* FPAgentController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1004, 571}}";
@@ -529,6 +540,8 @@
 		};
 		sourceDirectories = (
 		);
+		variableFormatDictionary = {
+		};
 	};
 	6C34FB680F033F0500F3A3A8 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -691,8 +704,8 @@
 		isa = PBXTextBookmark;
 		fRef = 6CA8258B0F1ACB76006F55F6 /* FPAgentController.m */;
 		name = "FPAgentController.m: 48";
-		rLen = 7;
-		rLoc = 1688;
+		rLen = 0;
+		rLoc = 1576;
 		rType = 0;
 		vrLen = 1233;
 		vrLoc = 438;
