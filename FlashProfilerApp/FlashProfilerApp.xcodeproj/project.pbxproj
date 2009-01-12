@@ -59,6 +59,7 @@
 		6C13A5490F17212000715A7C /* FPCallTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCallTree.m; sourceTree = "<group>"; };
 		6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonZeroLengthArrayValueTransformer.h; sourceTree = "<group>"; };
 		6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonZeroLengthArrayValueTransformer.m; sourceTree = "<group>"; };
+		6C26873F0F1AFE47003ABC33 /* protocol.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.mdown; sourceTree = "<group>"; };
 		6C27F2040F1467E500B29D55 /* FPAgentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPAgentController.h; sourceTree = "<group>"; };
 		6C27F2050F1467E500B29D55 /* FPAgentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgentController.m; sourceTree = "<group>"; };
 		6C34FD470F05EC2C00F3A3A8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ProfilingSession.xib; sourceTree = "<group>"; };
@@ -112,39 +113,39 @@
 			isa = PBXGroup;
 			children = (
 				6CBFC0E70F11BB54005FE40C /* AsyncSocket.h */,
-				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
-				6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */,
 				6C13A4FC0F17199C00715A7C /* FPAgent.h */,
-				6C13A4FD0F17199C00715A7C /* FPAgent.m */,
 				6C27F2040F1467E500B29D55 /* FPAgentController.h */,
-				6C27F2050F1467E500B29D55 /* FPAgentController.m */,
 				6C13A5480F17212000715A7C /* FPCallTree.h */,
-				6C13A5490F17212000715A7C /* FPCallTree.m */,
 				6CAEED3F0F1867E60013E786 /* FPCallTreeNode.h */,
-				6CAEED400F1867E60013E786 /* FPCallTreeNode.m */,
 				6CAEEE750F19AADD0013E786 /* FPCpuSample.h */,
-				6CAEEE760F19AADD0013E786 /* FPCpuSample.m */,
 				6CAEEEEF0F19AFE30013E786 /* FPIoThread.h */,
-				6CAEEEF00F19AFE30013E786 /* FPIoThread.m */,
 				6C5D7FB20F15C4300041FF31 /* FPMemoryUsage.h */,
-				6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */,
 				6CAEEEF30F19B1C30013E786 /* FPNewAgentListener.h */,
-				6CAEEEF40F19B1C30013E786 /* FPNewAgentListener.m */,
 				6C5D7FB80F15C7800041FF31 /* FPProfilingSession.h */,
-				6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */,
 				6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */,
-				6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */,
 				6CAEEE210F19A6910013E786 /* FPSample.h */,
-				6CAEEE220F19A6910013E786 /* FPSample.m */,
 				6C5D7FAC0F15C0D60041FF31 /* FPSampleSet.h */,
-				6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */,
 				6CAEED030F18582D0013E786 /* FPStackFrame.h */,
+				6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */,
+				6CBFC0E80F11BB54005FE40C /* AsyncSocket.m */,
+				6C13A4FD0F17199C00715A7C /* FPAgent.m */,
+				6C27F2050F1467E500B29D55 /* FPAgentController.m */,
+				6C13A5490F17212000715A7C /* FPCallTree.m */,
+				6CAEED400F1867E60013E786 /* FPCallTreeNode.m */,
+				6CAEEE760F19AADD0013E786 /* FPCpuSample.m */,
+				6CAEEEF00F19AFE30013E786 /* FPIoThread.m */,
+				6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */,
+				6CAEEEF40F19B1C30013E786 /* FPNewAgentListener.m */,
+				6C5D7FB90F15C7800041FF31 /* FPProfilingSession.m */,
+				6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */,
+				6CAEEE220F19A6910013E786 /* FPSample.m */,
+				6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */,
 				6CAEED040F18582D0013E786 /* FPStackFrame.m */,
+				6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */,
+				6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */,
 				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
 				6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */,
 				6C34FD850F0B160700F3A3A8 /* sample_parser.rb */,
-				6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */,
-				6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */,
 			);
 			fileEncoding = 4;
 			lineEnding = 0;
@@ -202,6 +203,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C26873F0F1AFE47003ABC33 /* protocol.mdown */,
 				6CAEEE150F191F480013E786 /* ProfilingSession.xib */,
 				6CD1CA6D0F14661400912223 /* Credits.rtf */,
 				6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */,
