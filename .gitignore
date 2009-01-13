@@ -2,3 +2,7 @@ Agent.swf.cache
 Agent.swf
 flash-profiler.tmproj
 FlashProfilerApp/build
+FlashProfilerApp/FlashProfilerApp.xcodeproj/*.mode1v3
+FlashProfilerApp/FlashProfilerApp.xcodeproj/*.mode2v3
+FlashProfilerApp/FlashProfilerApp.xcodeproj/*.pbxuser
+FlashProfilerApp/FlashProfilerApp.xcodeproj/*.perspectivev3
