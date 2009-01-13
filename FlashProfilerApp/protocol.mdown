@@ -3,13 +3,26 @@ Design
 
 The agent/controller protocol utilizes a two-byte command sequence design.
 
-The first byte of the command sequence is always **42**. The second indicates the command. There are the following commands:
+The first byte of the command sequence is always **0x42**. The second indicates the command.
+
+Strings are all UTF-8 encoded, prefixed with two bytes indicating the length of the string.
+
+Commands
+--------
+
+Any to Any
+===========
+
+   - **00** - Error.
+      - Optional error message string
 
 Agent to Controller
 ===================
 
    - **01** - "Hello World". Sent upon establishing a new socket connection. 
-      - 4 bytes indicating the system "base time" in seconds, and two bytes for the millisecond component.
+      - 4 bytes indicating the system "now" in seconds
+      - 2 bytes for the number of milliseconds in "now".
+      - 4 bytes indicating the "base time", which is an arbitrary millisecond value. later time values will be milliseconds relative to this. it can be converted into actual time by comparing with the "now"
    
    - **03** - Current memory usage of the client.
       - 4 bytes indicating the number of milliseconds since the "base time" (unsigned)

@@ -23,7 +23,6 @@ package {
 	    private var _port:int;
 	    private var _socket:Socket;
 	    private var _connected:Boolean;
-	    private var _referenceDate:Number;
 	    private var _sampleSender:Timer;
 	
     	public function Agent() {
@@ -31,8 +30,6 @@ package {
     	    
     	    _host = loaderInfo.parameters["host"] || HOST;
     	    _port = loaderInfo.parameters["port"] || PORT;
-	    
-	        _referenceDate = new Date().time;
 	    
 	        _socket = new XMLSocket();
 
@@ -46,77 +43,89 @@ package {
     	}
     	
     	private function dataReceived(e:ProgressEvent):void {
-    	    trace(PREFIX, "Received command", e.data);    	   
+    	    if( _socket.bytesAvailable < 2 ) {
+    	        // All commands are two-bytes.
+    	        return;
+    	    }
     	    
-    	    switch( e.data ) {
-                case "GET MEMORY":
-                    _socket.send("MEMORY: " + new Date().time + " " + System.totalMemory);
+    	    var command:uint = _socket.readUnsignedShort();
+    	    
+    	    trace(PREFIX, "Received command", command);    	   
+    	    
+    	    switch( command ) {
+                case 0x4202:
+                    _socket.writeShort(0x4203);
+                    _socket.writeUnsignedInt(getTimer());
+                    _socket.writeUnsignedInt(System.totalMemory);
+                    _socket.flush();
                     return;
                     
-                case "START SAMPLING":
-                    startSampling();
-                    _socket.send("OK START " + new Date().time );
-                    return;
-                    
-                case "PAUSE SAMPLING":
-                    pauseSampling();
-                    _socket.send("OK PAUSE");
-                    return;
-                    
-                case "STOP SAMPLING":
-                    stopSampling();
-                    _socket.send("OK STOP");
-                    return;
-                    
-                case "GET SAMPLES":
-                    var count:int = getSampleCount();
-                    
-                    trace(PREFIX, "Sending", count, "samples");
-
-                    _socket.send("SENDING SAMPLES: " + count);
-                    
-                    var samples:Array = []
-                    
-                    for each (var s:Sample in getSamples()) {
-                        samples.push(s);
-                    }
-                    
-                    var batchSize:int = 1000;
-                    var offset:int = 0;
-                    
-                    _sampleSender = new Timer(100, Math.ceil(count / batchSize) );
-                    _sampleSender.addEventListener(TimerEvent.TIMER, function(e:Event):void {
-                        var toSend:int = Math.min(count, offset + batchSize);
-                        
-                        trace(PREFIX, "Sending", offset, "-", toSend);
-                        
-                        for( var i:int = offset; i < toSend; i++ ) {
-                            _socket.send(sampleToString(samples[i]));
-                            
-                            if( i % 100 == 0) {
-                                trace(PREFIX, "Sent", i, "/", toSend);
-                            }
-                        }
-                        
-                        offset += batchSize;
-                    });
-                    _sampleSender.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:Event):void {
-                        trace(PREFIX, "Done sending samples");
-
-                        _sampleSender = null;
-                    });
-                    _sampleSender.start();
-                    
-                    return;
-                    
-                case "CLEAR SAMPLES":
-                    clearSamples();
-                    
-                    _socket.send("OK CLEARED");
-                    return;
+//                case "START SAMPLING":
+//                    startSampling();
+//                    _socket.send("OK START " + new Date().time );
+//                    return;
+//                    
+//                case "PAUSE SAMPLING":
+//                    pauseSampling();
+//                    _socket.send("OK PAUSE");
+//                    return;
+//                    
+//                case "STOP SAMPLING":
+//                    stopSampling();
+//                    _socket.send("OK STOP");
+//                    return;
+//                    
+//                case "GET SAMPLES":
+//                    var count:int = getSampleCount();
+//                    
+//                    trace(PREFIX, "Sending", count, "samples");
+//
+//                    _socket.send("SENDING SAMPLES: " + count);
+//                    
+//                    var samples:Array = []
+//                    
+//                    for each (var s:Sample in getSamples()) {
+//                        samples.push(s);
+//                    }
+//                    
+//                    var batchSize:int = 1000;
+//                    var offset:int = 0;
+//                    
+//                    _sampleSender = new Timer(100, Math.ceil(count / batchSize) );
+//                    _sampleSender.addEventListener(TimerEvent.TIMER, function(e:Event):void {
+//                        var toSend:int = Math.min(count, offset + batchSize);
+//                        
+//                        trace(PREFIX, "Sending", offset, "-", toSend);
+//                        
+//                        for( var i:int = offset; i < toSend; i++ ) {
+//                            _socket.send(sampleToString(samples[i]));
+//                            
+//                            if( i % 100 == 0) {
+//                                trace(PREFIX, "Sent", i, "/", toSend);
+//                            }
+//                        }
+//                        
+//                        offset += batchSize;
+//                    });
+//                    _sampleSender.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:Event):void {
+//                        trace(PREFIX, "Done sending samples");
+//
+//                        _sampleSender = null;
+//                    });
+//                    _sampleSender.start();
+//                    
+//                    return;
+//                    
+//                case "CLEAR SAMPLES":
+//                    clearSamples();
+//                    
+//                    _socket.send("OK CLEARED");
+//                    return;
                     
                 default:
-                    _socket.send("UNKNOWN COMMAND");
+                    _socket.writeShort(0x4200);
+                    _socket.writeUTF("UNKNOWN COMMAND");
+                    _socket.flush();
                     return;
     	    }
     	}
@@ -172,14 +181,14 @@ package {
     	   _connected = true;
 
     	   trace(PREFIX, "Connected");
-
-           _socket.writeByte(42);
-           _socket.writeByte(01);
-
-           var seconds:uint = _referenceDate / 1000;
            
+           var now:Date = new Date();
+           var seconds:uint = now / 1000;
+
+           _socket.writeShort(0x4201);
            _socket.writeUnsignedInt(seconds);
-           _socket.writeShort(_referenceDate - (seconds * 1000));
+           _socket.writeShort(now - (seconds * 1000));
+           _socket.writeUnsignedInt(getTimer());
            _socket.flush();
     	}
     	
