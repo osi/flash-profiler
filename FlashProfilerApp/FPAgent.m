@@ -8,6 +8,13 @@
 
 #import "FPAgent.h"
 
+short read_short(const unsigned char *bytes, unsigned int offset) {
+    return (bytes[offset] << 8) + bytes[offset+1];
+}
+
+unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) {
+    return (bytes[offset] << 24) + (bytes[offset+1] << 16) + (bytes[offset+2] << 8) + bytes[offset+3];
+}
 
 @implementation FPAgent
 
@@ -64,26 +71,27 @@
 
 -(void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
     switch (tag) {
-        case 1L: {
-            const unsigned char *bytes = [data bytes];
-            
-            short msg_type = (bytes[0] << 8) + bytes[1];
-            unsigned int seconds = (bytes[2] << 24) + (bytes[3] << 16) + (bytes[4] << 8) + bytes[5];
-            short ms = (bytes[6] << 8) + bytes[7];
-            unsigned int counter = (bytes[8] << 24) + (bytes[9] << 16) + (bytes[10] << 8) + bytes[11];
-            
-            NSLog(@"Received message of type %i", msg_type);
-            NSLog(@"Remote time is %i %i", seconds, ms);
-            NSLog(@"Counter is %i", counter);
-            
-            NSTimeInterval secondsSince1970 = seconds; // + (ms / 1000.0);
-
-            NSLog(@"secondsSince1970 is %f", secondsSince1970);
-            
-            NSDate *start = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
-            
-            NSLog(@"Remote time is %@", start);
-        }
+        case 1L: 
+            {
+                const unsigned char *bytes = [data bytes];
+                
+                short msg_type = read_short(bytes, 0);
+                
+                if( msg_type != 0x4201 ) {
+                    NSLog(@"Received invalid message type %i", msg_type);
+                    [_socket disconnect];
+                    return;
+                }
+                
+                unsigned int seconds = read_unsigned_int(bytes,2);
+                short ms = read_short(bytes, 6);
+                unsigned int counter = read_unsigned_int(bytes,8);
+                
+                NSTimeInterval secondsSince1970 = seconds + (ms / 1000.0);
+                NSDate *start = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
+                
+                NSLog(@"Remote time is %@", start);
+            }
             break;
         default:
             NSLog(@"Unknown tag value: %i", tag);
