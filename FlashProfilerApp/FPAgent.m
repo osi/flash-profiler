@@ -39,6 +39,66 @@
     _delegate = delegate;
 }
 
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port {
+    NSLog(@"Accepted conection on %@:%i", host, port);
+    
+    [_socket readDataToLength:12 withTimeout:5 tag:1UL];
+    
+/*
+    NSLog "Accepted connection from #{host}:#{port}"
+
+    hello_msg = read_message
+    
+    if "AGENT READY" != hello_msg
+      @socket.disconnect
+    else
+      @sampling_state = :stopped
+
+      @tracker.add self
+
+      NSLog "Agent ready"
+    end
+ 
+ */
+}
+
+-(void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
+    switch (tag) {
+        case 1L: {
+            const unsigned char *bytes = [data bytes];
+            
+            short msg_type = (bytes[0] << 8) + bytes[1];
+            unsigned int seconds = (bytes[2] << 24) + (bytes[3] << 16) + (bytes[4] << 8) + bytes[5];
+            short ms = (bytes[6] << 8) + bytes[7];
+            unsigned int counter = (bytes[8] << 24) + (bytes[9] << 16) + (bytes[10] << 8) + bytes[11];
+            
+            NSLog(@"Received message of type %i", msg_type);
+            NSLog(@"Remote time is %i %i", seconds, ms);
+            NSLog(@"Counter is %i", counter);
+            
+            NSTimeInterval secondsSince1970 = seconds; // + (ms / 1000.0);
+
+            NSLog(@"secondsSince1970 is %f", secondsSince1970);
+            
+            NSDate *start = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
+            
+            NSLog(@"Remote time is %@", start);
+        }
+            break;
+        default:
+            NSLog(@"Unknown tag value: %i", tag);
+            break;
+    }
+}
+
+-(void)onSocketDidDisconnect:(AsyncSocket *)sock {
+    NSLog(@"Socket closed");
+}
+
+-(void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
+    NSLog(@"Will be closing due to %@", err);
+}
+
 // TODO all the action methods need to be lazy and return stuff
 // via the delgate
 
