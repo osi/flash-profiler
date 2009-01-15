@@ -31,7 +31,7 @@ package {
     	    _host = loaderInfo.parameters["host"] || HOST;
     	    _port = loaderInfo.parameters["port"] || PORT;
 	    
-	        _socket = new XMLSocket();
+	        _socket = new Socket();
 
             _socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, fail);
             _socket.addEventListener(IOErrorEvent.IO_ERROR, fail);
@@ -182,14 +182,17 @@ package {
 
     	   trace(PREFIX, "Connected");
            
-           var now:Date = new Date();
+           var now:uint = new Date().time;
            var seconds:uint = now / 1000;
+           var timer:uint = getTimer();
 
            _socket.writeShort(0x4201);
            _socket.writeUnsignedInt(seconds);
            _socket.writeShort(now - (seconds * 1000));
-           _socket.writeUnsignedInt(getTimer());
+           _socket.writeUnsignedInt(timer);
            _socket.flush();
+           
+           trace(PREFIX, seconds, now - (seconds * 1000), timer);
     	}
     	
     	private function close(e:Event):void {
@@ -199,9 +202,10 @@ package {
     	}
 
     	private function fail(e:Event):void {
+            trace(PREFIX, "Communication failure", e);
+
     	    _socket.close();
     	    _connected = false;
-            trace(PREFIX, "Communication failure", e);
     	}
     }
 }
