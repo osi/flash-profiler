@@ -182,7 +182,7 @@ package {
 
     	   trace(PREFIX, "Connected");
            
-           var now:uint = new Date().time;
+           var now:Number = new Date().getTime();
            var seconds:uint = now / 1000;
            var timer:uint = getTimer();
 
@@ -192,7 +192,7 @@ package {
            _socket.writeUnsignedInt(timer);
            _socket.flush();
            
-           trace(PREFIX, seconds, now - (seconds * 1000), timer);
+           trace(PREFIX, now, seconds, now - (seconds * 1000), timer);
     	}
     	
     	private function close(e:Event):void {
