@@ -13,7 +13,7 @@
 #import "FPIoThread.h"
 
 
-@interface FPAgentController : NSObject <FPNewAgentListenerDelegate> {
+@interface FPAgentController : NSObject <FPAgentDelegate> {
     NSDocumentController *_sessions;
     NSTableView *_table;
     NSMutableArray *_agents;

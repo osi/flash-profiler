@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (id)initWithDelegate:(id)delegate {
+- (id)initWithAgentDelegate:(id)delegate {
     [super init];
     
     _delegate = delegate;
@@ -48,7 +48,8 @@
 - (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket {
     NSLog(@"Will make agent for %@", newSocket);
     
-    [_delegate agentConnected:[[FPAgent alloc] initWithSocket:newSocket]];
+    FPAgent *agent = [[FPAgent alloc] initWithSocket:newSocket];
+    [agent setDelegate:_delegate];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {

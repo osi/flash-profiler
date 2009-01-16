@@ -90,7 +90,9 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
                 NSTimeInterval secondsSince1970 = seconds + (ms / 1000.0);
                 NSDate *start = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
                 
-                NSLog(@"Remote time is %@", start);
+                NSLog(@"Agent Ready. Remote time is %@", start);
+                
+                [_delegate agentConnected:self];
             }
             break;
         default:

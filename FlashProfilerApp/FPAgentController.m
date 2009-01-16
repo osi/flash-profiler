@@ -44,7 +44,7 @@
     //# url = NSURL.fileURLWithPath "~/Desktop/modo2.profiler-session-data".stringByExpandingTildeInPath
     //# sessions.openDocumentWithContentsOfURL url, display: true, error: nil
 
-    FPNewAgentListener *listener = [[FPNewAgentListener alloc] initWithDelegate:self];
+    FPNewAgentListener *listener = [[FPNewAgentListener alloc] initWithAgentDelegate:self];
     
     _thread = [[FPIoThread alloc] initWithListener:listener];
     [_thread start];

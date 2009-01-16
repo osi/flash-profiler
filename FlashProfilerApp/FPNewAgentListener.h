@@ -10,13 +10,6 @@
 #import "AsyncSocket.h"
 #import "FPAgent.h"
 
-@protocol FPNewAgentListenerDelegate
-
-- (void)agentConnected:(FPAgent *)agent;
-
-@end
-
-
 @interface FPNewAgentListener : NSObject {
     id _delegate;
     AsyncSocket *_socket;
@@ -27,7 +20,7 @@
 @property(retain) NSString *host;
 @property NSUInteger port;
 
-- (id)initWithDelegate:(id)delegate;
+- (id)initWithAgentDelegate:(id)delegate;
 - (void)start;
 
 @end

@@ -9,13 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "AsyncSocket.h"
 
-@protocol FPAgentDelegate
-
-// TODO
-
-@end
-
-
 @interface FPAgent : NSObject {
     AsyncSocket *_socket;
     id _delegate;
@@ -32,5 +25,13 @@
 //- (IBAction)pauseSampling;
 //- (IBAction)stopSampling;
 //- (BOOL)isSampling;
+
+@end
+
+@protocol FPAgentDelegate
+
+@optional
+
+- (void)agentConnected:(FPAgent *)agent;
 
 @end
