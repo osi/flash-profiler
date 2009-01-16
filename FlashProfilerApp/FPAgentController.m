@@ -21,7 +21,7 @@
     NSInteger row = [_table selectedRow];
     
     if( row >= 0 ) {
-        FPAgent *agent; // TODO look up agent
+        FPAgent *agent = [_agents objectAtIndex:[_agentsController selectionIndex]];
         
         NSLog(@"Will create session for %@", agent);
         
