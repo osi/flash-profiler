@@ -9,20 +9,23 @@
 #import <Cocoa/Cocoa.h>
 #import "FPAgent.h"
 #import "FPSampleSet.h"
+#import "FPIoThread.h"
 
 
-@interface FPProfilingSession : NSDocument <FPAgentDelegate> {
+@interface FPProfilingSession : NSDocument {
     FPAgent *_agent;
+    FPIoThread *_ioThread;
     NSMutableArray *_memoryUsage;
     NSMutableArray *_sampleSets;
     FPSampleSet *_viewingSampleSet;
 }
 
-@property FPAgent *agent;
+@property(readonly) FPAgent *agent;
+@property(readonly) FPIoThread *ioThread;
 @property(retain) NSMutableArray *memoryUsage;
 @property(retain) NSMutableArray *sampleSets;
 
-- (id)initWithAgent:(FPAgent *)agent;
+- (id)initWithAgent:(FPAgent *)agent ioThread:(FPIoThread *)ioThread;
 
 - (void)addSampleSet:(FPSampleSet *)set;
 

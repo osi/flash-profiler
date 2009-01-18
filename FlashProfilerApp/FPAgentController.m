@@ -25,15 +25,18 @@
         
         NSLog(@"Will create session for %@", agent);
         
-        FPProfilingSession *session = [[FPProfilingSession alloc] initWithAgent: agent];
+        FPProfilingSession *session = [[FPProfilingSession alloc] initWithAgent:agent ioThread:_thread];
         
         [_sessions addDocument: session];
         [session makeWindowControllers];
         [session showWindows];
+        
+        // TODO remove the agent from the controller
     } 
 }
 
 + (void)initialize {
+    
     [NSValueTransformer setValueTransformer:[[NonZeroLengthArrayValueTransformer alloc] init] 
                                     forName:@"NonZeroLengthArray"];
 }
@@ -51,7 +54,11 @@
 }
 
 - (void)agentConnected:(FPAgent *)agent {
-    [_agentsController performSelectorOnMainThread:@selector(addObject:) withObject:agent waitUntilDone:YES];
+    [_agentsController performSelectorOnMainThread:@selector(addObject:) withObject:agent waitUntilDone:NO];
+}
+
+- (void)agentDisconnected:(FPAgent *)agent withReason:(NSError *)reason {
+    [_agentsController performSelectorOnMainThread:@selector(removeObject:) withObject:agent waitUntilDone:NO];
 }
 
 

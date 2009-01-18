@@ -7,12 +7,47 @@
 //
 
 #import "FPProfilingSessionController.h"
-
+#import "FPProfilingSession.h"
 
 @implementation FPProfilingSessionController
 
-@synthesize collectButton;
-@synthesize cpuView;
+@synthesize collectButton = _collectButton;
+@synthesize cpuView = _cpuView;
+
+- (void)awakeFromNib {
+    _agent = [[self document] agent];
+    _ioThread = [[self document] ioThread];
+    
+    if( _agent != nil ) {
+        [_agent setDelegate:self];
+        [self performSelector:@selector(setupTimer) onThread:_ioThread withObject:nil waitUntilDone:NO];
+    }
+}
+
+- (void)setupTimer {
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 
+                                              target:_agent 
+                                            selector:@selector(memoryUsage) 
+                                            userInfo:nil 
+                                             repeats:YES];
+}
+
+- (void)agentDisconnected:(FPAgent *)agent withReason:(NSError *)reason {
+    NSLog(@"Invaliding timer since agent disconnected");
+    [_timer invalidate];
+}
+
+- (void)memoryUsage:(FPMemoryUsage *)usage forAgent:(FPAgent *)agent {
+    NSLog(@"%@", usage);
+    
+//    document.memory_usage.push usage
+//    document.updateChangeCount NSChangeDone
+//    
+//    memory_graph.reloadData
+//    
+//    frame = memory_graph.frame
+//    memory_graph_scroll.documentView.scrollPoint NSPoint.new(frame.size.width + frame.origin.x, frame.origin.y)    
+}
 
 /*
  def awakeFromNib

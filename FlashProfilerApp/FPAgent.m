@@ -50,50 +50,58 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     NSLog(@"Accepted conection on %@:%i", host, port);
     
     [_socket readDataToLength:12 withTimeout:5 tag:1UL];
-    
-/*
-    NSLog "Accepted connection from #{host}:#{port}"
-
-    hello_msg = read_message
-    
-    if "AGENT READY" != hello_msg
-      @socket.disconnect
-    else
-      @sampling_state = :stopped
-
-      @tracker.add self
-
-      NSLog "Agent ready"
-    end
- 
- */
 }
 
--(void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
+- (void)readHello:(NSData *)data {
+    const unsigned char *bytes = [data bytes];
+    short msg_type = read_short(bytes, 0);
+    
+    if( msg_type != 0x4201 ) {
+        NSLog(@"Received invalid message type %i", msg_type);
+        [_socket disconnect];
+        return;
+    }
+    
+    unsigned int seconds = read_unsigned_int(bytes,2);
+    short ms = read_short(bytes, 6);
+    unsigned int counter = read_unsigned_int(bytes,8);
+    
+    NSTimeInterval secondsSince1970 = seconds + ((ms - counter) / 1000.0);
+    _remoteTime = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
+    
+    NSLog(@"Agent Ready. Remote time is %@", _remoteTime);
+    
+    // TODO       @sampling_state = :stopped
+    
+    [_delegate agentConnected:self];    
+}
+
+- (void)readMemoryUsage:(NSData *)data {
+    const unsigned char *bytes = [data bytes];
+    short msg_type = read_short(bytes, 0);
+    
+    if( msg_type != 0x4203 ) {
+        NSLog(@"Expected memory usage, got %i", msg_type);
+        [_socket disconnect];
+        return;
+    }
+    
+    unsigned int offset = read_unsigned_int(bytes,2);
+    unsigned int usage = read_unsigned_int(bytes,6);
+    
+    NSDate *timestamp = [_remoteTime addTimeInterval:offset / 1000.0];
+    
+    [_delegate memoryUsage:[[FPMemoryUsage alloc] initWithUsage:usage at:timestamp] 
+                  forAgent:self];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     switch (tag) {
-        case 1L: 
-            {
-                const unsigned char *bytes = [data bytes];
-                
-                short msg_type = read_short(bytes, 0);
-                
-                if( msg_type != 0x4201 ) {
-                    NSLog(@"Received invalid message type %i", msg_type);
-                    [_socket disconnect];
-                    return;
-                }
-                
-                unsigned int seconds = read_unsigned_int(bytes,2);
-                short ms = read_short(bytes, 6);
-                unsigned int counter = read_unsigned_int(bytes,8);
-                
-                NSTimeInterval secondsSince1970 = seconds + (ms / 1000.0);
-                NSDate *start = [NSDate dateWithTimeIntervalSince1970: secondsSince1970];
-                
-                NSLog(@"Agent Ready. Remote time is %@", start);
-                
-                [_delegate agentConnected:self];
-            }
+        case 1ul:
+            [self readHello:data];
+            break;
+        case 2ul:
+            [self readMemoryUsage:data];
             break;
         default:
             NSLog(@"Unknown tag value: %i", tag);
@@ -101,12 +109,26 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     }
 }
 
--(void)onSocketDidDisconnect:(AsyncSocket *)sock {
+- (void)onSocketDidDisconnect:(AsyncSocket *)sock {
     NSLog(@"Socket closed");
 }
 
--(void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
+- (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
     NSLog(@"Will be closing due to %@", err);
+    
+    [_delegate agentDisconnected:self withReason:err];
+}
+
+- (void)memoryUsage {
+    [_socket writeData:[NSData dataWithBytes:"\x42\x02" length:2] withTimeout:5 tag:2ul];        
+}
+
+- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    switch (tag) {
+        case 2ul:
+            [_socket readDataToLength:10 withTimeout:5 tag:tag];
+            break;
+    }    
 }
 
 // TODO all the action methods need to be lazy and return stuff

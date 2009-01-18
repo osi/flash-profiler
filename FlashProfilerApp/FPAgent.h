@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AsyncSocket.h"
+#import "FPMemoryUsage.h"
 
 @interface FPAgent : NSObject {
     AsyncSocket *_socket;
     id _delegate;
+    NSDate *_remoteTime;
 }
 
 - (id)initWithSocket:(AsyncSocket *)socket;
@@ -19,7 +21,8 @@
 - (BOOL)isConnected;
 
 - (void)setDelegate:(id)delegate;
-//- (FPMemoryUsage *)memoryUsage;
+
+- (void)memoryUsage;
 //- (FPSampleSet *)samples;
 //- (IBAction)startSampling;
 //- (IBAction)pauseSampling;
@@ -30,8 +33,12 @@
 
 @protocol FPAgentDelegate
 
+- (void)agentDisconnected:(FPAgent *)agent withReason:(NSError *)reason;
+
 @optional
 
 - (void)agentConnected:(FPAgent *)agent;
+
+- (void)memoryUsage:(FPMemoryUsage *)usage forAgent:(FPAgent *)agent;
 
 @end

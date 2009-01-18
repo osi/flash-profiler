@@ -9,22 +9,25 @@
 #import "FPProfilingSession.h"
 #import "FPAgent.h"
 #import "FPSampleSet.h"
+#import "FPProfilingSessionController.h"
 
 
 @implementation FPProfilingSession
 
 @synthesize agent = _agent;
+@synthesize ioThread = _ioThread;
 @synthesize memoryUsage = _memoryUsage;
 @synthesize sampleSets = _sampleSets;
 
 - (id)init {
-    return [self initWithAgent: nil];
+    return [self initWithAgent:nil ioThread:nil];
 }
 
-- (id)initWithAgent:(FPAgent *)agent {
+- (id)initWithAgent:(FPAgent *)agent ioThread:(FPIoThread *)ioThread {
     [super init];
 
     _agent = agent;
+    _ioThread = ioThread;
     _memoryUsage = [NSMutableArray arrayWithCapacity:128];
     _sampleSets = [NSMutableArray arrayWithCapacity:8];
     _viewingSampleSet = nil;
@@ -42,7 +45,7 @@
 // NSDoument overrides
 
 - (void)makeWindowControllers {
-//    addWindowController ProfilingSessionController.alloc.initWithWindowNibName("ProfilingSession")
+    [self addWindowController:[[FPProfilingSessionController alloc] initWithWindowNibName:@"ProfilingSession"]];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
