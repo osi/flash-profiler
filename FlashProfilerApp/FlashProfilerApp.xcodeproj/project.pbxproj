@@ -15,7 +15,7 @@
 		6C34FD890F0B160700F3A3A8 /* delete_object_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */; };
 		6C34FD8A0F0B160700F3A3A8 /* new_object_sample.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */; };
 		6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD850F0B160700F3A3A8 /* sample_parser.rb */; };
-		6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */; };
+		6C4E1F230F2437F60054EE15 /* FPGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E1F220F2437F60054EE15 /* FPGraphView.m */; };
 		6C5D7FA40F15BFB40041FF31 /* FPProfilingSessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */; };
 		6C5D7FAE0F15C0D60041FF31 /* FPSampleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FAD0F15C0D60041FF31 /* FPSampleSet.m */; };
 		6C5D7FB40F15C4300041FF31 /* FPMemoryUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D7FB30F15C4300041FF31 /* FPMemoryUsage.m */; };
@@ -67,7 +67,8 @@
 		6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = delete_object_sample.rb; sourceTree = "<group>"; };
 		6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = new_object_sample.rb; sourceTree = "<group>"; };
 		6C34FD850F0B160700F3A3A8 /* sample_parser.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sample_parser.rb; sourceTree = "<group>"; };
-		6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = graph_view.rb; sourceTree = "<group>"; };
+		6C4E1F210F2437F60054EE15 /* FPGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGraphView.h; sourceTree = "<group>"; };
+		6C4E1F220F2437F60054EE15 /* FPGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGraphView.m; sourceTree = "<group>"; };
 		6C5D7FA20F15BFB40041FF31 /* FPProfilingSessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPProfilingSessionController.h; sourceTree = "<group>"; };
 		6C5D7FA30F15BFB40041FF31 /* FPProfilingSessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPProfilingSessionController.m; sourceTree = "<group>"; };
 		6C5D7FAC0F15C0D60041FF31 /* FPSampleSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPSampleSet.h; sourceTree = "<group>"; };
@@ -143,9 +144,10 @@
 				6CAEED040F18582D0013E786 /* FPStackFrame.m */,
 				6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */,
 				6C34FD830F0B160700F3A3A8 /* delete_object_sample.rb */,
-				6C34FDAB0F0E92A800F3A3A8 /* graph_view.rb */,
 				6C34FD840F0B160700F3A3A8 /* new_object_sample.rb */,
 				6C34FD850F0B160700F3A3A8 /* sample_parser.rb */,
+				6C4E1F210F2437F60054EE15 /* FPGraphView.h */,
+				6C4E1F220F2437F60054EE15 /* FPGraphView.m */,
 			);
 			fileEncoding = 4;
 			lineEnding = 0;
@@ -272,7 +274,6 @@
 				6C34FD890F0B160700F3A3A8 /* delete_object_sample.rb in Resources */,
 				6C34FD8A0F0B160700F3A3A8 /* new_object_sample.rb in Resources */,
 				6C34FD8B0F0B160700F3A3A8 /* sample_parser.rb in Resources */,
-				6C34FDAC0F0E92A800F3A3A8 /* graph_view.rb in Resources */,
 				6CD1CA6F0F14661400912223 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +301,7 @@
 				6CAEEEF50F19B1C30013E786 /* FPNewAgentListener.m in Sources */,
 				6CA825740F19BEB5006F55F6 /* AsyncSocket.m in Sources */,
 				6C26870F0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m in Sources */,
+				6C4E1F230F2437F60054EE15 /* FPGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +348,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;

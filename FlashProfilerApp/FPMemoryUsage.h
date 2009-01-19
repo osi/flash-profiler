@@ -11,12 +11,12 @@
 
 @interface FPMemoryUsage : NSObject <NSCoding> {
     NSDate *at;
-    int usage;
+    NSUInteger usage;
 }
 
 @property(readonly) NSDate *at;
-@property(readonly) int usage;
+@property(readonly) NSUInteger usage;
 
-- (id)initWithUsage:(int)theUsage at:(NSDate *)theDate;
+- (id)initWithUsage:(NSUInteger)theUsage at:(NSDate *)theDate;
 
 @end

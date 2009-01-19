@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (id)initWithUsage:(int)theUsage at:(NSDate *)theDate {
+- (id)initWithUsage:(NSUInteger)theUsage at:(NSDate *)theDate {
     [super init];
     
     usage = theUsage;
