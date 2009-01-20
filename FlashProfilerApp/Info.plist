@@ -7,18 +7,18 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>profiler-session-data</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Session</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 			<key>NSDocumentClass</key>
-			<string>ProfilingSession</string>
+			<string>FPProfilingSession</string>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>Binary</string>
 		</dict>

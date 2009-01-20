@@ -49,20 +49,23 @@
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
-//    TODO
-    //    NSKeyedArchiver.archivedDataWithRootObject [memory_usage, sample_sets]
-
+    NSMutableData *data = [NSMutableData dataWithCapacity:1024];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     
-    return nil;
+    [archiver encodeObject:_memoryUsage forKey:@"memory usage"];
+    [archiver encodeObject:_sampleSets forKey:@"sample sets"];
+    [archiver finishEncoding];
+    
+    return data;
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
-//    TODO
-//    stored = NSKeyedUnarchiver.unarchiveObjectWithData data
-//    @memory_usage = stored[0]
-//    @sample_sets = stored[1]
-//# TODO outError is a Pointer instance.
-//# error = NSError.errorWithDomain NSOSStatusErrorDomain, code: -4, userInfo: nil
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    
+    _memoryUsage = [unarchiver decodeObjectForKey:@"memory usage"];
+    _sampleSets = [unarchiver decodeObjectForKey:@"sample sets"];
+    
+    [unarchiver finishDecoding];
     
     return YES;
 }
