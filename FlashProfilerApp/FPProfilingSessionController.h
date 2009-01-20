@@ -9,18 +9,21 @@
 #import <Cocoa/Cocoa.h>
 #import "FPAgent.h"
 #import "FPIoThread.h"
+#import "FPGraphView.h"
 
 
-@interface FPProfilingSessionController : NSWindowController <FPAgentDelegate> {
-//    memory_graph, :memory_graph_scroll, :cpu_view
+@interface FPProfilingSessionController : NSWindowController <FPAgentDelegate, FPGraphViewDataSource> {
+//    :memory_graph_scroll
     NSToolbarItem *_collectButton;
     NSOutlineView *_cpuView;
     FPAgent *_agent;
     FPIoThread *_ioThread;
     NSTimer *_timer;
+    FPGraphView *_memoryGraph;
 }
 
 @property(retain) IBOutlet NSToolbarItem *collectButton;
 @property IBOutlet NSOutlineView *cpuView;
+@property IBOutlet FPGraphView *memoryGraph;
 
 @end

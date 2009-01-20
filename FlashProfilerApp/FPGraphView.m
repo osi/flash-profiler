@@ -42,6 +42,9 @@ static int SECOND_TICK = 10;
         _needsRedraw = NO;
         _pathHeight = 0;
         _values = [NSArray array];
+        
+        NSSortDescriptor *memoryDescriptor = [[NSSortDescriptor alloc] initWithKey:@"usage" ascending:YES];
+        _valuesSortDescriptors = [NSArray arrayWithObject:memoryDescriptor];
     }
     return self;
 }
@@ -104,10 +107,11 @@ static int SECOND_TICK = 10;
         return;
     }
     
+    NSArray *sorted = [_values sortedArrayUsingDescriptors:_valuesSortDescriptors];
+    NSUInteger min = [[sorted objectAtIndex:0] usage];
+    NSUInteger max = [[sorted lastObject] usage];
+    
     CGFloat yOffset = [self bounds].origin.y;
-    // TODO sort the array, and then get first/last elements
-    NSUInteger min = nil;// TODO calc min
-    NSUInteger max = nil;// TODO calc max
     CGFloat ratio = (_pathHeight - 5) / (max - min);
     CGFloat currentX = [self bounds].origin.x;
     NSUInteger index = 0;

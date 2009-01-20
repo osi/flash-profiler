@@ -16,9 +16,10 @@
     BOOL _needsRedraw;
     CGFloat _pathHeight;
     NSArray *_values;
+    NSArray *_valuesSortDescriptors;
 }
 
-@property id dataSource;
+@property IBOutlet id dataSource;
 
 - (void)reloadData;
 

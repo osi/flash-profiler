@@ -13,6 +13,7 @@
 
 @synthesize collectButton = _collectButton;
 @synthesize cpuView = _cpuView;
+@synthesize memoryGraph = _memoryGraph;
 
 - (void)awakeFromNib {
     _agent = [[self document] agent];
@@ -22,6 +23,20 @@
         [_agent setDelegate:self];
         [self performSelector:@selector(setupTimer) onThread:_ioThread withObject:nil waitUntilDone:NO];
     }
+    
+/*
+ @viewing_sample_set = nil
+ 
+ formatter = NSNumberFormatter.alloc.init
+ formatter.numberStyle = NSNumberFormatterPercentStyle
+ 
+ @cpu_view.tableColumnWithIdentifier("time").dataCell.formatter = formatter
+ 
+ if not document.sample_sets.empty?
+ self.viewing_sample_set = document.sample_sets[0]
+ end
+*/ 
+    [_memoryGraph reloadData];
 }
 
 - (void)setupTimer {
@@ -40,68 +55,23 @@
 - (void)memoryUsage:(FPMemoryUsage *)usage forAgent:(FPAgent *)agent {
     NSLog(@"%@", usage);
     
-//    document.memory_usage.push usage
-//    document.updateChangeCount NSChangeDone
-//    
-//    memory_graph.reloadData
-//    
+    FPProfilingSession *session = [self document];
+    
+    [[session memoryUsage] addObject:usage];
+    [session updateChangeCount:NSChangeDone];
+    
+    [_memoryGraph reloadData];
+    
 //    frame = memory_graph.frame
 //    memory_graph_scroll.documentView.scrollPoint NSPoint.new(frame.size.width + frame.origin.x, frame.origin.y)    
 }
 
+- (NSArray *)valuesForGraphView:(FPGraphView *)graphView {
+    FPProfilingSession *session = [self document];
+    return [[session memoryUsage] copy];
+}
+
 /*
- def awakeFromNib
- @viewing_sample_set = nil
- @agent = document.agent
- 
- if not @agent.nil?
- @timer = NSTimer.scheduledTimerWithTimeInterval 1, 
- target: self, 
- selector: :get_memory_usage, 
- userInfo: nil, 
- repeats: true
- end
- 
- formatter = NSNumberFormatter.alloc.init
- formatter.numberStyle = NSNumberFormatterPercentStyle
- 
- @cpu_view.tableColumnWithIdentifier("time").dataCell.formatter = formatter
- 
- if not document.sample_sets.empty?
- self.viewing_sample_set = document.sample_sets[0]
- end
- 
- memory_graph.reloadData
- end
- 
- def get_memory_usage
- begin
- usage = @agent.memory_usage
- rescue Exception => e
- NSLog "Memory retrieval failed. #{e}"
- 
- @timer.invalidate
- 
- return
- end
- 
- if document.nil?
- # FIXME putting this in a 'dealloc' seems to kill things
- @timer.invalidate
- return
- end
- 
- document.memory_usage.push usage
- document.updateChangeCount NSChangeDone
- 
- memory_graph.reloadData
- 
- frame = memory_graph.frame
- memory_graph_scroll.documentView.scrollPoint NSPoint.new(frame.size.width + frame.origin.x, frame.origin.y)
- 
- NSLog "#{usage}"
- end
- 
  def collect_button_action(sender)
  if @agent.sampling?
  @agent.pause_sampling
@@ -172,13 +142,6 @@
  item.nil? ? @viewing_sample_set.call_tree.root : item
  end  
  
- public
- 
- # GraphView delegate
- 
- def valuesForGraphView(view)
- document.memory_usage
- end 
 */ 
 
 @end
