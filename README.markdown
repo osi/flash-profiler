@@ -9,7 +9,6 @@ this project aims to develop a set of open-source tools for working with the
 prerequisites
 -------------
 
-1. [MacRuby](http://macruby.org)
 1. Mac OS X 10.5
 1. [Flex SDK](http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK)
 
