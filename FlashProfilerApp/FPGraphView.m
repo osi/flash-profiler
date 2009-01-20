@@ -27,8 +27,6 @@ static int SECOND_TICK = 10;
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
-
         _valuePath = [NSBezierPath bezierPath];
         _valuePath.lineWidth = 2.0;
         _valuePath.lineJoinStyle = NSRoundLineJoinStyle;
