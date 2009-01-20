@@ -11,8 +11,8 @@
 
 @implementation FPMemoryUsage
 
-@synthesize at;
-@synthesize usage;
+@synthesize at = _at;
+@synthesize usage = _usage;
 
 - (id)init {
     [self dealloc];
@@ -24,35 +24,31 @@
     return nil;
 }
 
-- (id)initWithUsage:(NSUInteger)theUsage at:(NSDate *)theDate {
+- (id)initWithUsage:(NSUInteger)usage at:(NSDate *)date {
     [super init];
     
-    usage = theUsage;
-    at = theDate;
+    _usage = usage;
+    _at = date;
     
     return self;
 }
 
 - (NSString *)description {
-    return [[NSString alloc] initWithFormat:@"[MemoryUsage usage=%d, at %@]", usage, at];
+    return [[NSString alloc] initWithFormat:@"[MemoryUsage usage=%d, at %@]", _usage, _at];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
     [super init];
     
-    // TODO    
-//    @at = Time.at coder.decodeInt64ForKey("at_sec"), coder.decodeInt64ForKey("at_usec")
-//    @usage = coder.decodeInt64ForKey("usage")
-    
+    _at = [coder decodeObjectForKey:@"date"];
+    _usage = [coder decodeIntegerForKey:@"usage"];
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    //    TODO
-//    coder.encodeInt64 at.sec, forKey: "at_sec"
-//    coder.encodeInt64 at.usec, forKey: "at_usec"
-//    coder.encodeInt64 usage, forKey: "usage"
+    [coder encodeObject:_at forKey:@"date"];
+    [coder encodeInteger:_usage forKey:@"usage"];
 }
 
 @end
