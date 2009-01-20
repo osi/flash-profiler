@@ -22,6 +22,8 @@
     
     if( row >= 0 ) {
         FPAgent *agent = [_agents objectAtIndex:[_agentsController selectionIndex]];
+
+        [_agentsController removeObject:agent];
         
         NSLog(@"Will create session for %@", agent);
         
@@ -30,8 +32,6 @@
         [_sessions addDocument: session];
         [session makeWindowControllers];
         [session showWindows];
-        
-        // TODO remove the agent from the controller
     } 
 }
 
