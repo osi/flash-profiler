@@ -111,8 +111,9 @@ static int SECOND_TICK = 10;
     NSUInteger min = [[sorted objectAtIndex:0] usage];
     NSUInteger max = [[sorted lastObject] usage];
     
-    CGFloat yOffset = [self bounds].origin.y;
-    CGFloat ratio = (_pathHeight - 5) / (max - min);
+    CGFloat yOffset = [self bounds].origin.y + 2.5;
+    NSUInteger delta = max - min;
+    CGFloat ratio = 0 == delta ? 1 : (_pathHeight - 5) / delta;
     CGFloat currentX = [self bounds].origin.x;
     NSUInteger index = 0;
     
