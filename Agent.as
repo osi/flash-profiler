@@ -59,22 +59,22 @@ package {
                     _socket.writeUnsignedInt(System.totalMemory);
                     _socket.flush();
                     return;
+                case 0x4204:
+                    startSampling();
+                    _socket.writeShort(0x4205);
+                    _socket.flush();
+                    return;
+                case 0x4206:
+                    pauseSampling();
+                    _socket.writeShort(0x4207);
+                    _socket.flush();
+                    return;
+                case 0x4208:
+                    stopSampling();
+                    _socket.writeShort(0x4209);
+                    _socket.flush();
+                    return;
                     
-//                case "START SAMPLING":
-//                    startSampling();
-//                    _socket.send("OK START " + new Date().time );
-//                    return;
-//                    
-//                case "PAUSE SAMPLING":
-//                    pauseSampling();
-//                    _socket.send("OK PAUSE");
-//                    return;
-//                    
-//                case "STOP SAMPLING":
-//                    stopSampling();
-//                    _socket.send("OK STOP");
-//                    return;
-//                    
 //                case "GET SAMPLES":
 //                    var count:int = getSampleCount();
 //                    

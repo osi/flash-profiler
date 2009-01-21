@@ -27,8 +27,16 @@ Agent to Controller
    - **03** - Current memory usage of the client.
       - 4 bytes indicating the number of milliseconds since the "base time" (unsigned)
       - 4 bytes indicating the amount of memory in use (unsigned)
+
+  - **05** - ACK for starting capture of CPU/malloc samples.
+  - **07** - ACK for pausing capture of CPU/malloc samples.
+  - **09** - ACK for stopping capture of CPU/malloc samples.
+      
       
 Controller to Agent
 ===================      
    
    - **02** - Request for current memory usage.
+   - **04** - Start capturing CPU/malloc samples.
+   - **06** - Pause capturing CPU/malloc samples.
+   - **08** - Stop capturing CPU/malloc samples.
