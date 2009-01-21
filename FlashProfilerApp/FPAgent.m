@@ -52,16 +52,27 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     [_socket readDataToLength:12 withTimeout:5 tag:1UL];
 }
 
-- (void)readHello:(NSData *)data {
+// TODO category on NSData?
+- (BOOL)expectMessageType:(short)expectedType forData:(NSData *)data {
     const unsigned char *bytes = [data bytes];
     short msg_type = read_short(bytes, 0);
     
-    if( msg_type != 0x4201 ) {
-        NSLog(@"Received invalid message type %i", msg_type);
+    if( msg_type != expectedType ) {
+        // TODO return an error
+        NSLog(@"expected message type %i, but got %i", expectedType, msg_type);
         [_socket disconnect];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)readHello:(NSData *)data {
+    if( ![self expectMessageType:0x4201 forData:data] ) {
         return;
     }
     
+    const unsigned char *bytes = [data bytes];
     unsigned int seconds = read_unsigned_int(bytes,2);
     short ms = read_short(bytes, 6);
     unsigned int counter = read_unsigned_int(bytes,8);
@@ -77,15 +88,11 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)readMemoryUsage:(NSData *)data {
-    const unsigned char *bytes = [data bytes];
-    short msg_type = read_short(bytes, 0);
-    
-    if( msg_type != 0x4203 ) {
-        NSLog(@"Expected memory usage, got %i", msg_type);
-        [_socket disconnect];
+    if( ![self expectMessageType:0x4203 forData:data] ) {
         return;
     }
     
+    const unsigned char *bytes = [data bytes];
     unsigned int offset = read_unsigned_int(bytes,2);
     unsigned int usage = read_unsigned_int(bytes,6);
     
@@ -102,6 +109,21 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             break;
         case 2ul:
             [self readMemoryUsage:data];
+            break;
+        case 4ul:
+            if( [self expectMessageType:0x4205 forData:data] ) {
+                [_delegate startedSampling:self];
+            }
+            break;
+        case 6ul:
+            if( [self expectMessageType:0x4207 forData:data] ) {
+                [_delegate pausedSampling:self];
+            }
+            break;
+        case 8ul:
+            if( [self expectMessageType:0x4209 forData:data] ) {
+                [_delegate stoppedSampling:self];
+            }
             break;
         default:
             NSLog(@"Unknown tag value: %i", tag);
@@ -128,12 +150,30 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
         case 2ul:
             [_socket readDataToLength:10 withTimeout:5 tag:tag];
             break;
+        case 4ul:
+        case 6ul:
+        case 8ul:
+            [_socket readDataToLength:2 withTimeout:5 tag:tag];
+            break;
     }    
 }
 
 - (BOOL)isSampling {
     return Stopped != _samplingState;
 }
+
+- (IBAction)startSampling {
+    [_socket writeData:[NSData dataWithBytes:"\x42\x04" length:2] withTimeout:5 tag:4ul];        
+}
+
+- (IBAction)pauseSampling {
+    [_socket writeData:[NSData dataWithBytes:"\x42\x06" length:2] withTimeout:5 tag:6ul];        
+}
+
+- (IBAction)stopSampling {
+    [_socket writeData:[NSData dataWithBytes:"\x42\x08" length:2] withTimeout:5 tag:8ul];            
+}
+
 
 // TODO all the action methods need to be lazy and return stuff
 // via the delgate

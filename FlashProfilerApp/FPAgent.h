@@ -29,9 +29,10 @@ typedef enum samplingState { Stopped, Paused, Started } SamplingState;
 
 - (BOOL)isSampling;
 //- (FPSampleSet *)samples;
-//- (IBAction)startSampling;
-//- (IBAction)pauseSampling;
-//- (IBAction)stopSampling;
+
+- (IBAction)startSampling;
+- (IBAction)pauseSampling;
+- (IBAction)stopSampling;
 
 @end
 
@@ -44,5 +45,9 @@ typedef enum samplingState { Stopped, Paused, Started } SamplingState;
 - (void)agentConnected:(FPAgent *)agent;
 
 - (void)memoryUsage:(FPMemoryUsage *)usage forAgent:(FPAgent *)agent;
+
+- (void)startedSampling:(FPAgent *)agent;
+- (void)pausedSampling:(FPAgent *)agent;
+- (void)stoppedSampling:(FPAgent *)agent;
 
 @end
