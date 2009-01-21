@@ -21,7 +21,7 @@
     FPGraphView *_memoryGraph;
 }
 
-@property IBOutlet NSToolbarItem *collectButton;
+@property(retain) IBOutlet NSToolbarItem *collectButton;
 @property IBOutlet NSOutlineView *cpuView;
 @property IBOutlet FPGraphView *memoryGraph;
 
