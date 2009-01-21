@@ -25,4 +25,6 @@
 @property IBOutlet NSOutlineView *cpuView;
 @property IBOutlet FPGraphView *memoryGraph;
 
+- (IBAction)collectButtonAction:(id)sender;
+
 @end

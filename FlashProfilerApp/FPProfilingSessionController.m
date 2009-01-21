@@ -71,42 +71,38 @@
     return [[session memoryUsage] copy];
 }
 
+- (IBAction)collectButtonAction:(id)sender {
+    // TODO should make the window "busy" while waiting for the command to finish
+    if( [_agent isSampling] ) {
+//        [_agent pauseSampling];
+        // samples = @agent.samples
+        //[_agent stopSampling];
+        //document.add_sample_set samples
+    } else {
+//        [_agent startSampling];
+    }
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item {
+    if( item == _collectButton ) {
+        if( _agent == nil || ![_agent isConnected]) {
+            [item setLabel:@"Not Connected"];
+            return NO;
+        } else if( [_agent isSampling] ) {
+            [item setLabel:@"Stop"];
+        } else {
+            [item setLabel:@"Collect"];
+        }
+    }
+    
+    return YES;
+}
+
 /*
- def collect_button_action(sender)
- if @agent.sampling?
- @agent.pause_sampling
- 
- samples = @agent.samples
- 
- @agent.stop_sampling
- 
- document.add_sample_set samples
- else
- @agent.start_sampling
- end
- end
- 
  # FIXME temporary code since set-on-load
  def viewing_sample_set=(set)
  @viewing_sample_set = set
  @cpu_view.reloadData
- end
- 
- # NSToolbar Delegate
- 
- def validateToolbarItem(item)
- if item == @collect_button
- if @agent.nil? or @agent.closed?
- @collect_button.label = "Not Connected" 
- 
- return false
- elsif @agent.sampling?
- @collect_button.label = "Stop"
- else
- @collect_button.label = "Collect"
- end
- end
- true
  end
  
  # NSOutlineView delegates
