@@ -62,6 +62,7 @@
     
     [_memoryGraph reloadData];
     
+    // TODO only scroll if we are already scrolled all the way to the right
     NSRect frame = [_memoryGraph frame];
     [_memoryGraph scrollPoint:NSMakePoint(frame.size.width + frame.origin.x, frame.origin.y)];
 }
