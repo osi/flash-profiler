@@ -13,17 +13,18 @@
 
 
 @interface FPProfilingSessionController : NSWindowController <FPAgentDelegate, FPGraphViewDataSource> {
-//    :memory_graph_scroll
     NSToolbarItem *_collectButton;
     NSOutlineView *_cpuView;
     FPAgent *_agent;
     FPIoThread *_ioThread;
     NSTimer *_timer;
     FPGraphView *_memoryGraph;
+    NSScrollView *_memoryGraphScroller;
 }
 
-@property(retain) IBOutlet NSToolbarItem *collectButton;
+@property IBOutlet NSToolbarItem *collectButton;
 @property IBOutlet NSOutlineView *cpuView;
 @property IBOutlet FPGraphView *memoryGraph;
+@property IBOutlet NSScrollView *memoryGraphScroller;
 
 @end

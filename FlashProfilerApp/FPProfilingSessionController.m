@@ -14,6 +14,7 @@
 @synthesize collectButton = _collectButton;
 @synthesize cpuView = _cpuView;
 @synthesize memoryGraph = _memoryGraph;
+@synthesize memoryGraphScroller = _memoryGraphScroller;
 
 - (void)awakeFromNib {
     _agent = [[self document] agent];
