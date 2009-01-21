@@ -14,7 +14,6 @@
 @synthesize collectButton = _collectButton;
 @synthesize cpuView = _cpuView;
 @synthesize memoryGraph = _memoryGraph;
-@synthesize memoryGraphScroller = _memoryGraphScroller;
 
 - (void)awakeFromNib {
     _agent = [[self document] agent];
@@ -63,8 +62,8 @@
     
     [_memoryGraph reloadData];
     
-//    frame = memory_graph.frame
-//    memory_graph_scroll.documentView.scrollPoint NSPoint.new(frame.size.width + frame.origin.x, frame.origin.y)    
+    NSRect frame = [_memoryGraph frame];
+    [_memoryGraph scrollPoint:NSMakePoint(frame.size.width + frame.origin.x, frame.origin.y)];
 }
 
 - (NSArray *)valuesForGraphView:(FPGraphView *)graphView {
