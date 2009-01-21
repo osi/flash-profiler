@@ -71,7 +71,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     NSLog(@"Agent Ready. Remote time is %@", _remoteTime);
     
-    // TODO       @sampling_state = :stopped
+    _samplingState = Stopped;
     
     [_delegate agentConnected:self];    
 }
@@ -129,6 +129,10 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             [_socket readDataToLength:10 withTimeout:5 tag:tag];
             break;
     }    
+}
+
+- (BOOL)isSampling {
+    return Stopped != _samplingState;
 }
 
 // TODO all the action methods need to be lazy and return stuff

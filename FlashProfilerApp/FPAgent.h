@@ -10,10 +10,13 @@
 #import "AsyncSocket.h"
 #import "FPMemoryUsage.h"
 
+typedef enum samplingState { Stopped, Paused, Started } SamplingState;
+
 @interface FPAgent : NSObject {
     AsyncSocket *_socket;
     id _delegate;
     NSDate *_remoteTime;
+    SamplingState _samplingState;
 }
 
 - (id)initWithSocket:(AsyncSocket *)socket;
@@ -23,11 +26,12 @@
 - (void)setDelegate:(id)delegate;
 
 - (void)memoryUsage;
+
+- (BOOL)isSampling;
 //- (FPSampleSet *)samples;
 //- (IBAction)startSampling;
 //- (IBAction)pauseSampling;
 //- (IBAction)stopSampling;
-//- (BOOL)isSampling;
 
 @end
 
