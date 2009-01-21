@@ -67,6 +67,16 @@
     [_memoryGraph scrollPoint:NSMakePoint(frame.size.width + frame.origin.x, frame.origin.y)];
 }
 
+- (void)startedSampling:(FPAgent *)agent {
+    NSLog(@"Started Sampling");
+}
+- (void)pausedSampling:(FPAgent *)agent {
+    NSLog(@"Paused Sampling");
+}
+- (void)stoppedSampling:(FPAgent *)agent {
+    NSLog(@"Stopped Sampling");
+}
+
 - (NSArray *)valuesForGraphView:(FPGraphView *)graphView {
     FPProfilingSession *session = [self document];
     return [[session memoryUsage] copy];
@@ -75,12 +85,12 @@
 - (IBAction)collectButtonAction:(id)sender {
     // TODO should make the window "busy" while waiting for the command to finish
     if( [_agent isSampling] ) {
-//        [_agent pauseSampling];
+        [_agent performSelector:@selector(pauseSampling) onThread:_ioThread withObject:nil waitUntilDone:NO];
         // samples = @agent.samples
         //[_agent stopSampling];
         //document.add_sample_set samples
     } else {
-//        [_agent startSampling];
+        [_agent performSelector:@selector(startSampling) onThread:_ioThread withObject:nil waitUntilDone:NO];
     }
 }
 
