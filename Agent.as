@@ -10,6 +10,7 @@ package {
     import flash.net.Socket;
     import flash.system.System;
     import flash.utils.getTimer;
+    import flash.utils.ByteArray;
     import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.sampler.*;
@@ -24,6 +25,9 @@ package {
 	    private var _socket:Socket;
 	    private var _connected:Boolean;
 	    private var _sampleSender:Timer;
+
+        private var _baseTime:Number;
+	    private var _samplingStarted:Number;
 	
     	public function Agent() {
     	    trace(PREFIX, "Loaded");
@@ -61,6 +65,7 @@ package {
                     return;
                 case 0x4204:
                     startSampling();
+                    _samplingStarted = new Date().getTime() * 1000;
                     _socket.writeShort(0x4205);
                     _socket.flush();
                     return;
@@ -74,47 +79,51 @@ package {
                     _socket.writeShort(0x4209);
                     _socket.flush();
                     return;
+                case 0x420a:
+                    var count:int = getSampleCount();
+
+                    trace(PREFIX, "Sending", count, "samples");
                     
-//                case "GET SAMPLES":
-//                    var count:int = getSampleCount();
-//                    
-//                    trace(PREFIX, "Sending", count, "samples");
-//
-//                    _socket.send("SENDING SAMPLES: " + count);
-//                    
-//                    var samples:Array = []
-//                    
-//                    for each (var s:Sample in getSamples()) {
-//                        samples.push(s);
-//                    }
-//                    
-//                    var batchSize:int = 1000;
-//                    var offset:int = 0;
-//                    
-//                    _sampleSender = new Timer(100, Math.ceil(count / batchSize) );
-//                    _sampleSender.addEventListener(TimerEvent.TIMER, function(e:Event):void {
-//                        var toSend:int = Math.min(count, offset + batchSize);
-//                        
-//                        trace(PREFIX, "Sending", offset, "-", toSend);
-//                        
-//                        for( var i:int = offset; i < toSend; i++ ) {
-//                            _socket.send(sampleToString(samples[i]));
-//                            
-//                            if( i % 100 == 0) {
-//                                trace(PREFIX, "Sent", i, "/", toSend);
-//                            }
-//                        }
-//                        
-//                        offset += batchSize;
-//                    });
-//                    _sampleSender.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:Event):void {
-//                        trace(PREFIX, "Done sending samples");
-//
-//                        _sampleSender = null;
-//                    });
-//                    _sampleSender.start();
-//                    
-//                    return;
+                    _socket.writeShort(0x420b);
+                    _socket.writeUnsignedInt(count);
+                    _socket.flush();
+                    
+                    var samples:Array = []
+               
+                    for each (var s:Sample in getSamples()) {
+                        samples.push(s);
+                    }
+                    
+                    var sampleTimeOffset:Number = _samplingStarted - samples[0].time;
+                    var batchSize:int = 1000;
+                    var offset:int = 0;
+                   
+                    _sampleSender = new Timer(100, Math.ceil(count / batchSize) );
+                    _sampleSender.addEventListener(TimerEvent.TIMER, function(e:Event):void {
+                        var toSend:int = Math.min(count, offset + batchSize);
+                       
+                        trace(PREFIX, "Sending", offset, "-", toSend);
+                        
+                        for( var i:int = offset; i < toSend; i++ ) {
+                            _socket.writeBytes(encodeSample(samples[i], sampleTimeOffset));
+                           
+                            if( i % 100 == 0) {
+                                trace(PREFIX, "Sent", i, "/", toSend);
+                            }
+                        }
+                        
+                        _socket.flush();
+                       
+                        offset += batchSize;
+                    });
+                    _sampleSender.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:Event):void {
+                        trace(PREFIX, "Done sending samples");
+
+                        _sampleSender = null;
+                    });
+                    _sampleSender.start();
+                   
+                    return;
 //                    
 //                case "CLEAR SAMPLES":
 //                    clearSamples();
@@ -130,41 +139,51 @@ package {
     	    }
     	}
     	
-    	private function sampleToString(s:Sample):String {
+    	private function encodeSample(s:Sample, sampleTimeOffset:Number):ByteArray {
+    	    var out:ByteArray = new ByteArray();
+    	    var time:Number = _baseTime * 1000 + (s.time - sampleTimeOffset);
+    	    
             if( s is NewObjectSample ) {
                 var nos:NewObjectSample = s as NewObjectSample;
+            
+                out.writeShort(0x4210);
+                out.writeUnsignedInt(time);
+                out.writeUnsignedInt(nos.id);
+                out.writeUTF(getQualifiedClassName(nos.type));
                 
-                return "[NewObjectSample" +
-                    "\n   time: " + nos.time +
-                    "\n     id: " + nos.id +
-                    "\n   type: " + getQualifiedClassName(nos.type) +
-                    stackToString(nos.stack) +
-                    "\n]";
-                    
             } else if( s is DeleteObjectSample ) {
                 var dos:DeleteObjectSample = s as DeleteObjectSample;
                 
-                return "[DeleteObjectSample" +
-                    "\n   time: " + dos.time +
-                    "\n     id: " + dos.id +
-                    "\n   size: " + dos.size +
-                    stackToString(dos.stack) +
-                    "\n]";
+                out.writeShort(0x4211);
+                out.writeUnsignedInt(time);
+                out.writeUnsignedInt(dos.id);
+                out.writeUnsignedInt(dos.size);
+                
+            } else {
+                out.writeShort(0x4212);
+                out.writeUnsignedInt(time);
             } 
             
-            return "[Sample" +
-                "\n   time: " + s.time +
-                stackToString(s.stack) +
-                "\n]";
-    	}
-    	
-    	private function stackToString(stack:Array):String {
-    	    if( null == stack ) {
-    	        return "";
-    	    }
-    	    
-    	    var separator:String = "\n    ";
-    	    return "\n  stack: " + separator + stack.join(separator);
+            var stack:Array = s.stack;
+            
+            if( null == stack ) {
+                out.writeShort(0);
+            } else {
+                out.writeShort(stack.length);
+
+                for each( var frame:StackFrame in stack ) {
+                    out.writeUTF(frame.name);
+                    
+                    if( frame.file == null ) {
+                        out.writeShort(0);
+                    } else {
+                        out.writeUTF(frame.file);
+                        out.writeUnsignedInt(frame.line);
+                    }
+                }
+            }
+            
+            return out;
     	}
     	
     	private function connect():void {
@@ -182,17 +201,17 @@ package {
 
     	   trace(PREFIX, "Connected");
            
-           var now:Number = new Date().getTime();
-           var seconds:uint = now / 1000;
+           _baseTime = new Date().getTime();
+           var seconds:uint = _baseTime / 1000;
            var timer:uint = getTimer();
 
            _socket.writeShort(0x4201);
            _socket.writeUnsignedInt(seconds);
-           _socket.writeShort(now - (seconds * 1000));
+           _socket.writeShort(_baseTime - (seconds * 1000));
            _socket.writeUnsignedInt(timer);
            _socket.flush();
            
-           trace(PREFIX, now, seconds, now - (seconds * 1000), timer);
+           trace(PREFIX, _baseTime, seconds, _baseTime - (seconds * 1000), timer);
     	}
     	
     	private function close(e:Event):void {
