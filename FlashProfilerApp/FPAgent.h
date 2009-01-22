@@ -16,7 +16,7 @@ typedef enum samplingState { Stopped, Paused, Started } SamplingState;
     AsyncSocket *_socket;
     id _delegate;
     NSDate *_remoteTime;
-    SamplingState _samplingState;
+    volatile SamplingState _samplingState;
 }
 
 - (id)initWithSocket:(AsyncSocket *)socket;

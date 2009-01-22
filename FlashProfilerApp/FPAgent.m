@@ -112,16 +112,19 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             break;
         case 4ul:
             if( [self expectMessageType:0x4205 forData:data] ) {
+                _samplingState = Started;
                 [_delegate startedSampling:self];
             }
             break;
         case 6ul:
             if( [self expectMessageType:0x4207 forData:data] ) {
+                _samplingState = Paused;
                 [_delegate pausedSampling:self];
             }
             break;
         case 8ul:
             if( [self expectMessageType:0x4209 forData:data] ) {
+                _samplingState = Stopped;
                 [_delegate stoppedSampling:self];
             }
             break;
