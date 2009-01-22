@@ -72,6 +72,9 @@
 }
 - (void)pausedSampling:(FPAgent *)agent {
     NSLog(@"Paused Sampling");
+    // samples = @agent.samples
+    //[_agent stopSampling];
+    //document.add_sample_set samples
 }
 - (void)stoppedSampling:(FPAgent *)agent {
     NSLog(@"Stopped Sampling");
@@ -86,9 +89,6 @@
     // TODO should make the window "busy" while waiting for the command to finish
     if( [_agent isSampling] ) {
         [_agent performSelector:@selector(pauseSampling) onThread:_ioThread withObject:nil waitUntilDone:NO];
-        // samples = @agent.samples
-        //[_agent stopSampling];
-        //document.add_sample_set samples
     } else {
         [_agent performSelector:@selector(startSampling) onThread:_ioThread withObject:nil waitUntilDone:NO];
     }
