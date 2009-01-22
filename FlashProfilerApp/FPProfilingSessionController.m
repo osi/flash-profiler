@@ -72,7 +72,8 @@
 }
 - (void)pausedSampling:(FPAgent *)agent {
     NSLog(@"Paused Sampling");
-    // samples = @agent.samples
+    
+    [_agent performSelector:@selector(samples) onThread:_ioThread withObject:nil waitUntilDone:NO];
     //[_agent stopSampling];
     //document.add_sample_set samples
 }

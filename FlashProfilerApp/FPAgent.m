@@ -158,6 +158,10 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
         case 8ul:
             [_socket readDataToLength:2 withTimeout:5 tag:tag];
             break;
+        case 10ul:
+            // TODO should be more, as we expect the sample count to lead it as well
+            [_socket readDataToLength:2 withTimeout:5 tag:tag];
+            break;
     }    
 }
 
@@ -175,6 +179,10 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (IBAction)stopSampling {
     [_socket writeData:[NSData dataWithBytes:"\x42\x08" length:2] withTimeout:5 tag:8ul];            
+}
+
+- (void)samples {
+    [_socket writeData:[NSData dataWithBytes:"\x42\x0a" length:2] withTimeout:5 tag:10ul];            
 }
 
 

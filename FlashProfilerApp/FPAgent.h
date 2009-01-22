@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "AsyncSocket.h"
 #import "FPMemoryUsage.h"
+#import "FPSampleSet.h"
+
 
 typedef enum samplingState { Stopped, Paused, Started } SamplingState;
 
@@ -28,11 +30,12 @@ typedef enum samplingState { Stopped, Paused, Started } SamplingState;
 - (void)memoryUsage;
 
 - (BOOL)isSampling;
-//- (FPSampleSet *)samples;
 
 - (IBAction)startSampling;
 - (IBAction)pauseSampling;
 - (IBAction)stopSampling;
+
+- (void)samples;
 
 @end
 
@@ -49,5 +52,7 @@ typedef enum samplingState { Stopped, Paused, Started } SamplingState;
 - (void)startedSampling:(FPAgent *)agent;
 - (void)pausedSampling:(FPAgent *)agent;
 - (void)stoppedSampling:(FPAgent *)agent;
+
+- (void)samples:(FPSampleSet *)usage forAgent:(FPAgent *)agent;
 
 @end
