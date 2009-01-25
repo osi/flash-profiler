@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FPSample.h"
 
-@interface FPCpuSample : NSObject <NSCoding> {
+@interface FPCpuSample : FPSample <NSCoding> {
     NSArray *_stack;
 }
 
 @property(readonly) NSArray *stack;
 
-- (id)initWithStack:(NSArray *)stack;
+- (id)initWithStack:(NSArray *)stack at:(NSDate *)takenAt;
 
 @end

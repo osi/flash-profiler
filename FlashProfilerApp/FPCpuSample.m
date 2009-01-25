@@ -17,14 +17,14 @@
     [self dealloc];
     
     @throw [NSException exceptionWithName:@"FPBadInitCall" 
-                                   reason:@"Initialize with initWithStack" 
+                                   reason:@"Initialize with initWithStack:at" 
                                  userInfo:nil];
     
     return nil;
 }
 
-- (id)initWithStack:(NSArray *)stack {
-    [super init];
+- (id)initWithStack:(NSArray *)stack at:(NSDate *)takenAt {
+    [super initWithTime:takenAt];
     
     _stack = stack;
     
@@ -32,11 +32,13 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    [super encodeWithCoder:coder];
+    
     [coder encodeObject:_stack forKey:@"stack"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    [super init];
+    [super initWithCoder:decoder];
     
     _stack = [decoder decodeObjectForKey:@"stack"];
     
