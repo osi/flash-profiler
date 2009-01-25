@@ -16,7 +16,21 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     return (bytes[offset] << 24) + (bytes[offset+1] << 16) + (bytes[offset+2] << 8) + bytes[offset+3];
 }
 
-@implementation FPAgent
+@interface FPAgent (Private)
+
+- (BOOL)expectMessageType:(short)expectedType forData:(NSData *)data;
+- (void)readHello:(NSData *)data;
+- (void)readSample;
+- (void)readSamples:(NSData *)data;
+- (void)readMemoryUsage:(NSData *)data;
+- (void)readNewObjectSampleHeader:(NSData *)data;
+- (void)readDeletedObjectSampleHeader:(NSData *)data;
+- (void)readNextStackFrame;
+- (void)completeSample;
+
+@end
+
+@implementation FPAgent (Private)
 
 - (id)init {
     [self dealloc];
@@ -102,6 +116,105 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
                   forAgent:self];
 }
 
+- (void)readSamples:(NSData *)data {
+    if( ![self expectMessageType:0x420b forData:data] ) {
+        return;
+    }
+    
+    const unsigned char *bytes = [data bytes];
+    _expectedSamples = read_unsigned_int(bytes,2);
+    _sampleSet = [[FPSampleSet alloc] init];
+
+    [self readSample];
+}
+
+- (void)readSample {
+    [_socket readDataToLength:6 withTimeout:5 tag:100ul];
+}
+
+- (void)readStackTrace {
+    [_socket readDataToLength:2 withTimeout:5 tag:1301ul];
+}
+
+- (void)readSampleHeader:(NSData *)data {
+    const unsigned char *bytes = [data bytes];
+    short msg_type = read_short(bytes, 0);
+    NSUInteger time = read_unsigned_int(bytes, 2);
+
+    switch (msg_type) {
+        case 0x4210: // New Object
+            _currentSampleType = NewObject;
+            _currentSampleData = [NSMutableArray arrayWithCapacity:4];
+
+            [_socket readDataToLength:4 withTimeout:5 tag:1001ul];
+            break;
+        case 0x4211: // Deleted Object
+            _currentSampleType = DeletedObject;
+            _currentSampleData = [NSMutableArray arrayWithCapacity:4];
+
+            [_socket readDataToLength:8 withTimeout:5 tag:1101ul];
+            break;
+        case 0x4212: // CPU
+            _currentSampleType = CPU;
+            _currentSampleData = [NSMutableArray arrayWithCapacity:2];
+
+            [self readStackTrace];
+        default:
+            // TODO return an error
+            NSLog(@"expected a sample message type but got %i", msg_type);
+            [_socket disconnect];
+            break;
+    }
+    
+    [_currentSampleData addObject:[_remoteTime addTimeInterval:time / 1000000.0]];
+}
+
+- (void)completeSample {
+    FPSample *sample;
+    
+    switch( _currentSampleType ) {
+        case NewObject:
+            // TODO
+            break;
+        case DeletedObject:
+            // TODO
+            break;
+        case CPU:
+            sample = [[FPCpuSample alloc] initWithStack:[NSArray arrayWithArray:[_currentSampleData objectAtIndex:1]] 
+                                                     at:[_currentSampleData objectAtIndex:0]];
+            break;
+    }
+    
+    _currentSampleData = nil;
+    
+    [_sampleSet add:sample];
+    
+    if( --_expectedSamples == 0 ) {
+        [_delegate samples:_sampleSet forAgent:self];
+        _sampleSet = nil;
+    } else {
+        [self readSample];
+    }
+}
+
+- (void)readStackTraceHeader:(NSData *)data {
+    const unsigned char *bytes = [data bytes];
+    
+    _expectedStackFrames = read_short(bytes, 0);
+    
+    [_currentSampleData addObject:[NSMutableArray arrayWithCapacity:_expectedStackFrames]];
+    
+    [self readNextStackFrame];
+}
+
+- (void)readNextStackFrame {
+    if( _expectedStackFrames == 0 ) {
+        [self completeSample];    
+    } else {
+        [_socket readDataToLength:2 withTimeout:5 tag:1301ul];
+    }
+}
+
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     switch (tag) {
         case 1ul:
@@ -127,6 +240,21 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
                 _samplingState = Stopped;
                 [_delegate stoppedSampling:self];
             }
+            break;
+        case 10ul:
+            [self readSamples:data];
+            break;
+        case 100ul:
+            [self readSampleHeader:data];
+            break;
+        case 1001ul:
+            [self readNewObjectSampleHeader:data];
+            break;
+        case 1101ul:
+            [self readDeletedObjectSampleHeader:data];
+            break;
+        case 1301ul:
+            [self readStackTraceHeader:data];
             break;
         default:
             NSLog(@"Unknown tag value: %i", tag);
@@ -159,8 +287,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             [_socket readDataToLength:2 withTimeout:5 tag:tag];
             break;
         case 10ul:
-            // TODO should be more, as we expect the sample count to lead it as well
-            [_socket readDataToLength:2 withTimeout:5 tag:tag];
+            [_socket readDataToLength:6 withTimeout:5 tag:tag];
             break;
     }    
 }

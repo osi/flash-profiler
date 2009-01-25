@@ -13,12 +13,19 @@
 
 
 typedef enum samplingState { Stopped, Paused, Started } SamplingState;
+typedef enum sampleType { NewObject, DeletedObject, CPU } SampleType;
 
 @interface FPAgent : NSObject {
     AsyncSocket *_socket;
     id _delegate;
     NSDate *_remoteTime;
+    FPSampleSet *_sampleSet;
     volatile SamplingState _samplingState;
+    
+    NSUInteger _expectedSamples;
+    SampleType _currentSampleType;
+    NSMutableArray *_currentSampleData;
+    NSUInteger _expectedStackFrames;
 }
 
 - (id)initWithSocket:(AsyncSocket *)socket;
