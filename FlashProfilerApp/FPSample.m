@@ -23,25 +23,22 @@
     return nil;
 }
 
-- (id)initWithTime:(NSDate *)takenAt rawValue:(NSString *)value {
+- (id)initWithTime:(NSDate *)takenAt {
     [super init];
     
     _at = takenAt;
-    _rawTime = value;
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:_at forKey:@"at"];
-    [coder encodeObject:_rawTime forKey:@"rawTime"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     [super init];
     
     _at = [decoder decodeObjectForKey:@"at"];
-    _rawTime = [decoder decodeObjectForKey:@"rawTime"];
     
     return self;
 }

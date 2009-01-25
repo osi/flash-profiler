@@ -11,11 +11,10 @@
 
 @interface FPSample : NSObject <NSCoding> {
     NSDate *_at;
-    NSString *_rawTime;
 }
 
 @property(readonly) NSDate *at;
 
-- (id)initWithTime:(NSDate *)takenAt rawValue:(NSString *)value;
+- (id)initWithTime:(NSDate *)takenAt;
 
 @end
