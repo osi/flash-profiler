@@ -11,8 +11,7 @@
 
 @implementation FPStackFrame
 
-@synthesize className = _className;
-@synthesize methodName = _methodName;
+@synthesize functionName = _functionName;
 @synthesize file = _file;
 @synthesize line = _line;
 
@@ -20,25 +19,23 @@
     [self dealloc];
     
     @throw [NSException exceptionWithName:@"FPBadInitCall" 
-                                   reason:@"Initialize with initWithClassName:methodName:file:line" 
+                                   reason:@"Initialize with initWithFunctionName:methodName:file:line" 
                                  userInfo:nil];
     
     return nil;
 }
 
 
-- (id)initWithClassName:(NSString *)className methodName:(NSString *)methodName {
-    return [self initWithClassName:className methodName:methodName file:nil line:0];
+- (id)initWithFunctionName:(NSString *)name {
+    return [self initWithFunctionName:name file:nil line:0];
 }
 
-- (id)initWithClassName:(NSString *)className 
-             methodName:(NSString *)methodName 
-                   file:(NSString *)file 
-                   line:(NSUInteger)line {
+- (id)initWithFunctionName:(NSString *)name 
+                      file:(NSString *)file 
+                      line:(NSUInteger)line {
     [super init];
 
-    _className = className;
-    _methodName = methodName;
+    _functionName = name;
     _file = file;
     _line = line;
     
@@ -53,8 +50,7 @@
     }
     
     return 
-        [_className isEqual:[other className]] && 
-        [_methodName isEqual:[other methodName]] &&
+        [_functionName isEqual:[other functionName]] && 
         [_file isEqual:[other file]] &&
         _line == [other line];
 }
@@ -63,8 +59,7 @@
     NSUInteger prime = 31;
     NSUInteger hash = 1;
     
-    hash = hash * prime + [_className hash];
-    hash = hash * prime + [_methodName hash];
+    hash = hash * prime + [_functionName hash];
     hash = hash * prime + [_file hash];
     hash = hash * prime + _line;
     
@@ -74,42 +69,29 @@
 
 - (NSString *)description {
     if( _line ) {
-        return [[NSString alloc] initWithFormat:@"%@/%@(%@:%d)", _className, _methodName, _file, _line];
+        return [[NSString alloc] initWithFormat:@"%@(%@:%d)", _functionName, _file, _line];
     } else {
-        return [[NSString alloc] initWithFormat:@"%@/%@", _className, _methodName];
+        return [[NSString alloc] initWithFormat:@"%@", _functionName];
     }
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
     [super init];
     
-    // TODO    
-    /*
-     def initWithCoder(coder)
-     @class_name = coder.decodeObjectForKey("class_name")
-     @method_name = coder.decodeObjectForKey("method_name")
-     @file = coder.decodeObjectForKey("file")
-     @line = coder.decodeIntegerForKey("line")
-     @line = nil if @line == 0
-     
-     self
-     
-     */    
+    _functionName = [coder decodeObjectForKey:@"function"];
+    _file = [coder decodeObjectForKey:@"file"];
+    
+    if( _file != nil ) {
+        _line = [coder decodeIntegerForKey:@"line"];
+    }
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    //    TODO
-    /*
-     def encodeWithCoder(coder)
-     coder.encodeObject class_name, forKey: "class_name"
-     coder.encodeObject method_name, forKey: "method_name"
-     coder.encodeObject file, forKey: "file"
-     coder.encodeInteger line, forKey: "line" if not line.nil?
-     end  
-     
-     */
+    [coder encodeObject:_functionName forKey:@"function"];
+    [coder encodeObject:_file forKey:@"file"];
+    [coder encodeInteger:_line forKey:@"line"];
 }
 
 @end

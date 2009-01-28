@@ -10,19 +10,17 @@
 
 
 @interface FPStackFrame : NSObject <NSCoding> {
-    NSString *_className;
-    NSString *_methodName;
+    NSString *_functionName;
     NSString *_file;
     NSUInteger _line;
 }
 
-@property(readonly) NSString *className;
-@property(readonly) NSString *methodName;
+@property(readonly) NSString *functionName;
 @property(readonly) NSString *file;
 @property(readonly) NSUInteger line;
 
-- (id)initWithClassName:(NSString *)className methodName:(NSString *)methodName;
+- (id)initWithFunctionName:(NSString *)name;
 
-- (id)initWithClassName:(NSString *)className methodName:(NSString *)methodName file:(NSString *)file line:(NSUInteger)line;
+- (id)initWithFunctionName:(NSString *)name file:(NSString *)file line:(NSUInteger)line;
 
 @end
