@@ -23,14 +23,17 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 - (void)readSample;
 - (void)readSamples:(NSData *)data;
 - (void)readMemoryUsage:(NSData *)data;
-- (void)readNewObjectSampleHeader:(NSData *)data;
-- (void)readDeletedObjectSampleHeader:(NSData *)data;
 - (void)readNextStackFrame;
 - (void)completeSample;
+- (NSInvocation *)invocationForSelector:(SEL)selector;
+- (void)sendCommand:(NSData *)command responseLength:(CFIndex)length withResponder:(NSInvocation *)responder;
+- (void)readData:(CFIndex)length withResponder:(NSInvocation *)responder;
+- (void)readString:(NSInvocation *)action;
+- (void)completeStackFrame:(NSMutableDictionary *)context;
 
 @end
 
-@implementation FPAgent (Private)
+@implementation FPAgent
 
 - (id)init {
     [self dealloc];
@@ -49,6 +52,11 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     [_socket setDelegate:self];
     
+    _readCallbacks = [NSMutableDictionary dictionaryWithCapacity:16];
+    _writeCallbacks = [NSMutableDictionary dictionaryWithCapacity:16];
+    _readId = 0;
+    _writeId = 0;
+    
     return self;
 }
 
@@ -63,7 +71,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port {
     NSLog(@"Accepted conection on %@:%i", host, port);
     
-    [_socket readDataToLength:12 withTimeout:5 tag:1UL];
+    [self readData:12 withResponder:[self invocationForSelector:@selector(readHello:)]];
 }
 
 // TODO category on NSData?
@@ -129,11 +137,11 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)readSample {
-    [_socket readDataToLength:6 withTimeout:5 tag:100ul];
+    [self readData:6 withResponder:[self invocationForSelector:@selector(readSampleHeader:)]];
 }
 
 - (void)readStackTrace {
-    [_socket readDataToLength:2 withTimeout:5 tag:1301ul];
+    [self readData:2 withResponder:[self invocationForSelector:@selector(readStackTraceHeader:)]];
 }
 
 - (void)readSampleHeader:(NSData *)data {
@@ -141,22 +149,25 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     short msg_type = read_short(bytes, 0);
     NSUInteger time = read_unsigned_int(bytes, 2);
 
+    _currentSampleData = [NSMutableDictionary dictionaryWithCapacity:8];
+
+    [_currentSampleData setObject:[_remoteTime addTimeInterval:time / 1000000.0] forKey:@"time"];
+    
     switch (msg_type) {
-        case 0x4210: // New Object
+        case 0x4210:
             _currentSampleType = NewObject;
-            _currentSampleData = [NSMutableArray arrayWithCapacity:4];
 
-            [_socket readDataToLength:4 withTimeout:5 tag:1001ul];
+// TODO            
+//            [self readData:4 withResponder:[self invocationForSelector:@selector(readNewObjectSampleHeader)]];
             break;
-        case 0x4211: // Deleted Object
+        case 0x4211:
             _currentSampleType = DeletedObject;
-            _currentSampleData = [NSMutableArray arrayWithCapacity:4];
 
-            [_socket readDataToLength:8 withTimeout:5 tag:1101ul];
+            // TODO            
+//            [self readData:8 withResponder:[self invocationForSelector:@selector(readDeletedObjectSampleHeader)]];
             break;
-        case 0x4212: // CPU
+        case 0x4212:
             _currentSampleType = CPU;
-            _currentSampleData = [NSMutableArray arrayWithCapacity:2];
 
             [self readStackTrace];
         default:
@@ -164,9 +175,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             NSLog(@"expected a sample message type but got %i", msg_type);
             [_socket disconnect];
             break;
-    }
-    
-    [_currentSampleData addObject:[_remoteTime addTimeInterval:time / 1000000.0]];
+    }    
 }
 
 - (void)completeSample {
@@ -180,8 +189,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             // TODO
             break;
         case CPU:
-            sample = [[FPCpuSample alloc] initWithStack:[NSArray arrayWithArray:[_currentSampleData objectAtIndex:1]] 
-                                                     at:[_currentSampleData objectAtIndex:0]];
+            sample = [[FPCpuSample alloc] initWithStack:[NSArray arrayWithArray:[_currentSampleData objectForKey:@"stack"]] 
+                                                     at:[_currentSampleData objectForKey:@"time"]];
             break;
     }
     
@@ -202,7 +211,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     _expectedStackFrames = read_short(bytes, 0);
     
-    [_currentSampleData addObject:[NSMutableArray arrayWithCapacity:_expectedStackFrames]];
+    [_currentSampleData setObject:[NSMutableArray arrayWithCapacity:_expectedStackFrames] forKey:@"stack"];
     
     [self readNextStackFrame];
 }
@@ -211,55 +220,84 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     if( _expectedStackFrames == 0 ) {
         [self completeSample];    
     } else {
-        [_socket readDataToLength:2 withTimeout:5 tag:1301ul];
+        [self readString:[self invocationForSelector:@selector(readStackFrameFunction:)]];
     }
 }
 
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    switch (tag) {
-        case 1ul:
-            [self readHello:data];
-            break;
-        case 2ul:
-            [self readMemoryUsage:data];
-            break;
-        case 4ul:
-            if( [self expectMessageType:0x4205 forData:data] ) {
-                _samplingState = Started;
-                [_delegate startedSampling:self];
-            }
-            break;
-        case 6ul:
-            if( [self expectMessageType:0x4207 forData:data] ) {
-                _samplingState = Paused;
-                [_delegate pausedSampling:self];
-            }
-            break;
-        case 8ul:
-            if( [self expectMessageType:0x4209 forData:data] ) {
-                _samplingState = Stopped;
-                [_delegate stoppedSampling:self];
-            }
-            break;
-        case 10ul:
-            [self readSamples:data];
-            break;
-        case 100ul:
-            [self readSampleHeader:data];
-            break;
-        case 1001ul:
-            [self readNewObjectSampleHeader:data];
-            break;
-        case 1101ul:
-            [self readDeletedObjectSampleHeader:data];
-            break;
-        case 1301ul:
-            [self readStackTraceHeader:data];
-            break;
-        default:
-            NSLog(@"Unknown tag value: %i", tag);
-            break;
+- (void)readStackFrameFunction:(NSString *)function {
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:3];
+    [data setObject:function forKey:@"function"];
+    
+    NSInvocation *action = [self invocationForSelector:@selector(readStackFrameFile:withContext:)];
+    [action setArgument:&data atIndex:3];
+    
+    [self readString:action];
+}
+
+- (void)readStackFrameFile:(NSString *)file withContext:(NSMutableDictionary *)context {
+    if( file == nil ) {
+        [self completeStackFrame:context];
+    } else {
+        [context setObject:file forKey:@"file"];
+        
+        NSInvocation *action = [self invocationForSelector:@selector(readStackFrameLine:withContext:)];
+        [action setArgument:&context atIndex:3];
+        
+        [self readData:4 withResponder:action];
     }
+}
+
+- (void)readStackFrameLine:(NSData *)data withContext:(NSMutableDictionary *)context {
+    NSUInteger line = read_unsigned_int((unsigned char*)[data bytes], 0);
+    
+    [context setObject:[NSNumber numberWithUnsignedInteger:line] forKey:@"line"];
+    [self completeStackFrame:context];
+}
+
+- (void)completeStackFrame:(NSMutableDictionary *)context {
+    FPStackFrame *frame = [FPStackFrame alloc];
+    
+    if( nil == [context objectForKey:@"file"] ) {
+        [frame initWithFunctionName:[context objectForKey:@"function"]];
+    } else {
+        [frame initWithFunctionName:[context objectForKey:@"function"] 
+                               file:[context objectForKey:@"file"]
+                               line:[[context objectForKey:@"line"] unsignedIntValue]];
+    }
+    
+    [[_currentSampleData objectForKey:@"stack"] addObject:frame];
+
+    [self readNextStackFrame];
+}
+
+- (void)readString:(NSInvocation *)action {
+    NSInvocation *response = [self invocationForSelector:@selector(readStringLength:andDo:)];
+    
+    [response setArgument:&action atIndex:3];
+    
+    [self readData:2 withResponder:response];
+}
+
+- (void)readStringLength:(NSData *)data andDo:(NSInvocation *)action {
+    const unsigned char *bytes = [data bytes];
+    short length = read_short(bytes, 0);
+    
+    if( length == 0 ) {
+        [action setArgument:nil atIndex:2];
+        [action invoke];
+    } else {
+        NSInvocation *response = [self invocationForSelector:@selector(readStringBody:andDo:)];
+        
+        [response setArgument:&action atIndex:3];
+        
+        [self readData:length withResponder:response];
+    }
+}
+
+- (void)readStringBody:(NSData *)data andDo:(NSInvocation *)action {
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [action setArgument:&string atIndex:2];
+    [action invoke];
 }
 
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock {
@@ -273,23 +311,9 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)memoryUsage {
-    [_socket writeData:[NSData dataWithBytes:"\x42\x02" length:2] withTimeout:5 tag:2ul];        
-}
-
-- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    switch (tag) {
-        case 2ul:
-            [_socket readDataToLength:10 withTimeout:5 tag:tag];
-            break;
-        case 4ul:
-        case 6ul:
-        case 8ul:
-            [_socket readDataToLength:2 withTimeout:5 tag:tag];
-            break;
-        case 10ul:
-            [_socket readDataToLength:6 withTimeout:5 tag:tag];
-            break;
-    }    
+    [self sendCommand:[NSData dataWithBytes:"\x42\x04" length:2] 
+       responseLength:10 
+        withResponder:[self invocationForSelector:@selector(readMemoryUsage:)]];
 }
 
 - (BOOL)isSampling {
@@ -297,141 +321,107 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (IBAction)startSampling {
-    [_socket writeData:[NSData dataWithBytes:"\x42\x04" length:2] withTimeout:5 tag:4ul];        
+    [self sendCommand:[NSData dataWithBytes:"\x42\x04" length:2] 
+       responseLength:2 
+        withResponder:[self invocationForSelector:@selector(startSamplingResponse:)]];
+}
+
+- (void)startSamplingResponse:(NSData *)data {
+    if( [self expectMessageType:0x4205 forData:data] ) {
+        _samplingState = Started;
+        [_delegate startedSampling:self];
+    }
 }
 
 - (IBAction)pauseSampling {
-    [_socket writeData:[NSData dataWithBytes:"\x42\x06" length:2] withTimeout:5 tag:6ul];        
+    [self sendCommand:[NSData dataWithBytes:"\x42\x06" length:2] 
+       responseLength:2 
+        withResponder:[self invocationForSelector:@selector(pauseSamplingResponse:)]];
+}
+
+- (void)pauseSamplingResponse:(NSData *)data {
+    if( [self expectMessageType:0x4207 forData:data] ) {
+        _samplingState = Paused;
+        [_delegate pausedSampling:self];
+    }
 }
 
 - (IBAction)stopSampling {
-    [_socket writeData:[NSData dataWithBytes:"\x42\x08" length:2] withTimeout:5 tag:8ul];            
+    [self sendCommand:[NSData dataWithBytes:"\x42\x08" length:2] 
+       responseLength:2 
+        withResponder:[self invocationForSelector:@selector(stopSamplingResponse:)]];
+}
+
+- (void)stopSamplingResponse:(NSData *)data {
+    if( [self expectMessageType:0x4209 forData:data] ) {
+        _samplingState = Stopped;
+        [_delegate stoppedSampling:self];
+    }
 }
 
 - (void)samples {
-    [_socket writeData:[NSData dataWithBytes:"\x42\x0a" length:2] withTimeout:5 tag:10ul];            
+    [self sendCommand:[NSData dataWithBytes:"\x42\x0a" length:2] 
+       responseLength:2 
+        withResponder:[self invocationForSelector:@selector(readSamples:)]];
 }
 
+- (void)sendCommand:(NSData *)command responseLength:(CFIndex)length withResponder:(NSInvocation *)responder {
+    NSInvocation *invocation = [self invocationForSelector:@selector(readData:withResponder:)];
 
-// TODO all the action methods need to be lazy and return stuff
-// via the delgate
+    [invocation setArgument:length atIndex:2];
+    [invocation setArgument:&responder atIndex:3];
+    
+    long id = _writeId++;
+    
+    NSLog(@"Sending %@ as id %qx", command, id);
+    
+    [_writeCallbacks setObject:invocation forKey:[NSNumber numberWithLong:id]];
+    [_socket writeData:command withTimeout:5 tag:id];        
+}
 
-/*
-class Agent
-  
-  def memory_usage
-    m = send_and_expect "GET MEMORY", /MEMORY: (\d+) (\d+)/
+- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    NSNumber *key = [NSNumber numberWithLong:tag];
+    NSInvocation *callback = [_writeCallbacks objectForKey:key];
     
-    MemoryUsage.new m[1].to_i, m[2].to_i
-  end
-  
-  def samples
-    count = send_and_expect("GET SAMPLES", /SENDING SAMPLES: (\d+)/)[1].to_i
-    sample_set = SampleSet.new
-    previous = nil
-    
-    count.times do
-      previous = (sample_set << read_sample(previous))
-    end
-    
-    send_and_expect "CLEAR SAMPLES", "OK CLEARED"
-    
-    sample_set
-  end
-  
-  def start_sampling
-    at = send_and_expect("START SAMPLING", /OK START (\d+)/)[1].to_i
-    @started_at = Time.at(at / 1000, at % 1000 * 1000)
-    @sampling_state = :started
-  end
-  
-  def pause_sampling
-    send_and_expect "PAUSE SAMPLING", "OK PAUSE"
-    
-    @sampling_state = :paused
-  end
-  
-  def stop_sampling
-    send_and_expect "STOP SAMPLING", "OK STOP"
-    
-    @sampling_state = :stopped
-  end
-  
-  def sampling?
-    :started == @sampling_state
-  end
-  
-  def to_s
-    "#{@socket.peeraddr[2]}:#{@socket.peeraddr[1]}"
-  end
-  
-  # AsyncSocket delegates
-  
-  def onSocket(socket, didConnectToHost:host, port:port)
-    NSLog "Accepted connection from #{host}:#{port}"
+    if( nil == callback ) {
+        NSLog(@"ERROR no callback for write key %qx", tag);
+    } else {
+        [_writeCallbacks removeObjectForKey:key];
+        [callback invoke];
+    }
+}
 
-    hello_msg = read_message
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    NSNumber *key = [NSNumber numberWithLong:tag];
+    NSInvocation *callback = [_readCallbacks objectForKey:key];
     
-    if "AGENT READY" != hello_msg
-      @socket.disconnect
-    else
-      @sampling_state = :stopped
+    if( nil == callback ) {
+        NSLog(@"ERROR no callback for read key %qx", tag);
+    } else {
+        [_readCallbacks removeObjectForKey:key];
+        [callback setArgument:&data atIndex:2];
+        [callback invoke];
+    }
+}
 
-      @tracker.add self
+// the invocation should expect the NSData to be its first argument
+- (void)readData:(CFIndex)length withResponder:(NSInvocation *)responder {
+    long id = _readId++;
+    
+    NSLog(@"Reading for id %qx", id);
+    
+    [_readCallbacks setObject:responder forKey:[NSNumber numberWithLong:id]];
+    [_socket readDataToLength:length withTimeout:5 tag:id];
+}
 
-      NSLog "Agent ready"
-    end
-  end
-  
-  def onSocket(socket, didReadData:data, withTag:tag)
-    @callbacks.delete(tag).call NSString.initWithData(data, encoding: NSUTF8StringEncoding)
-  end
-  
-  def onSocket(socket, willDisconnectWithError:err)
-    NSLog "#{self} closing due to #{err}"
-  end
-  
-  def onSocketDidDisconnect(socket)
-    # TODO ensure that we're removed from the tracker
-  end
-  
-  private
-  
-  def read_sample(previous)
-    SampleParser.parse read_message, @started_at, previous.nil? ? nil : previous.raw_time
-  end
-  
-  def send_and_expect(msg, expected)
-    send_message msg
+- (NSInvocation *)invocationForSelector:(SEL)selector {
+    NSMethodSignature *signature = [self methodSignatureForSelector:selector];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     
-    response = read_message
-   
-    case expected
-    when Regexp
-      m = expected.match(response)
-      return m if not m.nil?
-    when response
-      return response
-    end
-    
-    raise "Invalid response: #{response}"
-  end
-  
-  def send_message(msg) 
-    sdata = msg.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-    
-    @socket.writeData sdata, withTimeout: -1, tag: 0
-    @socket.writeData AsyncSocket.ZeroData, withTimeout: -1, tag: 0
-  end
-  
-  def read_message(&block)
-    id = @callback_counter++
-    
-    @callbacks[id] = block
-    @socket.readDataToData AsyncSocket.ZeroData, withTimeout: -1, tag: id
-  end  
-end 
+    [invocation setTarget:self];
+    [invocation setSelector:selector];
 
-*/
+    return invocation;
+}
 
 @end

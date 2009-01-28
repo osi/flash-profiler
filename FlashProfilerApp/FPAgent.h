@@ -22,9 +22,14 @@ typedef enum sampleType { NewObject, DeletedObject, CPU } SampleType;
     FPSampleSet *_sampleSet;
     volatile SamplingState _samplingState;
     
+    NSMutableDictionary *_readCallbacks;
+    NSMutableDictionary *_writeCallbacks;
+    unsigned long long _readId;
+    unsigned long long _writeId;
+    
     NSUInteger _expectedSamples;
     SampleType _currentSampleType;
-    NSMutableArray *_currentSampleData;
+    NSMutableDictionary *_currentSampleData;
     NSUInteger _expectedStackFrames;
 }
 
