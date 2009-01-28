@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C13A4FE0F17199C00715A7C /* FPAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A4FD0F17199C00715A7C /* FPAgent.m */; };
 		6C13A54A0F17212000715A7C /* FPCallTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13A5490F17212000715A7C /* FPCallTree.m */; };
+		6C1E06C40F30241F00900844 /* ExceptionHandling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E06C30F30241F00900844 /* ExceptionHandling.framework */; };
 		6C26870F0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */; };
 		6C27F2060F1467E500B29D55 /* FPAgentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C27F2050F1467E500B29D55 /* FPAgentController.m */; };
 		6C34FD730F05F5AB00F3A3A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C34FD710F05F5AB00F3A3A8 /* MainMenu.xib */; };
@@ -57,6 +58,7 @@
 		6C13A4FD0F17199C00715A7C /* FPAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPAgent.m; sourceTree = "<group>"; };
 		6C13A5480F17212000715A7C /* FPCallTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCallTree.h; sourceTree = "<group>"; };
 		6C13A5490F17212000715A7C /* FPCallTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCallTree.m; sourceTree = "<group>"; };
+		6C1E06C30F30241F00900844 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
 		6C26870D0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonZeroLengthArrayValueTransformer.h; sourceTree = "<group>"; };
 		6C26870E0F1AE3B5003ABC33 /* NonZeroLengthArrayValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonZeroLengthArrayValueTransformer.m; sourceTree = "<group>"; };
 		6C26873F0F1AFE47003ABC33 /* protocol.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.mdown; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				6C1E06C40F30241F00900844 /* ExceptionHandling.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +160,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C1E06C30F30241F00900844 /* ExceptionHandling.framework */,
 				6CBFC0F50F11BC23005FE40C /* CoreServices.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);

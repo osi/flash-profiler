@@ -7,8 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ExceptionHandling/ExceptionHandling.h>
 
 int main(int argc, char *argv[])
 {
+    [[NSExceptionHandler defaultExceptionHandler] setExceptionHandlingMask:NSLogAndHandleEveryExceptionMask];
     return NSApplicationMain(argc, (const char **) argv);
 }
