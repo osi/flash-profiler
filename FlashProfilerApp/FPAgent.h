@@ -24,8 +24,8 @@ typedef enum sampleType { NewObject, DeletedObject, CPU } SampleType;
     
     NSMutableDictionary *_readCallbacks;
     NSMutableDictionary *_writeCallbacks;
-    unsigned long long _readId;
-    unsigned long long _writeId;
+    long _readId;
+    long _writeId;
     
     NSUInteger _expectedSamples;
     SampleType _currentSampleType;

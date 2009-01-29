@@ -302,6 +302,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock {
     NSLog(@"Socket closed");
+
+    [_delegate agentDisconnected:self withReason:nil];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
@@ -311,7 +313,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)memoryUsage {
-    [self sendCommand:[NSData dataWithBytes:"\x42\x04" length:2] 
+    [self sendCommand:[NSData dataWithBytes:"\x42\x02" length:2] 
        responseLength:10 
         withResponder:[self invocationForSelector:@selector(readMemoryUsage:)]];
 }
@@ -368,12 +370,12 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 - (void)sendCommand:(NSData *)command responseLength:(CFIndex)length withResponder:(NSInvocation *)responder {
     NSInvocation *invocation = [self invocationForSelector:@selector(readData:withResponder:)];
 
-    [invocation setArgument:length atIndex:2];
+    [invocation setArgument:&length atIndex:2];
     [invocation setArgument:&responder atIndex:3];
     
     long id = _writeId++;
     
-    NSLog(@"Sending %@ as id %qx", command, id);
+    NSLog(@"Sending %@ as id %li", command, id);
     
     [_writeCallbacks setObject:invocation forKey:[NSNumber numberWithLong:id]];
     [_socket writeData:command withTimeout:5 tag:id];        
@@ -384,10 +386,11 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     NSInvocation *callback = [_writeCallbacks objectForKey:key];
     
     if( nil == callback ) {
-        NSLog(@"ERROR no callback for write key %qx", tag);
+        NSLog(@"ERROR no callback for write key %li", tag);
     } else {
-        [_writeCallbacks removeObjectForKey:key];
+        NSLog(@"Wrote %@ for %li", callback, tag);
         [callback invoke];
+        [_writeCallbacks removeObjectForKey:key];
     }
 }
 
@@ -396,11 +399,12 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     NSInvocation *callback = [_readCallbacks objectForKey:key];
     
     if( nil == callback ) {
-        NSLog(@"ERROR no callback for read key %qx", tag);
+        NSLog(@"ERROR no callback for read key %li", tag);
     } else {
-        [_readCallbacks removeObjectForKey:key];
+        NSLog(@"Read %@ for %li", callback, tag);
         [callback setArgument:&data atIndex:2];
         [callback invoke];
+        [_readCallbacks removeObjectForKey:key];
     }
 }
 
@@ -408,7 +412,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 - (void)readData:(CFIndex)length withResponder:(NSInvocation *)responder {
     long id = _readId++;
     
-    NSLog(@"Reading for id %qx", id);
+    NSLog(@"Reading for id %li %li bytes", id, length);
     
     [_readCallbacks setObject:responder forKey:[NSNumber numberWithLong:id]];
     [_socket readDataToLength:length withTimeout:5 tag:id];
