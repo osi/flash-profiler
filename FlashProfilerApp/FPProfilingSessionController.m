@@ -9,6 +9,15 @@
 #import "FPProfilingSessionController.h"
 #import "FPProfilingSession.h"
 
+@interface FPProfilingSessionController (Private)
+
+- (void)startTimer;
+- (void)setupTimer;
+- (void)stopTimer;
+
+@end
+
+
 @implementation FPProfilingSessionController
 
 @synthesize collectButton = _collectButton;
@@ -21,7 +30,7 @@
     
     if( _agent != nil ) {
         [_agent setDelegate:self];
-        [self performSelector:@selector(setupTimer) onThread:_ioThread withObject:nil waitUntilDone:NO];
+        [self startTimer];
     }
     
 /*
@@ -39,6 +48,11 @@
     [_memoryGraph reloadData];
 }
 
+- (void)startTimer {
+    [self performSelector:@selector(setupTimer) onThread:_ioThread withObject:nil waitUntilDone:YES];
+    NSLog(@"Started memory collection timer");
+}
+
 - (void)setupTimer {
     _timer = [NSTimer scheduledTimerWithTimeInterval:1 
                                               target:_agent 
@@ -47,9 +61,15 @@
                                              repeats:YES];
 }
 
+- (void)stopTimer {
+    [_timer performSelector:@selector(invalidate) onThread:_ioThread withObject:nil waitUntilDone:YES];
+    _timer = nil;
+    NSLog(@"Stopped memory collection timer");
+}
+
 - (void)agentDisconnected:(FPAgent *)agent withReason:(NSError *)reason {
     NSLog(@"Invaliding timer since agent disconnected");
-    [_timer invalidate];
+    [self stopTimer];
 }
 
 - (void)memoryUsage:(FPMemoryUsage *)usage forAgent:(FPAgent *)agent {
@@ -73,6 +93,7 @@
 - (void)pausedSampling:(FPAgent *)agent {
     NSLog(@"Paused Sampling");
     
+    [self stopTimer];
     [_agent performSelector:@selector(samples) onThread:_ioThread withObject:nil waitUntilDone:NO];
     //[_agent stopSampling];
     //document.add_sample_set samples
