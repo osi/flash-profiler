@@ -128,11 +128,13 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     if( ![self expectMessageType:0x420b forData:data] ) {
         return;
     }
-    
+
     const unsigned char *bytes = [data bytes];
-    _expectedSamples = read_unsigned_int(bytes,2);
+    _expectedSamples = read_unsigned_int(bytes, 2);
     _sampleSet = [[FPSampleSet alloc] init];
 
+    NSLog(@"will read %lu samples", _expectedSamples);
+    
     [self readSample];
 }
 
@@ -142,6 +144,34 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)readStackTrace {
     [self readData:2 withResponder:[self invocationForSelector:@selector(readStackTraceHeader:)]];
+}
+
+- (void)readObjectId:(NSData *)data {
+    NSUInteger object_id = read_unsigned_int((unsigned char*)[data bytes], 0);
+    
+    [_currentSampleData setObject:[NSNumber numberWithUnsignedInteger:object_id] forKey:@"object id"];
+    
+    switch(_currentSampleType) {
+        case NewObject:
+            [self readString:[self invocationForSelector:@selector(readNewObjectClassName:)]];
+            break;
+        case DeletedObject:
+            [self readData:4 withResponder:[self invocationForSelector:@selector(readObjectSize:)]];
+            break;
+        default:
+            // TODO throw exception
+            NSLog(@"Expected to be either a new or deleted object, but was %i", _currentSampleType);
+            [_socket disconnect];
+            break;
+    }
+}
+
+- (void)readObjectSize:(NSData *)data {
+    NSUInteger size = read_unsigned_int((unsigned char*)[data bytes], 0);
+    
+    [_currentSampleData setObject:[NSNumber numberWithUnsignedInteger:size] forKey:@"size"];
+    
+    [self readStackTrace];
 }
 
 - (void)readSampleHeader:(NSData *)data {
@@ -157,14 +187,12 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
         case 0x4210:
             _currentSampleType = NewObject;
 
-// TODO            
-//            [self readData:4 withResponder:[self invocationForSelector:@selector(readNewObjectSampleHeader)]];
+            [self readData:4 withResponder:[self invocationForSelector:@selector(readObjectId:)]];
             break;
         case 0x4211:
             _currentSampleType = DeletedObject;
 
-            // TODO            
-//            [self readData:8 withResponder:[self invocationForSelector:@selector(readDeletedObjectSampleHeader)]];
+            [self readData:4 withResponder:[self invocationForSelector:@selector(readObjectId:)]];
             break;
         case 0x4212:
             _currentSampleType = CPU;
@@ -179,7 +207,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)completeSample {
-    FPSample *sample;
+    FPSample *sample = nil;
     
     switch( _currentSampleType ) {
         case NewObject:
@@ -194,11 +222,14 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
             break;
     }
     
+    NSLog(@"Read %@", sample);
+    
     _currentSampleData = nil;
     
     [_sampleSet add:sample];
     
     if( --_expectedSamples == 0 ) {
+        NSLog(@"Done reading samples");
         [_delegate samples:_sampleSet forAgent:self];
         _sampleSet = nil;
     } else {
@@ -222,6 +253,11 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     } else {
         [self readString:[self invocationForSelector:@selector(readStackFrameFunction:)]];
     }
+}
+
+- (void)readNewObjectClassName:(NSString *)className {
+    [_currentSampleData setObject:className forKey:@"className"];
+    [self readStackTrace];
 }
 
 - (void)readStackFrameFunction:(NSString *)function {
@@ -363,7 +399,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)samples {
     [self sendCommand:[NSData dataWithBytes:"\x42\x0a" length:2] 
-       responseLength:2 
+       responseLength:6 
         withResponder:[self invocationForSelector:@selector(readSamples:)]];
 }
 
@@ -375,7 +411,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     long id = _writeId++;
     
-    NSLog(@"Sending %@ as id %li", command, id);
+//    NSLog(@"Sending %@ as id %li", command, id);
     
     [_writeCallbacks setObject:invocation forKey:[NSNumber numberWithLong:id]];
     [_socket writeData:command withTimeout:5 tag:id];        
@@ -388,7 +424,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     if( nil == callback ) {
         NSLog(@"ERROR no callback for write key %li", tag);
     } else {
-        NSLog(@"Wrote %@ for %li", callback, tag);
+//        NSLog(@"Wrote %@ for %li", callback, tag);
         [callback invoke];
         [_writeCallbacks removeObjectForKey:key];
     }
@@ -401,7 +437,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     if( nil == callback ) {
         NSLog(@"ERROR no callback for read key %li", tag);
     } else {
-        NSLog(@"Read %@ for %li", callback, tag);
+//        NSLog(@"Read %@ for %li", callback, tag);
         [callback setArgument:&data atIndex:2];
         [callback invoke];
         [_readCallbacks removeObjectForKey:key];
@@ -412,7 +448,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 - (void)readData:(CFIndex)length withResponder:(NSInvocation *)responder {
     long id = _readId++;
     
-    NSLog(@"Reading for id %li %li bytes", id, length);
+//    NSLog(@"Reading for id %li %li bytes", id, length);
     
     [_readCallbacks setObject:responder forKey:[NSNumber numberWithLong:id]];
     [_socket readDataToLength:length withTimeout:5 tag:id];
