@@ -11,10 +11,12 @@
 
 @interface FPSample : NSObject <NSCoding> {
     NSDate *_at;
+    NSArray *_stack;
 }
 
 @property(readonly) NSDate *at;
+@property(readonly) NSArray *stack;
 
-- (id)initWithTime:(NSDate *)takenAt;
+- (id)initWithStack:(NSArray *)stack at:(NSDate *)takenAt;
 
 @end

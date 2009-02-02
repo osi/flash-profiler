@@ -11,34 +11,38 @@
 
 @implementation FPSample
 
+@synthesize stack = _stack;
 @synthesize at = _at;
 
 - (id)init {
     [self dealloc];
     
     @throw [NSException exceptionWithName:@"FPBadInitCall" 
-                                   reason:@"Initialize with initWithTime" 
+                                   reason:@"Initialize with initWithStack:at" 
                                  userInfo:nil];
     
     return nil;
 }
 
-- (id)initWithTime:(NSDate *)takenAt {
+- (id)initWithStack:(NSArray *)stack at:(NSDate *)takenAt {
     [super init];
     
     _at = takenAt;
+    _stack = stack;
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:_at forKey:@"at"];
+    [coder encodeObject:_stack forKey:@"stack"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     [super init];
     
     _at = [decoder decodeObjectForKey:@"at"];
+    _stack = [decoder decodeObjectForKey:@"stack"];
     
     return self;
 }
