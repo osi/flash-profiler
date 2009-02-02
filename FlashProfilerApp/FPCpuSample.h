@@ -9,12 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "FPSample.h"
 
+// a CPU sample is just a regular sample
 @interface FPCpuSample : FPSample <NSCoding> {
-    NSArray *_stack;
 }
-
-@property(readonly) NSArray *stack;
-
-- (id)initWithStack:(NSArray *)stack at:(NSDate *)takenAt;
 
 @end
