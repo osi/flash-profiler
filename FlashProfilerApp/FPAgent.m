@@ -7,6 +7,8 @@
 //
 
 #import "FPAgent.h"
+#import "FPNewObjectSample.h"
+#import "FPDeleteObjectSample.h"
 
 short read_short(const unsigned char *bytes, unsigned int offset) {
     return (bytes[offset] << 8) + bytes[offset+1];
@@ -139,10 +141,12 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 }
 
 - (void)readSample {
+    NSLog(@"attempting to read sample header");
     [self readData:6 withResponder:[self invocationForSelector:@selector(readSampleHeader:)]];
 }
 
 - (void)readStackTrace {
+    NSLog(@"Reading stack trace...");
     [self readData:2 withResponder:[self invocationForSelector:@selector(readStackTraceHeader:)]];
 }
 
@@ -150,6 +154,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     NSUInteger object_id = read_unsigned_int((unsigned char*)[data bytes], 0);
     
     [_currentSampleData setObject:[NSNumber numberWithUnsignedInteger:object_id] forKey:@"object id"];
+    
+    NSLog(@"Read object ID %lx", object_id);
     
     switch(_currentSampleType) {
         case NewObject:
@@ -185,19 +191,23 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     switch (msg_type) {
         case 0x4210:
+            NSLog(@"Reading new object sample");
             _currentSampleType = NewObject;
 
             [self readData:4 withResponder:[self invocationForSelector:@selector(readObjectId:)]];
             break;
         case 0x4211:
+            NSLog(@"Reading delete object sample");
             _currentSampleType = DeletedObject;
 
             [self readData:4 withResponder:[self invocationForSelector:@selector(readObjectId:)]];
             break;
         case 0x4212:
+            NSLog(@"Reading CPU sample");
             _currentSampleType = CPU;
 
             [self readStackTrace];
+            break;
         default:
             // TODO return an error
             NSLog(@"expected a sample message type but got %i", msg_type);
@@ -208,17 +218,24 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)completeSample {
     FPSample *sample = nil;
+    NSArray *stack = [NSArray arrayWithArray:[_currentSampleData objectForKey:@"stack"]];
+    NSDate *at = [_currentSampleData objectForKey:@"time"];
     
     switch( _currentSampleType ) {
         case NewObject:
-            // TODO
+            sample = [[FPNewObjectSample alloc] initWithIdentifier:[[_currentSampleData objectForKey:@"object id"] unsignedIntegerValue] 
+                                                            ofType:[_currentSampleData objectForKey:@"className"] 
+                                                        atLocation:stack
+                                                                at:at];
             break;
         case DeletedObject:
-            // TODO
+            sample = [[FPDeleteObjectSample alloc] initWithIdentifier:[[_currentSampleData objectForKey:@"object id"] unsignedIntegerValue] 
+                                                                 size:[[_currentSampleData objectForKey:@"size"] unsignedIntegerValue] 
+                                                           atLocation:stack 
+                                                                   at:at];
             break;
         case CPU:
-            sample = [[FPCpuSample alloc] initWithStack:[NSArray arrayWithArray:[_currentSampleData objectForKey:@"stack"]] 
-                                                     at:[_currentSampleData objectForKey:@"time"]];
+            sample = [[FPCpuSample alloc] initWithStack:stack at:at];
             break;
     }
     
@@ -242,6 +259,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     _expectedStackFrames = read_short(bytes, 0);
     
+    NSLog(@"Expecting %i stack frames", _expectedStackFrames);
+    
     [_currentSampleData setObject:[NSMutableArray arrayWithCapacity:_expectedStackFrames] forKey:@"stack"];
     
     [self readNextStackFrame];
@@ -249,9 +268,12 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)readNextStackFrame {
     if( _expectedStackFrames == 0 ) {
+        NSLog(@"done reading stack");
         [self completeSample];    
     } else {
+        NSLog(@"Reading stack frame %i", _expectedStackFrames);
         [self readString:[self invocationForSelector:@selector(readStackFrameFunction:)]];
+        --_expectedStackFrames;
     }
 }
 
@@ -272,12 +294,15 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)readStackFrameFile:(NSString *)file withContext:(NSMutableDictionary *)context {
     if( file == nil ) {
+        NSLog(@"stack has no file");
         [self completeStackFrame:context];
     } else {
         [context setObject:file forKey:@"file"];
         
         NSInvocation *action = [self invocationForSelector:@selector(readStackFrameLine:withContext:)];
         [action setArgument:&context atIndex:3];
+        
+        NSLog(@"will read file for stack frame");
         
         [self readData:4 withResponder:action];
     }
@@ -301,6 +326,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
                                line:[[context objectForKey:@"line"] unsignedIntValue]];
     }
     
+    NSLog(@"Read stack frame %@", frame);
+    
     [[_currentSampleData objectForKey:@"stack"] addObject:frame];
 
     [self readNextStackFrame];
@@ -311,6 +338,8 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     [response setArgument:&action atIndex:3];
     
+    NSLog(@"reading string start");
+    
     [self readData:2 withResponder:response];
 }
 
@@ -318,13 +347,18 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     const unsigned char *bytes = [data bytes];
     short length = read_short(bytes, 0);
     
+    NSLog(@"String of length %i", length);
+    
     if( length == 0 ) {
-        [action setArgument:nil atIndex:2];
+        NSString *value = nil;
+        [action setArgument:&value atIndex:2];
         [action invoke];
     } else {
         NSInvocation *response = [self invocationForSelector:@selector(readStringBody:andDo:)];
         
         [response setArgument:&action atIndex:3];
+        
+        NSLog(@"reading body...");
         
         [self readData:length withResponder:response];
     }
@@ -332,6 +366,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
 
 - (void)readStringBody:(NSData *)data andDo:(NSInvocation *)action {
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Invoking invocation with string '%@'", string);
     [action setArgument:&string atIndex:2];
     [action invoke];
 }
