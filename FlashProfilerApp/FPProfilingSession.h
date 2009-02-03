@@ -10,6 +10,7 @@
 #import "FPAgent.h"
 #import "FPSampleSet.h"
 #import "FPIoThread.h"
+#import "FPMemoryUsage.h"
 
 
 @interface FPProfilingSession : NSDocument {
@@ -22,11 +23,13 @@
 
 @property(readonly) FPAgent *agent;
 @property(readonly) FPIoThread *ioThread;
-@property(retain) NSMutableArray *memoryUsage;
-@property(retain) NSMutableArray *sampleSets;
+@property(readonly) NSArray *memoryUsage;
+@property(readonly) NSArray *sampleSets;
 
 - (id)initWithAgent:(FPAgent *)agent ioThread:(FPIoThread *)ioThread;
 
 - (void)addSampleSet:(FPSampleSet *)set;
+
+- (void)addMemoryUsage:(FPMemoryUsage *)usage;
 
 @end

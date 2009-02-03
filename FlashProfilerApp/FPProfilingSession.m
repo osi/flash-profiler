@@ -42,6 +42,11 @@
     [self updateChangeCount:NSChangeDone];
 }
 
+- (void)addMemoryUsage:(FPMemoryUsage *)usage {
+    [_memoryUsage addObject:usage];
+    [self updateChangeCount:NSChangeDone];
+}
+
 // NSDoument overrides
 
 - (void)makeWindowControllers {
