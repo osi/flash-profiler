@@ -495,6 +495,7 @@ unsigned int read_unsigned_int(const unsigned char *bytes, unsigned int offset) 
     
     [invocation setTarget:self];
     [invocation setSelector:selector];
+    [invocation retainArguments];
 
     return invocation;
 }
