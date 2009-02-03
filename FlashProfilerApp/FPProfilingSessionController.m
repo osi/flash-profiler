@@ -77,8 +77,7 @@
     
     FPProfilingSession *session = [self document];
     
-    [[session memoryUsage] addObject:usage];
-    [session updateChangeCount:NSChangeDone];
+    [session addMemoryUsage:usage];
     
     [_memoryGraph reloadData];
     
@@ -90,14 +89,23 @@
 - (void)startedSampling:(FPAgent *)agent {
     NSLog(@"Started Sampling");
 }
+
 - (void)pausedSampling:(FPAgent *)agent {
     NSLog(@"Paused Sampling");
     
     [self stopTimer];
     [_agent performSelector:@selector(samples) onThread:_ioThread withObject:nil waitUntilDone:NO];
-    //[_agent stopSampling];
-    //document.add_sample_set samples
 }
+
+- (void)samples:(FPSampleSet *)samples forAgent:(FPAgent *)agent {
+    FPProfilingSession *session = [self document];
+    
+    [session addSampleSet:samples];
+    
+    [_agent performSelector:@selector(stopSampling) onThread:_ioThread withObject:nil waitUntilDone:NO];
+    [self startTimer];
+}
+
 - (void)stoppedSampling:(FPAgent *)agent {
     NSLog(@"Stopped Sampling");
 }
