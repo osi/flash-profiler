@@ -65,6 +65,6 @@ typedef enum sampleType { NewObject, DeletedObject, CPU } SampleType;
 - (void)pausedSampling:(FPAgent *)agent;
 - (void)stoppedSampling:(FPAgent *)agent;
 
-- (void)samples:(FPSampleSet *)usage forAgent:(FPAgent *)agent;
+- (void)samples:(FPSampleSet *)samples forAgent:(FPAgent *)agent;
 
 @end
